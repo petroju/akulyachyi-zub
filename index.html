@@ -166,52 +166,52 @@ details li{margin:.3em 0}
 .act:hover{transform:translateY(-3px)}.act{transition:transform .15s}
 .win{font-size:clamp(28px,8vw,44px)}
 /* дошка острова */
-.ib{position:relative;border-radius:22px;overflow:hidden;box-shadow:0 12px 34px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.12);margin:10px 0 4px;background:#0b4a57;isolation:isolate}
-.ib>svg{display:block;width:100%;height:auto}
-.ib .bd{position:absolute;transform:translate(-50%,-100%);display:flex;align-items:center;gap:4px;background:rgba(8,28,36,.78);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:#fff;border-radius:99px;padding:2px 10px 2px 4px;font:800 15px Rubik,sans-serif;border:1.5px solid rgba(255,255,255,.3);box-shadow:0 4px 12px rgba(0,0,0,.35);white-space:nowrap;animation:ibfloat 4s ease-in-out infinite}
+.ib{position:relative;aspect-ratio:1024/874;border-radius:22px;overflow:hidden;box-shadow:0 12px 34px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.12);margin:10px 0 4px;background:#0b4a57 center/cover no-repeat;isolation:isolate}
+.ib.storm{animation:ibshake 6s ease-in-out infinite}@keyframes ibshake{0%,100%{background-position:50% 50%}50%{background-position:51% 49%}}
+.ib .spr{position:absolute;height:auto;pointer-events:none;filter:drop-shadow(0 4px 3px rgba(0,0,0,.35))}
+.ib .pop{animation:ibpop .8s cubic-bezier(.3,1.7,.5,1) both;transform-origin:50% 100%}@keyframes ibpop{from{transform:translateY(-40%) scale(.2);opacity:0}}
+.ib .bad{filter:drop-shadow(0 4px 3px rgba(0,0,0,.35)) hue-rotate(55deg) saturate(.75)}
+.ib .ibraft{position:absolute;left:64%;bottom:26%;width:32%;transform:scaleY(.52);transform-origin:50% 100%}
+.ib .ibraft img{display:block;width:100%;height:auto}.ib .ibraft .built{position:absolute;inset:0;filter:drop-shadow(0 5px 3px rgba(0,0,0,.4))}
+.ib .ibraft .ghost{opacity:.42;filter:grayscale(1) brightness(1.7) contrast(.7)}
+.ib .ibraft .grow{animation:ibgrow 1.4s .3s cubic-bezier(.3,1.1,.5,1) both}@keyframes ibgrow{from{clip-path:inset(0 var(--c0) 0 0)}to{clip-path:inset(0 var(--c1) 0 0)}}
+.ib .sail{transform-origin:50% 100%;animation:ibsail 3.2s ease-in-out infinite alternate}.ib .sail.pop{animation:ibpop .9s .6s cubic-bezier(.3,1.7,.5,1) both,ibsail 3.2s 1.5s ease-in-out infinite alternate}
+@keyframes ibsail{from{transform:rotate(-2deg)}to{transform:rotate(2.5deg) scaleX(1.03)}}
+.ib.storm .sail{animation-duration:.8s}
+.ib .flm{position:absolute;pointer-events:none;-webkit-mask-image:linear-gradient(#000 45%,transparent 70%);mask-image:linear-gradient(#000 45%,transparent 70%)}
+.ib .flm img{display:block;width:100%;height:auto;transform-origin:50% 62%;animation:ibflick .16s ease-in-out infinite alternate}
+@keyframes ibflick{from{transform:scale(1.03,.97) skewX(-1.5deg);filter:brightness(1)}to{transform:scale(.97,1.06) skewX(1.5deg);filter:brightness(1.18)}}
+.ib .glow{position:absolute;width:30%;aspect-ratio:1;transform:translate(-50%,30%);border-radius:50%;background:radial-gradient(rgba(255,190,80,.55),rgba(255,120,30,.15) 45%,transparent 70%);z-index:90;animation:ibglow 1.6s ease-in-out infinite alternate;pointer-events:none}
+.ib .glow.n{width:52%;background:radial-gradient(rgba(255,180,70,.6),rgba(255,120,30,.2) 45%,transparent 70%)}
+@keyframes ibglow{from{opacity:.7;transform:translate(-50%,30%) scale(.95)}to{opacity:1;transform:translate(-50%,30%) scale(1.05)}}
+.ib .spk{position:absolute;width:4px;height:4px;border-radius:50%;background:#ffd166;box-shadow:0 0 6px #ffb347;z-index:99;animation:ibspark 2s ease-out infinite}@keyframes ibspark{from{transform:translate(0,0);opacity:1}to{transform:translate(var(--x),-46px);opacity:0}}
+.ib .crab{position:absolute;left:28%;bottom:1%;width:6%;animation:ibcrab 18s ease-in-out infinite}
+.ib .crab img{animation:ibscut .25s steps(2) infinite}@keyframes ibscut{50%{transform:translateY(-6%) rotate(3deg)}}
+@keyframes ibcrab{0%,12%{transform:translateX(0)}40%,55%{transform:translateX(260%)}85%{transform:translateX(90%)}100%{transform:translateX(0)}}
+.ib .finw{position:absolute;left:0;width:9%;z-index:30;animation:ibfin 18s linear infinite}.ib .finw img{width:100%;display:block}
+@keyframes ibfin{from{transform:translateX(-120%)}to{transform:translateX(1150%)}}
+.ib .bob{animation:ibbob 3s ease-in-out infinite}@keyframes ibbob{50%{transform:translate(6%,-8%) rotate(-3deg)}}
+.ib .ibov{position:absolute;inset:0;width:100%;height:100%;z-index:100;pointer-events:none}
+.ib .nt{position:absolute;inset:0;background:radial-gradient(circle at 50% 92%,transparent 18%,rgba(8,16,40,.25) 60%);z-index:96;pointer-events:none}
+.ib .tw{animation:ibtw 3s ease-in-out infinite}@keyframes ibtw{0%,100%{opacity:0}50%{opacity:.95}}
+.ib .rn{animation:ibrain .7s linear infinite}@keyframes ibrain{from{transform:translate(0,-8px)}to{transform:translate(-3px,30px)}}
+.ib .rain.st .rn{animation-name:ibrain2}@keyframes ibrain2{from{transform:translate(6px,-8px)}to{transform:translate(-12px,30px)}}
+.ib .flash{opacity:0;animation:ibflash 5.5s infinite}@keyframes ibflash{0%,86%,100%{opacity:0}87%{opacity:.8}88.5%{opacity:.1}90%{opacity:.65}92%{opacity:0}}
+.ib .fog{animation:ibfog 30s ease-in-out infinite alternate}@keyframes ibfog{to{transform:translateX(-22px)}}
+.ib .heat{animation:ibheat 2.4s linear infinite}@keyframes ibheat{from{transform:translateY(0);opacity:.4}to{transform:translateY(-12px);opacity:0}}
+.ib .wnd{animation:ibwnd 2.5s linear infinite}@keyframes ibwnd{from{transform:translateX(-20px);opacity:0}20%{opacity:.7}to{transform:translateX(110px);opacity:0}}
+.ib .gl{animation:ibgull 30s linear infinite}@keyframes ibgull{from{transform:translateX(-8px)}to{transform:translateX(108px)}}
+.ib .flap{animation:ibflap .5s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}@keyframes ibflap{to{transform:scaleY(.35)}}
+.ib .fly{animation:ibfly 1.1s linear infinite;transform-box:fill-box;transform-origin:center}@keyframes ibfly{from{transform:rotate(0) translateX(var(--r))}to{transform:rotate(360deg) translateX(var(--r))}}
+.ib .bd{position:absolute;z-index:120;transform:translate(-50%,-100%);display:flex;align-items:center;gap:4px;background:rgba(8,28,36,.8);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:#fff;border-radius:99px;padding:2px 10px 2px 4px;font:800 15px Rubik,sans-serif;border:1.5px solid rgba(255,255,255,.3);box-shadow:0 4px 12px rgba(0,0,0,.35);white-space:nowrap;animation:ibfloat 4s ease-in-out infinite}
 .ib .bd svg{width:20px;height:20px}
 .ib .bd.ok{border-color:rgba(125,255,154,.75)}
 .ib .bd.low{border-color:#ff8a7a;background:rgba(120,25,20,.85);animation:ibfloat 4s ease-in-out infinite,ibpulse 1.4s ease-in-out infinite}
-.ib .ibe,.ib .ibw{position:absolute;top:8px;display:flex;align-items:center;gap:6px;background:rgba(8,28,36,.72);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:#fff;border-radius:99px;padding:3px 11px 3px 4px;font:600 13px Rubik,sans-serif;border:1px solid rgba(255,255,255,.25)}
+.ib .ibe,.ib .ibw{position:absolute;z-index:120;top:8px;display:flex;align-items:center;gap:6px;background:rgba(8,28,36,.74);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:#fff;border-radius:99px;padding:3px 11px 3px 4px;font:600 13px Rubik,sans-serif;border:1px solid rgba(255,255,255,.25)}
 .ib .ibe{left:8px;max-width:62%}.ib .ibw{right:8px;padding-left:11px}
-
 .ibn{font-size:14px;color:var(--muted);margin:2px 4px 10px}
 @keyframes ibfloat{50%{transform:translate(-50%,calc(-100% - 3px))}}
 @keyframes ibpulse{50%{box-shadow:0 0 0 6px rgba(255,138,122,.25),0 4px 12px rgba(0,0,0,.35)}}
-.ib .wv{animation:ibwave 9s linear infinite}@keyframes ibwave{to{transform:translateX(-40px)}}
-.ib.storm .wv{animation-duration:2.6s!important}
-.ib .cl{animation:ibdrift 60s linear infinite}@keyframes ibdrift{from{transform:translateX(-80px)}to{transform:translateX(500px)}}
-.ib .rn{animation:ibrain .7s linear infinite}@keyframes ibrain{from{transform:translate(0,-30px)}to{transform:translate(-14px,140px)}}
-.ib .rain.st .rn{animation-name:ibrain2}@keyframes ibrain2{from{transform:translate(20px,-30px)}to{transform:translate(-50px,140px)}}
-.ib .sway{animation:ibsway 5s ease-in-out infinite alternate}@keyframes ibsway{from{transform:rotate(-2.5deg)}to{transform:rotate(3.5deg)}}
-.ib.windy .sway{animation:ibsway2 1.3s ease-in-out infinite alternate}@keyframes ibsway2{from{transform:rotate(-3deg)}to{transform:rotate(11deg)}}
-.ib.storm .sway{animation:ibsway3 .7s ease-in-out infinite alternate}@keyframes ibsway3{from{transform:rotate(-2deg)}to{transform:rotate(18deg)}}
-.ib .rays{animation:ibspin 50s linear infinite}@keyframes ibspin{to{transform:rotate(360deg)}}
-.ib .glow{animation:ibglow 3s ease-in-out infinite alternate}@keyframes ibglow{from{opacity:.7}to{opacity:1}}
-.ib .tw{animation:ibtw 3s ease-in-out infinite}@keyframes ibtw{0%,100%{opacity:0}50%{opacity:1}}
-.ib .foam{animation:ibfoam 4s ease-in-out infinite}@keyframes ibfoam{50%{transform:translateY(-2.5px);opacity:.35}}
-.ib .flame{animation:ibflick .32s ease-in-out infinite alternate}@keyframes ibflick{from{transform:scale(1,1) skewX(0)}to{transform:scale(.92,1.12) skewX(3deg)}}
-.ib .spk{animation:ibspark 2.2s ease-out infinite}@keyframes ibspark{from{transform:translate(0,0);opacity:1}to{transform:translate(var(--x),-30px);opacity:0}}
-.ib .smk{animation:ibsmoke 4.2s ease-out infinite;opacity:0}@keyframes ibsmoke{0%{transform:translate(0,0) scale(.4);opacity:.7}100%{transform:translate(18px,-70px) scale(2.2);opacity:0}}
-.ib .vsm{animation:ibvsm 6s ease-out infinite;opacity:0}@keyframes ibvsm{0%{transform:translate(0,0) scale(.5);opacity:.8}100%{transform:translate(10px,-30px) scale(2);opacity:0}}
-.ib .pop{animation:ibpop .8s cubic-bezier(.3,1.7,.5,1) both}@keyframes ibpop{from{transform:translateY(-26px) scale(.2);opacity:0}}
-.ib .wat{animation:ibwat 2.4s ease-in-out infinite alternate}@keyframes ibwat{to{opacity:.75}}
-.ib .gl{animation:ibgull 30s linear infinite}@keyframes ibgull{from{transform:translateX(-30px)}to{transform:translateX(430px)}}
-.ib .flap{animation:ibflap .5s ease-in-out infinite alternate}@keyframes ibflap{to{transform:scaleY(.35)}}
-.ib .fin{animation:ibfin 18s linear infinite}@keyframes ibfin{from{transform:translateX(-30px)}to{transform:translateX(430px)}}
-.ib .jump{animation:ibjump 3.2s ease-in-out infinite;opacity:0}@keyframes ibjump{0%,55%{transform:translate(0,8px) rotate(-30deg);opacity:0}60%{opacity:1}78%{transform:translate(10px,-12px) rotate(10deg);opacity:1}95%{transform:translate(20px,6px) rotate(50deg);opacity:0}100%{opacity:0}}
-.ib .bob{animation:ibbob 3s ease-in-out infinite}@keyframes ibbob{50%{transform:translate(4px,-2px) rotate(-2deg)}}
-.ib .fog{animation:ibfog 30s ease-in-out infinite alternate}@keyframes ibfog{to{transform:translateX(-90px)}}
-.ib .heat{animation:ibheat 2.4s linear infinite}@keyframes ibheat{from{transform:translateY(0);opacity:.35}to{transform:translateY(-40px);opacity:0}}
-.ib .wnd{animation:ibwnd 2.5s linear infinite}@keyframes ibwnd{from{transform:translateX(-80px);opacity:0}20%{opacity:.6}to{transform:translateX(440px);opacity:0}}
-.ib .crab{animation:ibcrab 16s ease-in-out infinite alternate}@keyframes ibcrab{0%,15%{transform:translateX(0)}45%,60%{transform:translateX(90px)}100%{transform:translateX(30px)}}
-.ib .fly{animation:ibfly 1.2s linear infinite;transform-box:fill-box;transform-origin:center}@keyframes ibfly{from{transform:rotate(0) translateX(var(--r))}to{transform:rotate(360deg) translateX(var(--r))}}
-.ib .bsk.bad path{filter:hue-rotate(60deg) saturate(.7)}
-.ib .sail{animation:ibsail 2.6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}@keyframes ibsail{to{transform:scaleX(1.08) skewY(-2deg)}}
-.ib .flag{animation:ibflag .5s ease-in-out infinite alternate}@keyframes ibflag{to{transform:scaleY(.6) skewY(8deg)}}
-.ib .mast{animation:ibpop .9s .4s cubic-bezier(.3,1.7,.5,1) both;transform-box:fill-box;transform-origin:50% 100%}
-.ib .flash{opacity:0;animation:ibflash 5.5s infinite}.ib .bolt{opacity:0;animation:ibflash 5.5s infinite}
-@keyframes ibflash{0%,86%,100%{opacity:0}87%{opacity:.85}88.5%{opacity:.1}90%{opacity:.7}92%{opacity:0}}
 /* режими */
 .modes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .mode{appearance:none;text-align:left;border:2px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(0,0,0,.28);color:var(--ink);padding:8px;cursor:pointer;display:flex;flex-direction:column;gap:3px;font:14px/1.3 Rubik,sans-serif;transition:transform .15s,border-color .15s}
@@ -906,96 +906,51 @@ function raftScene(){return `<svg class="ovs" viewBox="0 0 400 230"><g class="ra
 function waveScene(){return `<svg class="ovs" viewBox="0 0 400 230"><path class="bigwave" d="M-20 230V140q60-60 120-20t100 0 120 10 100-10V230z" fill="#0d5e6e" opacity=".85"/></svg>`}
 /* ===== Дошка острова ===== */
 function islandBoard(){
-  const al=alive().length,O1=O(),e=O1.events?S.ev:null,storm=!!S.final,wt=storm?3:S.weather;
-  const night=e==='moon',heat=e==='heat',fog=e==='fog',wind=e==='wind'||storm;
+  const al=alive().length,e=O().events?S.ev:null,storm=!!S.final,wt=storm?3:S.weather;
+  const bg=storm?'storm':e==='moon'?'night':e==='heat'?'heat':(wt>=2||e==='fog')?'rain':'day',night=bg==='night';
   const same=prevRes&&prevRes.g===S.players.length+'|'+S.players[0].name;
   const pw=same?prevRes.water:S.water,pf=same?prevRes.food:S.food,pd=same?prevRes.wood:S.wood;
-  const sky=storm?['#141c27','#3d4856']:night?['#08122c','#2a3b70']:heat?['#ff8f3d','#ffe2a0']:wt>=2?['#56778a','#b8c7cc']:wt===1?['#5d9ec6','#efd9b0']:['#2f9fe0','#ffe0a3'];
-  const seaC=storm?['#1e4a57','#0c2630']:night?['#16365a','#081a30']:['#1fb2c4','#0a6a80'];
-  const R=(a,b)=>a+rnd(b-a+1);
-  // хмари
-  const cloud=(x,y,s,c,d,dl)=>`<g class="cl" style="animation-duration:${d}s;animation-delay:-${dl}s"><g transform="translate(${x} ${y}) scale(${s})" fill="${c}"><ellipse cx="0" cy="8" rx="30" ry="9"/><circle cx="-14" cy="3" r="10"/><circle cx="2" cy="-3" r="14"/><circle cx="17" cy="3" r="10"/></g></g>`;
-  const nCl=storm?7:wt>=2?6:wt===1?4:2,cc=storm?'#2a333f':wt>=2?'#8796a0':wt===1?'#dfe8ee':'#ffffff';
-  let clouds='';for(let i=0;i<nCl;i++)clouds+=cloud(0,18+rnd(48),.6+rnd(60)/100,cc,storm?22+rnd(12):55+rnd(40),rnd(90));
-  // дощ
-  let rain='';const nR=storm?60:wt*16;for(let i=0;i<nR;i++){const x=rnd(440)-10,y=rnd(120);rain+=`<line class="rn" x1="${x}" y1="${y}" x2="${x-4}" y2="${y+10}" style="animation-duration:${(storm?.45:.7)+rnd(30)/100}s;animation-delay:-${rnd(100)/100}s"/>`}
-  // хвилі
-  const wave=(y,c,o,d,amp)=>{let p=`M-80 ${y}`;for(let x=-80;x<480;x+=40)p+=` q10 -${amp} 20 0 t20 0`;return `<path class="wv" d="${p} V160 H-80Z" fill="${c}" opacity="${o}" style="animation-duration:${d}s"/>`};
-  const amp=storm?5:wind?3.2:2;
-  let spark='';if(!storm)for(let i=0;i<9;i++)spark+=`<path class="tw" d="M${R(10,390)} ${R(124,150)}l1.5 -3 1.5 3 -1.5 3z" fill="#fff" style="animation-delay:-${rnd(30)/10}s"/>`;
-  // пальма
-  const palm=(bx,by,cx,cy,flip)=>{const lv=[-160,-125,-95,-60,-25,10,40].map((a,i)=>`<path d="M0 0 Q22 -13 46 3 Q24 -3 0 0Z" fill="${i%2?'#2f9e44':'#3fb954'}" transform="rotate(${flip?180-a:a})"/>`).join('');
-    return `<path d="M${bx} ${by} Q${(bx+cx)/2+(flip?10:-10)} ${(by+cy)/2} ${cx} ${cy}" stroke="#8a5a2b" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M${bx} ${by} Q${(bx+cx)/2+(flip?10:-10)} ${(by+cy)/2} ${cx} ${cy}" stroke="#b07a40" stroke-width="7" fill="none" stroke-dasharray="2 5"/>
-    <g class="sway" style="transform-origin:${cx}px ${cy}px"><g transform="translate(${cx} ${cy})">${lv}<circle cx="-3" cy="5" r="3.2" fill="#6b4421"/><circle cx="3" cy="6" r="3.2" fill="#7a4e26"/></g></g>`};
-  // бочки з водою
-  const nb=Math.min(6,Math.ceil(S.water/3)),pb=Math.min(6,Math.ceil(pw/3));
-  const BP=[[60,176],[86,178],[112,176],[73,163],[99,164],[125,162]];
-  const barrel=(i)=>{const [x,y]=BP[i],u=Math.min(3,S.water-i*3),pop=i>=pb?' pop':'';
-    return `<g class="bar${pop}" style="transform-origin:${x+12}px ${y+30}px;animation-delay:${.2+(i-pb)*.18}s"><g transform="translate(${x} ${y})"><ellipse cx="12" cy="29" rx="12" ry="2.6" fill="#0003"/><path d="M2 4Q0 15 2 26Q12 31 22 26Q24 15 22 4Q12 -1 2 4Z" fill="url(#ibW)" stroke="#5b3517" stroke-width=".8"/><path d="M1.3 9Q12 13 22.7 9M1.3 21Q12 25 22.7 21" stroke="#3b2612" stroke-width="1.6" fill="none"/><ellipse cx="12" cy="4" rx="10" ry="3.2" fill="#4a2c12"/><ellipse class="wat" cx="12" cy="${4.6+(3-u)*.5}" rx="${6+u*.9}" ry="${1.7+u*.25}" fill="url(#ibWat)"/><path d="M7 3.9q3 -1 6 0" stroke="#e6faff" stroke-width=".7" fill="none" opacity=".9"/></g></g>`};
-  let barrels='';[3,4,5,0,1,2].forEach(i=>{if(i<nb)barrels+=barrel(i)});
-  // кошики з рибою
-  const nk=Math.min(6,Math.ceil(S.food/3)),pk=Math.min(6,Math.ceil(pf/3));
-  const KP=[[204,184],[232,186],[260,184],[218,172],[246,173],[274,171]];
-  const basket=(i)=>{const [x,y]=KP[i],u=Math.min(3,S.food-i*3),pop=i>=pk?' pop':'';
-    const fish=Array.from({length:u},(_,j)=>`<g transform="translate(${6+j*6} 7) rotate(${-70+j*35})"><path d="M0 0c3 -4 9 -4 12 0l3.5 -2.6v5.2L12 0c-3 4 -9 4 -12 0z" fill="${['#ff9f4a','#ffb35c','#f08a3a'][j]}" stroke="#c45f16" stroke-width=".5"/><circle cx="2.6" cy="-.6" r=".7" fill="#2a1d12"/></g>`).join('');
-    return `<g class="bsk${pop}${e==='poison'?' bad':''}" style="transform-origin:${x+13}px ${y+20}px;animation-delay:${.3+(i-pk)*.18}s"><g transform="translate(${x} ${y})"><ellipse cx="13" cy="20" rx="13" ry="2.4" fill="#0003"/>${fish}<path d="M1 6L4 18Q13 21 22 18L25 6Z" fill="url(#ibB)" stroke="#6e4b1e" stroke-width=".7"/><path d="M2.4 10h21.2M3.4 14h19.2M8 6.5v12.5M13 6.5v13.5M18 6.5v12.5" stroke="#8b6428" stroke-width=".8"/><ellipse cx="13" cy="6" rx="12" ry="2.3" fill="none" stroke="#c9974a" stroke-width="1.6"/></g></g>`};
-  let baskets='';[3,4,5,0,1,2].forEach(i=>{if(i<nk)baskets+=basket(i)});
-  let flies='';if(e==='poison')for(let i=0;i<6;i++)flies+=`<circle class="fly" cx="${230+rnd(40)}" cy="${176+rnd(10)}" r="1.1" fill="#7ad94a" style="animation-delay:-${rnd(20)/10}s;--r:${6+rnd(8)}px"/>`;
+  const spr=(k,x,b,w,cls='',st='')=>`<img class="spr ${cls}" src="images/sp_${k}.webp" alt="" style="left:${(x-w/2).toFixed(1)}%;bottom:${(100-b).toFixed(1)}%;width:${w}%;z-index:${Math.round(b)};${st}">`;
+  // бочки й кошики
+  const BP=[[24,93],[36,94],[12,91],[30,84],[18,83],[42,85]],KP=[[64,96],[77,97],[89,95],[70,87],[83,88],[95,86]];
+  const nb=Math.min(6,Math.ceil(S.water/3)),pb=Math.min(6,Math.ceil(pw/3)),nk=Math.min(6,Math.ceil(S.food/3)),pk=Math.min(6,Math.ceil(pf/3));
+  let items='';
+  for(let i=0;i<nb;i++)items+=spr('barrel',BP[i][0],BP[i][1],12,i>=pb?'pop':'',`animation-delay:${(.15+(i-pb)*.15).toFixed(2)}s`);
+  for(let i=0;i<nk;i++)items+=spr('basket',KP[i][0],KP[i][1],13,(i>=pk?'pop':'')+(e==='poison'?' bad':''),`animation-delay:${(.25+(i-pk)*.15).toFixed(2)}s`);
   // пліт
-  const capt=S.players.some(p=>p.alive&&hero(p,'capt'))?2:0,need=Math.max(1,al),have=(S.wood+capt)/SEAT+(S.xseat||0);
-  const ratio=Math.min(1,have/need),NL=12,k=ratio>=1?NL:Math.min(NL-1,Math.round(NL*ratio));
-  const pratio=same?Math.min(1,((pd+capt)/SEAT+(S.xseat||0))/need):ratio,pk2=pratio>=1?NL:Math.min(NL-1,Math.round(NL*pratio));
-  let logs='';for(let i=0;i<NL;i++){const x=i*8.3;if(i<k)logs+=`<g class="${i>=pk2?'pop':''}" style="transform-origin:${x+4}px 34px;animation-delay:${.3+(i-pk2)*.12}s"><rect x="${x}" y="0" width="7.6" height="32" rx="3.6" fill="url(#ibL)" stroke="#5e3a17" stroke-width=".6"/><ellipse cx="${x+3.8}" cy="2.6" rx="3.2" ry="1.8" fill="#e3b27a" stroke="#a0612f" stroke-width=".5"/></g>`;else logs+=`<rect x="${x+.4}" y=".4" width="6.8" height="31.2" rx="3.4" fill="#ffffff22" stroke="#fffc" stroke-width=".8" stroke-dasharray="2.4 1.8"/>`}
-  const bw=k*8.3-.7,ropes=k?`<path d="M-1 9H${bw+1}M-1 23H${bw+1}" stroke="#e8d39a" stroke-width="1.6"/>`:'';
-  const sail=ratio>=1?`<g class="mast"><path d="M62 4V-58" stroke="#6b4421" stroke-width="2.8"/><path d="M50 -50H76" stroke="#6b4421" stroke-width="2"/><path class="sail" d="M51 -49Q66 -30 52 -10H75Q86 -30 75 -49Z" fill="#fff6e3" stroke="#d9c7a3" stroke-width=".8"/><path d="M58 -40h12M57 -30h14M57 -20h13" stroke="#e8d9b8" stroke-width=".8"/><path class="flag" d="M62 -58l11 3 -11 3z" fill="#ff6a3d" style="transform-origin:348px 92px"/></g>`:'';
-  const raft=`<g transform="translate(286 150) skewX(-14)"><ellipse cx="50" cy="35" rx="56" ry="4" fill="#0003"/>${logs}${ropes}${sail}</g>`;
+  const capt=S.players.some(p=>p.alive&&hero(p,'capt'))?2:0,need=Math.max(1,al);
+  const rat=w=>Math.min(1,((w+capt)/SEAT+(S.xseat||0))/need),q=r=>r>=1?100:Math.min(91,Math.round(r*11)*100/11);
+  const pct=q(rat(S.wood)),ppct=same?q(rat(pd)):pct;
+  const raft=`<div class="ibraft" style="z-index:74"><img class="ghost" src="images/sp_raft.webp" alt=""><img class="built${pct>ppct?' grow':''}" src="images/sp_raft.webp" alt="" style="--c0:${100-ppct}%;--c1:${100-pct}%;clip-path:inset(0 ${100-pct}% 0 0)"></div>${pct>=100?spr('sail',80,66,14,'sail'+(ppct<100?' pop':''),'z-index:75'):''}`;
   // вогнище
-  const fireBig=e==='fire';
-  const fire=`<g transform="translate(176 200)"><circle class="glow" r="${night?30:20}" fill="url(#ibG)"/><ellipse cy="4" rx="13" ry="3.4" fill="#0004"/><path d="M-10 2l20 -5M-10 -3l20 5" stroke="#5e3a17" stroke-width="3.2" stroke-linecap="round"/>${[-12,-7,0,7,12].map((x,i)=>`<circle cx="${x}" cy="${3+(i%2)}" r="2.4" fill="#8a8f96"/>`).join('')}<g class="flame" style="transform-origin:176px 201px"><path d="M0 1C-${fireBig?11:7} -4 -4 -${fireBig?20:13} 0 -${fireBig?28:19}C4 -${fireBig?20:13} ${fireBig?11:7} -4 0 1Z" fill="#ff6a1f"/><path d="M0 0C-4 -3 -2 -8 0 -${fireBig?17:12}C2 -8 4 -3 0 0Z" fill="#ffd45a"/></g>${Array.from({length:fireBig?8:4},(_,i)=>`<circle class="spk" cx="${rnd(8)-4}" cy="-10" r=".9" fill="#ffd166" style="--x:${rnd(20)-10}px;animation-delay:-${rnd(22)/10}s"/>`).join('')}</g>`;
-  const smoke=fireBig||storm?'':'';
-  const plume=fireBig?Array.from({length:7},(_,i)=>`<circle class="smk" cx="${176+rnd(10)-5}" cy="176" r="${6+rnd(5)}" fill="#5b5f66" style="transform-origin:176px 176px;animation-delay:-${(i*.6).toFixed(1)}s"/>`).join(''):'';
-  // віддалений вулкан
-  const far=night?'#2c3e66':storm?'#38434f':'#6f9fb0';
-  const volcano=`<path d="M118 119Q140 106 160 108L177 88Q183 85 189 88L204 106Q232 104 262 119Z" fill="${far}" opacity=".9"/>${storm?'':Array.from({length:4},(_,i)=>`<circle class="vsm" cx="183" cy="84" r="${4+i}" fill="${night?'#556':'#c9d3d6'}" style="transform-origin:183px 84px;animation-delay:-${i*1.5}s"/>`).join('')}`;
-  // небесні тіла
-  const sun=night?`<circle cx="330" cy="40" r="26" fill="url(#ibMoonG)"/><circle cx="330" cy="40" r="13" fill="#f4f1dc"/><circle cx="335" cy="36" r="12" fill="${sky[0]}" opacity=".0"/>${Array.from({length:22},()=>`<circle class="tw" cx="${rnd(400)}" cy="${rnd(90)}" r="${(rnd(9)+4)/10}" fill="#fff" style="animation-delay:-${rnd(40)/10}s"/>`).join('')}`
-    :storm?'':`<g opacity="${wt>=2?.25:wt===1?.75:1}"><circle class="glow" cx="330" cy="44" r="${heat?44:34}" fill="url(#ibSunG)"/><g class="rays" style="transform-origin:330px 44px">${Array.from({length:12},(_,i)=>`<path d="M330 ${44-(heat?30:24)}l2.6 -9 2.6 9z" fill="#ffd75e" opacity=".75" transform="rotate(${i*30} 330 44)"/>`).join('')}</g><circle cx="330" cy="44" r="${heat?19:15}" fill="#ffd34d"/><circle cx="330" cy="44" r="${heat?15:11}" fill="#ffe680"/></g>`;
-  const gulls=night||storm?'':[0,1].map(i=>`<g class="gl" style="animation-duration:${26+i*9}s;animation-delay:-${i*11}s"><path class="flap" d="M0 0q4 -4 8 0q4 -4 8 0" stroke="#fff" stroke-width="1.5" fill="none" transform="translate(0 ${36+i*14})" style="transform-origin:8px ${36+i*14}px"/></g>`).join('');
+  const fire=`<div class="glow${night?' n':''}" style="left:50%;bottom:4%"></div>${spr('fire',50,96,15,'base')}<div class="flm" style="left:42.5%;bottom:4%;width:15%;z-index:97"><img src="images/sp_fire.webp" alt=""></div>
+  ${Array.from({length:e==='fire'?9:5},(_,i)=>`<i class="spk" style="left:${48+rnd(5)}%;bottom:${12+rnd(4)}%;--x:${rnd(30)-15}px;animation-delay:-${(rnd(20)/10).toFixed(1)}s"></i>`).join('')}`;
+  const crab=night||storm?'':`<div class="crab" style="z-index:98">${spr('crab',30,99.5,6,'','position:relative;left:0;bottom:0;width:100%')}</div>`;
   // події на морі
-  let sea2='';
-  if(e==='sharks')sea2+=[0,1].map(i=>`<g class="fin" style="animation-duration:${16+i*7}s;animation-delay:-${i*6}s"><g transform="translate(0 ${130+i*12})"><path d="M0 0L7 -11Q10 -3 13 0Z" fill="#41606e"/><path d="M-6 1q9 3 25 0" stroke="#d9f4ff" stroke-width="1" fill="none" opacity=".8"/></g></g>`).join('');
-  if(e==='shoal')sea2+=[60,150,250].map((x,i)=>`<g class="jump" style="transform-origin:${x}px 132px;animation-delay:-${i*1.1}s"><path d="M${x} 132c3 -3 7 -3 9 0l3 -2v4l-3 -2c-2 3 -6 3 -9 0z" fill="#ffb35c"/></g>`).join('');
-  if(e==='drift'||e==='find')sea2+=[70,190,250].map((x,i)=>`<g class="bob" style="animation-delay:-${i*.8}s">${e==='drift'?`<rect x="${x}" y="${136+i*4}" width="26" height="6" rx="3" fill="#a0612f" stroke="#5e3a17" stroke-width=".6"/>`:`<rect x="${x}" y="${132+i*4}" width="12" height="10" fill="#b77a3d" stroke="#5e3a17" stroke-width=".7"/><path d="M${x} ${137+i*4}h12" stroke="#5e3a17" stroke-width=".7"/>`}</g>`).join('');
-  const rainbow=e==='rainbow'?`<g opacity=".55" fill="none" stroke-width="3.2">${['#ff5b5b','#ffa64d','#ffe14d','#6ee06e','#5bb6ff','#a77bff'].map((c,i)=>`<path d="M60 120A140 110 0 0 1 340 120" stroke="${c}" transform="translate(0 ${i*3.2})"/>`).join('')}</g>`:'';
-  const fogL=fog?[0,1,2].map(i=>`<ellipse class="fog" cx="${120+i*110}" cy="${110+i*30}" rx="170" ry="${26+i*6}" fill="#fff" opacity=".42" filter="url(#ibBlur)" style="animation-duration:${30+i*12}s;animation-delay:-${i*7}s"/>`).join(''):'';
-  const heatL=heat?[0,1,2,3].map(i=>`<path class="heat" d="M${60+i*90} 220q6 -10 0 -20t0 -20t0 -20" stroke="#fff" stroke-width="1.4" fill="none" opacity=".35" style="animation-delay:-${i*.7}s"/>`).join(''):'';
-  const windL=wind&&!storm?Array.from({length:6},(_,i)=>`<path class="wnd" d="M0 ${30+i*16}q30 -6 60 0" stroke="#fff" stroke-width="1" fill="none" opacity=".5" style="animation-delay:-${(i*.5).toFixed(1)}s"/>`).join(''):'';
-  const crab=night||storm?'':`<g class="crab"><g transform="translate(130 212)"><ellipse rx="4.5" ry="3" fill="#e4572e"/><path d="M-4 1l-3 2M-3 2l-2 3M4 1l3 2M3 2l2 3" stroke="#c0392b" stroke-width=".8"/><circle cx="-6" cy="-2" r="1.8" fill="#e4572e"/><circle cx="6" cy="-2" r="1.8" fill="#e4572e"/><circle cx="-1.4" cy="-2.6" r=".6" fill="#111"/><circle cx="1.4" cy="-2.6" r=".6" fill="#111"/></g></g>`;
-  const flash=storm?`<rect class="flash" width="400" height="225" fill="#fff"/><path class="bolt" d="M250 0l-14 40h10l-12 38 26 -48h-11l13 -30z" fill="#fff8d0"/>`:'';
-  const svg=`<svg viewBox="0 0 400 225" role="img" aria-label="Табір на острові"><defs>
-<linearGradient id="ibSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sky[0]}"/><stop offset="1" stop-color="${sky[1]}"/></linearGradient>
-<linearGradient id="ibSea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${seaC[0]}"/><stop offset="1" stop-color="${seaC[1]}"/></linearGradient>
-<linearGradient id="ibSand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${night?'#b8a47c':storm?'#a99a7a':'#f8dfa9'}"/><stop offset="1" stop-color="${night?'#8e7b58':storm?'#857558':'#e3b871'}"/></linearGradient>
-<linearGradient id="ibW" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6e4019"/><stop offset=".45" stop-color="#c0803f"/><stop offset="1" stop-color="#6e4019"/></linearGradient>
-<linearGradient id="ibL" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7a4a22"/><stop offset=".5" stop-color="#b9783e"/><stop offset="1" stop-color="#6e4019"/></linearGradient>
-<linearGradient id="ibB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0ae5c"/><stop offset="1" stop-color="#a8762f"/></linearGradient>
-<radialGradient id="ibWat"><stop offset="0" stop-color="#9be7ff"/><stop offset="1" stop-color="#1e9bd7"/></radialGradient>
-<radialGradient id="ibSunG"><stop offset="0" stop-color="#fff3b0" stop-opacity=".95"/><stop offset=".5" stop-color="#ffd15c" stop-opacity=".45"/><stop offset="1" stop-color="#ffb627" stop-opacity="0"/></radialGradient>
-<radialGradient id="ibMoonG"><stop offset="0" stop-color="#fffbe0" stop-opacity=".6"/><stop offset="1" stop-color="#fffbe0" stop-opacity="0"/></radialGradient>
-<radialGradient id="ibG"><stop offset="0" stop-color="#ffb347" stop-opacity=".7"/><stop offset="1" stop-color="#ff6a1f" stop-opacity="0"/></radialGradient>
-<filter id="ibBlur" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
-</defs>
-<rect width="400" height="122" fill="url(#ibSky)"/>${sun}${rainbow}${clouds}${volcano}${gulls}${windL}
-<rect y="118" width="400" height="50" fill="url(#ibSea)"/>${wave(124,'#5fd3df',.35,9,amp)}${wave(133,'#2bb8c9',.45,13,amp)}${spark}${sea2}${wave(143,'#139bb1',.6,7,amp*1.2)}
-<path d="M0 160Q60 149 120 155T240 151T400 145V225H0Z" fill="url(#ibSand)"/><path class="foam" d="M0 159Q60 148 120 154T240 150T400 144" stroke="#fff" stroke-width="2.2" fill="none" opacity=".75"/><path d="M0 163Q60 152 120 158T240 154T400 148" stroke="#c99b55" stroke-width="5" fill="none" opacity=".35"/>
-${palm(26,212,46,96,false)}${palm(404,196,392,86,true)}
-${raft}${plume}${barrels}${fire}${baskets}${flies}${crab}${heatL}${fogL}<g class="rain${storm?' st':''}" stroke="${storm?'#c6d4e0':'#d6ecff'}" stroke-width="1" opacity=".75">${rain}</g>${flash}
-${night?'<rect width="400" height="225" fill="#0a1a40" opacity=".28"/>':''}</svg>`;
+  let sea='';
+  if(e==='sharks')sea+=[0,1].map(i=>`<div class="finw" style="bottom:${44+i*6}%;animation-duration:${17+i*7}s;animation-delay:-${i*7}s"><img src="images/sp_fin.webp" alt=""></div>`).join('');
+  if(e==='find')sea+=[18,46,72].map((x,i)=>spr('crate',x,56+i*2,6,'bob',`animation-delay:-${i*.8}s;z-index:40`)).join('');
+  if(e==='drift')sea+=[22,55,78].map((x,i)=>spr('logs',x,57+i*1.5,9,'bob',`animation-delay:-${i*.9}s;z-index:40`)).join('');
+  // накладки: дощ, блиск моря, туман, спека, вітер, блискавка, веселка, чайки
+  const R=(a,b)=>a+rnd(b-a+1);
+  let ov='';
+  if(!storm&&wt<2)for(let i=0;i<7;i++)ov+=`<path class="tw" d="M${R(15,95)} ${R(36,52)}l.35 -.9.35 .9 -.35 .9z" fill="#fff" style="animation-delay:-${rnd(30)/10}s"/>`;
+  const nR=storm?70:wt*18;if(nR){ov+=`<g class="rain${storm?' st':''}" stroke="${storm?'#d5e0ea':'#e4f2ff'}" stroke-width=".28" opacity=".8">`;for(let i=0;i<nR;i++){const x=R(-5,105),y=R(-10,70);ov+=`<line class="rn" x1="${x}" y1="${y}" x2="${x-1}" y2="${y+3.2}" style="animation-duration:${((storm?.45:.7)+rnd(30)/100).toFixed(2)}s;animation-delay:-${(rnd(100)/100).toFixed(2)}s"/>`}ov+='</g>'}
+  if(e==='fog')ov+=[0,1,2].map(i=>`<ellipse class="fog" cx="${30+i*25}" cy="${40+i*14}" rx="48" ry="${9+i*2}" fill="#fff" opacity=".5" filter="url(#ibBlur)" style="animation-duration:${30+i*12}s;animation-delay:-${i*7}s"/>`).join('');
+  if(e==='heat')ov+=[0,1,2,3].map(i=>`<path class="heat" d="M${15+i*22} 85q1.6 -3 0 -6t0 -6t0 -6" stroke="#fff" stroke-width=".4" fill="none" opacity=".4" style="animation-delay:-${i*.7}s"/>`).join('');
+  if(e==='wind'&&!storm)ov+=Array.from({length:6},(_,i)=>`<path class="wnd" d="M0 ${8+i*7}q8 -1.6 16 0" stroke="#fff" stroke-width=".35" fill="none" opacity=".6" style="animation-delay:-${(i*.45).toFixed(1)}s"/>`).join('');
+  if(e==='rainbow'&&!storm)ov+=`<g opacity=".5" fill="none" stroke-width="1.1">${['#ff5b5b','#ffa64d','#ffe14d','#6ee06e','#5bb6ff','#a77bff'].map((c,i)=>`<path d="M8 ${36+i*1.1}A44 34 0 0 1 92 ${36+i*1.1}" stroke="${c}"/>`).join('')}</g>`;
+  if(!night&&!storm)ov+=[0,1].map(i=>`<g class="gl" style="animation-duration:${26+i*9}s;animation-delay:-${i*11}s"><path class="flap" d="M0 ${7+i*5}q1.4 -1.4 2.8 0q1.4 -1.4 2.8 0" stroke="#2a2a2a" stroke-width=".5" fill="none"/><path d="M0 ${7+i*5}q1.4 -1.4 2.8 0q1.4 -1.4 2.8 0" stroke="#fff" stroke-width=".25" fill="none" class="flap"/></g>`).join('');
+  if(storm)ov+=`<rect class="flash" x="-5" y="-5" width="110" height="100" fill="#fff"/><path class="flash" d="M64 0l-5 13h3.5l-4.5 13 10 -17h-4l5 -9z" fill="#fff6c8" stroke="#ffd75e" stroke-width=".3"/>`;
+  if(e==='poison')ov+=Array.from({length:7},()=>`<circle class="fly" cx="${R(66,86)}" cy="${R(74,80)}" r=".45" fill="#2a2a2a" style="--r:${R(2,4)}px;animation-delay:-${rnd(20)/10}s"/>`).join('');
   const L=lack(),seatsNow=seats();
   const bd=(x,y,ic,txt,cls,lbl)=>`<div class="bd ${cls}" style="left:${x}%;top:${y}%" aria-label="${lbl}">${ic}<b>${txt}</b></div>`;
   const lowW=S.water<al,lowF=S.food<al,lowS=seatsNow<al;
-  return `<div class="ib${wind?' windy':''}${storm?' storm':''}">${svg}
-  ${bd(23,74,IC.w,S.water,lowW?'low':'ok','Вода')}${bd(60,77,IC.f,S.food,lowF?'low':'ok','Їжа')}${bd(71,62,IC.s,`${seatsNow}/${al}`,lowS?(storm?'low':''):'ok','Місць на плоту')}
+  return `<div class="ib b-${bg}${storm?' storm':''}${night?' night':''}" style="background-image:url(images/bg_${bg}.webp)">
+  ${sea}${raft}${items}${fire}${crab}
+  <svg class="ibov" viewBox="0 0 100 85.4" preserveAspectRatio="none"><defs><filter id="ibBlur" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="2.2"/></filter></defs>${ov}</svg>
+  ${night?'<div class="nt"></div>':''}
+  ${bd(25,70,IC.w,S.water,lowW?'low':'ok','Вода')}${bd(64,79,IC.f,S.food,lowF?'low':'ok','Їжа')}${bd(80,51,IC.s,`${seatsNow}/${al}`,lowS?(storm?'low':''):'ok','Місць на плоту')}
   ${e?`<div class="ibe"><span class="eic">${EMO[e]}<img src="images/e_${e}.webp" alt="" onerror="this.remove()"></span>${EVI[e][0]}</div>`:''}<div class="ibw">${storm?'Ураган!':wt?`Дощ ${wt}`:'Сухо'}</div></div>
   <p class="ibn">Щовечора табір п’є й їсть: <b>${al}</b> води і <b>${al}</b> їжі. ${seatsNow>=al?'Пліт уже вміщує всіх.':`Для плоту бракує ще <b>${Math.max(0,al*SEAT-S.wood-capt-(S.xseat||0)*SEAT)}</b> дерева.`}</p>`}
 
