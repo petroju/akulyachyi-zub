@@ -174,7 +174,9 @@ lucky:['Щасливчик','Перший укус змії за гру його
 thief:['Злодійка','Починає гру з трьома картами замість однієї.'],
 diplo:['Дипломатка','Один раз за гру переконує табір не виганяти її.']};
 const ITEMS=Object.keys(C).filter(k=>C[k][1]==='i');
-const rnd=n=>Math.floor(Math.random()*n), pick=a=>a[rnd(a.length)];
+const RB=new Uint32Array(64);let rbi=64;
+const r32=()=>{if(rbi>=64){try{crypto.getRandomValues(RB)}catch(e){for(let i=0;i<64;i++)RB[i]=Math.floor(Math.random()*4294967296)}rbi=0}return RB[rbi++]};
+const rnd=n=>{if(n<=1)return 0;const lim=4294967296-(4294967296%n);let x;do{x=r32()}while(x>=lim);return x%n}, pick=a=>a[rnd(a.length)];
 const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const app=document.getElementById('app');
@@ -194,7 +196,15 @@ function lack(){const al=alive();let nw=0,nf=0;al.forEach(p=>{if(!has(p,'flask')
 const seats=()=>Math.floor((S.wood+(S.players.some(p=>p.alive&&hero(p,'capt'))?2:0))/SEAT);
 const sicken=p=>{if(hero(p,'doc'))return false;p.sick=true;return true};
 const log=t=>{S.log.push(t);if(S.log.length>40)S.log.shift()};
-const deckBuild=()=>shuffle(Object.entries(N).flatMap(([k,n])=>Array(n).fill(k)));
+// колода без карт, що зараз на руках; перемішування з розведенням однакових карт
+const deckBuild=()=>{const cnt={...N};if(S&&S.players)S.players.forEach(p=>p.hand.forEach(k=>{if(cnt[k]>0)cnt[k]--}));
+  const d=shuffle(Object.entries(cnt).flatMap(([k,n])=>Array(n).fill(k)));
+  for(let pass=0;pass<3;pass++)for(let i=1;i<d.length;i++){if(d[i]===d[i-1]||(i>1&&d[i]===d[i-2])){for(let t=0;t<12;t++){const j=rnd(d.length);if(d[j]!==d[i-1]&&d[j]!==d[i]&&d[j-1]!==d[i]&&d[j+1]!==d[i]){[d[i],d[j]]=[d[j],d[i]];break}}}}
+  return d};
+// дістати з колоди предмет, бажано такий, якого ще немає в руках
+function dealItem(avoid){if(!S.deck.length)S.deck=deckBuild();
+  let best=-1;for(let i=S.deck.length-1;i>=0;i--){const k=S.deck[i];if(C[k][1]!=='i')continue;if(!avoid.includes(k)){best=i;break}if(best<0)best=i}
+  if(best<0)return pick(ITEMS);return S.deck.splice(best,1)[0]}
 const pic=k=>'images/'+k+'.webp';
 const cardHTML=(k,btn='')=>{const c=C[k];return `<div class="card" style="--c:${c[2]}"><div class="art" style="background-image:url(${pic('c_'+k)})"></div><span class="kd">${c[1]==='e'?'Подія':c[4]?'Предмет · треба зіграти':'Предмет · діє сам'}</span><h3>${c[0]}</h3><p>${c[3]}</p>${btn}</div>`};
 const av=p=>p.hero?`<i class="hp" style="background-image:url(${pic('h_'+p.hero)});border-color:${p.col}"></i>`:`<i style="background:${p.col}">${esc(p.name[0]||'?').toUpperCase()}</i>`;
@@ -203,8 +213,9 @@ function newGame(names){
   const n=names.length, wd=shuffle([0,0,0,1,1,1,1,2,2,2,3,3]);
   wd.splice(6+rnd(6),0,'H');
   const hs=shuffle(Object.keys(HER));
-  S={players:names.map((nm,i)=>({name:nm,alive:true,sick:false,hand:[pick(ITEMS)],col:COLS[i],hero:hs[i],shield:hs[i]==='diplo',luck:hs[i]==='lucky'})),water:2*n+2,food:2*n+2,wood:0,round:0,start:-1,wdeck:wd,weather:1,final:false,deck:deckBuild(),order:[],ti:0,log:[],traps:0,catchers:0,dolphin:false,scr:'round',openVote:setup.open};
-  S.players.forEach(p=>{if(hero(p,'thief'))p.hand.push(pick(ITEMS),pick(ITEMS))});
+  S={players:names.map((nm,i)=>({name:nm,alive:true,sick:false,hand:[],col:COLS[i],hero:hs[i],shield:hs[i]==='diplo',luck:hs[i]==='lucky'})),water:2*n+2,food:2*n+2,wood:0,round:0,start:rnd(n)-1,wdeck:wd,weather:1,final:false,deck:[],order:[],ti:0,log:[],traps:0,catchers:0,dolphin:false,scr:'round',openVote:setup.open};
+  S.deck=deckBuild();const given=[];
+  S.players.forEach(p=>{const m=hero(p,'thief')?3:1;for(let j=0;j<m;j++){const k=dealItem(given.concat(p.hand));p.hand.push(k);given.push(k)}});
   nextRound();
 }
 function nextRound(){
@@ -231,7 +242,7 @@ function draw(p,out,depth=0){
   if(e.x==='chest'&&depth<3){draw(p,out,depth+1);draw(p,out,depth+1)}
   if(e.x==='berries'){if(Math.random()<.5){S.food+=2;out.push('<p>Ягоди виявились смачними! +2 їжі.</p>')}else if(sicken(p))out.push('<p>Ягоди отруйні. Ти захворів.</p>');else out.push('<p>Ягоди отруйні, але Лікарка не хворіє.</p>')}
   if(e.x==='parrot'){const w=S.wdeck[0];out.push(`<p>Наступна погода: <b>${w==='H'?'УРАГАН':w?'дощ '+w:'сухо'}</b>.</p>`)}
-  if(e.x==='stash'){const it=pick(ITEMS);p.hand.push(it);out.push(`<p>Ти знайшов: «${C[it][0]}».</p>`)}
+  if(e.x==='stash'){const it=dealItem(p.hand);p.hand.push(it);out.push(`<p>Ти знайшов: «${C[it][0]}».</p>`)}
   if(e.x==='dolphin')S.dolphin=true;
   if(e.x==='heal')S.players.forEach(q=>q.sick=false);
   if(e.x==='bottle')out.push(`<p>Ураган прийде в раунді <b>${S.final?S.round:S.round+S.wdeck.indexOf('H')+1}</b>.</p>`);
