@@ -9,7 +9,7 @@
    LAYOUT: одна колонка під телефон, ресурси вгорі, дії великими плитками */
 :root{--deep:#062a33;--sea:#0b4a57;--sand:#f3d9a4;--coral:#ff6a3d;--gold:#ffd166;--ink:#fff8ec;--muted:#b9d3d2;--card:#fff6e3;--cink:#2a1d12;color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
-body{margin:0;background:radial-gradient(140% 70% at 50% 0%,#11606f,var(--deep) 70%) fixed;color:var(--ink);font:16px/1.5 Rubik,system-ui,sans-serif;min-height:100vh;overflow-x:clip}
+body{margin:0;background:linear-gradient(rgba(6,42,51,.80),rgba(6,42,51,.93)),url(images/bg_sea.webp) center/cover fixed,var(--deep);color:var(--ink);font:16px/1.5 Rubik,system-ui,sans-serif;min-height:100vh;overflow-x:clip}
 #app{max-width:760px;margin:0 auto;padding:14px 14px 48px}
 h1,h2,h3{font-family:"Russo One",Rubik,sans-serif;font-weight:400;line-height:1.05;margin:0;text-wrap:balance}
 h1{font-size:clamp(36px,10vw,52px);color:var(--gold);text-shadow:0 3px 0 #8a3b12}
@@ -71,7 +71,7 @@ details li{margin:.3em 0}
 .hcard{display:flex;flex-direction:column;gap:2px;background:var(--card);color:var(--cink);border-left:8px solid var(--c);border-radius:14px;padding:10px 14px;margin-bottom:12px}.hcard b{font:400 18px "Russo One",Rubik,sans-serif}.hcard span{font-size:14px;line-height:1.35}
 .heroes{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:10px}.heroes div{background:rgba(0,0,0,.25);border-radius:12px;padding:8px 10px;font-size:14px;line-height:1.35}.heroes b{display:block;color:var(--gold)}
 .rul h3,details h3{margin:16px 0 6px;color:var(--gold)}.rul ul,.rul ol,details ul,details ol{padding-left:20px;margin:4px 0}.rul li,details li{margin:.35em 0}.sheet.rul{max-height:90vh}
-.card .gv{min-height:36px;font-size:14px;margin-top:4px}
+.card .gv{min-height:36px;font-size:14px;margin-top:4px;background:#e9dcc3;color:#3b2a18}
 .need{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.need div{display:flex;align-items:center;gap:6px;background:rgba(192,57,43,.35);border-radius:12px;padding:6px 12px}.need svg{width:24px;height:24px}.need b{font-size:20px}
 .talkhint{background:rgba(255,209,102,.12);border-left:4px solid var(--gold);padding:10px 12px;border-radius:8px}
 .tmr{font:400 44px "Russo One",sans-serif;text-align:center;color:var(--gold);margin-top:8px}
@@ -82,6 +82,13 @@ details li{margin:.3em 0}
 .chip.me{box-shadow:0 0 0 2px #fff inset}
 .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#1b1b1b;color:#fff;padding:12px 18px;border-radius:14px;z-index:20;max-width:90vw;box-shadow:0 6px 20px rgba(0,0,0,.4)}
 .lost{position:sticky;top:0;z-index:15;background:#c0392b;color:#fff;padding:10px 14px;border-radius:12px;margin-bottom:10px;text-align:center}
+.card .art{height:120px;margin:-10px -10px 2px;background:#e8d9b8 center/cover;border-radius:3px 3px 0 0}
+.chip i.hp{background:#ddd center/cover;border:2px solid;width:28px;height:28px}
+.big .av{background:#ddd center/cover;border:4px solid #fff;width:110px;height:110px}.big .av.gone{filter:grayscale(1) brightness(.7);border-color:#555}
+.hcard{display:grid!important;grid-template-columns:64px 1fr;column-gap:12px;align-items:center}.hcard img{grid-row:span 2;width:64px;height:64px;border-radius:12px;object-fit:cover}
+.heroes div img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;display:block;margin-bottom:6px}
+.hero .bimg{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}.hero .t h1,.hero .t p{text-shadow:0 2px 6px rgba(0,0,0,.6)}
+.mapbox{position:relative;border-radius:18px;overflow:hidden;margin:10px 0;box-shadow:0 8px 24px rgba(0,0,0,.35)}.mapbox img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}.mapbox span{position:absolute;left:12px;bottom:10px;background:rgba(0,0,0,.55);color:#fff;border-radius:99px;padding:4px 12px;font:400 16px "Russo One",sans-serif}
 .win{font-size:clamp(28px,8vw,44px)}
 </style></head><body>
 <div id="app"><p style="padding:24px;font:16px sans-serif;color:#fff8ec">Завантаження гри…</p></div>
@@ -117,6 +124,8 @@ map:['Стара карта','i','#b8860b','Натисни «Зіграти»: �
 spyglass:['Підзорна труба','i','#3a6fa8','Натисни «Зіграти»: ти бачиш погоду на наступні два раунди. Наприклад, «дощ 2, сухо» або «УРАГАН». Можеш сказати іншим або збрехати.','self'],
 barometer:['Барометр','i','#3a6fa8','Натисни «Зіграти»: ураган прийде на один раунд пізніше, ніж мав. Це дає табору ще один раунд, щоб добудувати пліт.','self'],
 trap:['Пастка для крабів','i','#e8873a','Натисни «Зіграти»: пастка ставиться на березі й лишається там до кінця гри. Наприкінці кожного раунду вона приносить табору +1 їжу (у пастку лізуть краби).','self'],
+gun:['Револьвер','i','#4a4a4a','Старий револьвер. Якщо в тебе є ще й «Патрон», можеш вистрілити у свій хід або під час розмов перед голосуванням: вибраний гравець одразу вибуває з гри. Кожен постріл витрачає один патрон, а револьвер лишається в тебе. Без патронів ним можна лише погрожувати.','shoot'],
+patron:['Патрон','i','#4a4a4a','Сам нічого не робить. Потрібен для пострілу з револьвера. Можна тримати про запас, віддати тому, в кого є револьвер, або сховати, щоб ніхто не вистрілив.'],
 native:['Тубілець','i','#a0612f','Натисни «Зіграти»: до табору приходить тубілець. Він забирає 1 їжу зі спільного запасу й натомість дає 3 дерева для плоту.','self'],
 treasure:['Карта скарбів','i','#b8860b','Натисни «Зіграти»: за картою ти знаходиш скарб і одразу тягнеш три карти з уламків. Це окрім твоєї звичайної дії.','self'],
 dance:['Танець дощу','i','#3aa7d8','Натисни «Зіграти»: наступного раунду погода буде щонайменше дощ 2, тож воду набирати буде легше. Ураган танцем не скасувати.','self'],
@@ -150,7 +159,7 @@ oldfisher:['Старий рибалка','e','#e8873a','Добра подія, �
 stash:['Чиясь схованка','e','#b8860b','Добра подія, спрацьовує одразу. У дуплі дерева чиясь схованка: ти отримуєш один випадковий предмет у руку.',{x:'stash'}],
 gift:['Дар моря','e','#3aa7d8','Добра подія, спрацьовує одразу. Море викинуло ящик із припасами: +1 вода, +1 їжа і +1 дерево.',{w:1,f:1,d:1}],
 sand:['Лише пісок','e','#9a8a6a','Нічого не відбувається. Ти довго копирсався в уламках, але знайшов тільки пісок і мушлі.',{}]};
-const N={native:2,treasure:1,dance:2,betray:2,spy:1,spear:1,storm:2,pirates:1,volcano:1,berries:2,parrot:1,oldfisher:2,stash:2,gift:1,flask:4,can:4,coconut:3,net:3,rope:3,sail:2,axe:2,rod:2,bucket:2,antidote:2,amulet:2,megaphone:2,medkit:3,thief:3,swap:1,map:2,spyglass:2,barometer:1,trap:1,catcher:1,spring:2,turtle:3,banana:2,crabs:2,planks:4,rain:3,monkeys:2,termites:2,shark:2,wave:2,snake:3,fever:2,gull:1,chest:2,dolphin:1,bottle:1,fire:1,sand:3};
+const N={gun:2,patron:6,native:2,treasure:1,dance:2,betray:2,spy:1,spear:1,storm:2,pirates:1,volcano:1,berries:2,parrot:1,oldfisher:2,stash:2,gift:1,flask:4,can:4,coconut:3,net:3,rope:3,sail:2,axe:2,rod:2,bucket:2,antidote:2,amulet:2,megaphone:2,medkit:3,thief:3,swap:1,map:2,spyglass:2,barometer:1,trap:1,catcher:1,spring:2,turtle:3,banana:2,crabs:2,planks:4,rain:3,monkeys:2,termites:2,shark:2,wave:2,snake:3,fever:2,gull:1,chest:2,dolphin:1,bottle:1,fire:1,sand:3};
 const HER={
 fisher:['Рибалка','Ніколи не повертається з порожніми руками: улов щонайменше 1.'],
 carp:['Тесляр','Рубає на +1 дерева більше.'],
@@ -186,8 +195,9 @@ const seats=()=>Math.floor((S.wood+(S.players.some(p=>p.alive&&hero(p,'capt'))?2
 const sicken=p=>{if(hero(p,'doc'))return false;p.sick=true;return true};
 const log=t=>{S.log.push(t);if(S.log.length>40)S.log.shift()};
 const deckBuild=()=>shuffle(Object.entries(N).flatMap(([k,n])=>Array(n).fill(k)));
-const cardHTML=(k,btn='')=>{const c=C[k];return `<div class="card" style="--c:${c[2]}"><span class="kd">${c[1]==='e'?'Подія':c[4]?'Предмет · треба зіграти':'Предмет · діє сам'}</span><h3>${c[0]}</h3><p>${c[3]}</p>${btn}</div>`};
-const av=p=>`<i style="background:${p.col}">${esc(p.name[0]||'?').toUpperCase()}</i>`;
+const pic=k=>'images/'+k+'.webp';
+const cardHTML=(k,btn='')=>{const c=C[k];return `<div class="card" style="--c:${c[2]}"><div class="art" style="background-image:url(${pic('c_'+k)})"></div><span class="kd">${c[1]==='e'?'Подія':c[4]?'Предмет · треба зіграти':'Предмет · діє сам'}</span><h3>${c[0]}</h3><p>${c[3]}</p>${btn}</div>`};
+const av=p=>p.hero?`<i class="hp" style="background-image:url(${pic('h_'+p.hero)});border-color:${p.col}"></i>`:`<i style="background:${p.col}">${esc(p.name[0]||'?').toUpperCase()}</i>`;
 
 function newGame(names){
   const n=names.length, wd=shuffle([0,0,0,1,1,1,1,2,2,2,3,3]);
@@ -259,7 +269,9 @@ const ACT={
       if(k==='catcher'){S.catchers++;S.flash='Збирач дощу встановлено.'}}
     else{sheet={k}}
     render()},
-  tgt(i){const p=cur(),q=P(+i),k=sheet.k;take(p,k);sheet=null;
+  tgt(i){const p=holder(),q=P(+i),k=sheet.k;
+    if(k==='gun'){sheet=null;if(!has(p,'gun')||!q.alive||q===p)return render();if(!has(p,'patron')){S.flash='Немає патрона: револьвер клацнув упусту.';return render()}take(p,'patron');q.alive=false;q.hand=[];log(`${p.name} вистрілив у ${q.name}!`);S.flash=`Постріл! ${esc(q.name)} вибуває з гри.`;return render()}
+    if(S.scr!=='turn'||cur()!==p)return;take(p,k);sheet=null;
     if(k==='medkit'){q.sick=false;S.flash=`${esc(q.name)} видужав.`;log(`${p.name} вилікував ${q.name}`)}
     if(k==='betray'){if(sicken(q)){S.flash=`${esc(q.name)} отруєний і захворіє.`}else S.flash='Лікарку не отруїти.';log(`${p.name} щось підлаштував`)}
     if(k==='spy'){S.flash=`Карти ${esc(q.name)}: ${q.hand.length?q.hand.map(x=>'«'+C[x][0]+'»').join(', '):'порожньо'}.`;log(`${p.name} підслухав когось`)}
@@ -269,9 +281,10 @@ const ACT={
   close(){sheet=null;render()},
   rules(){showRules=!showRules;render();window.scrollTo(0,0)},
   okflash(){S.flash=null;render()},
-  next(){S.ti++;if(S.ti>=S.order.length)endRound();else S.scr='pass';render()},
+  next(){S.ti++;while(S.ti<S.order.length&&!P(S.order[S.ti]).alive)S.ti++;if(S.ti>=S.order.length)endRound();else S.scr='pass';render()},
   undo(){if(!hist.length)return;S=JSON.parse(hist.pop());sheet=null;mega=false;render()},
   give(k){sheet={give:k};render()},
+  shoot(){sheet={k:'gun'};render()},
   gto(i){const p=holder(),q=P(+i),k=sheet.give;take(p,k);q.hand.push(k);sheet=null;log(`${p.name} передав карту гравцю ${q.name}`);S.flash=`Ти передав «${C[k][0]}» гравцю ${esc(q.name)}.`;render()},
   pool(k){const p=holder(),c=C[k];take(p,k);apply(c[5]);log(`${p.name} віддав табору «${c[0]}»`);S.flash=`«${c[0]}» віддано в спільний запас.`;render()},
   who(){S.view={ret:S.scr};S.flash=null;S.scr='pickwho';render()},
@@ -342,16 +355,7 @@ function over(win){S.scr='over';S.win=win&&alive().length>0}
 const bar=()=>`<div class="top"><span class="tag">Раунд ${S.round}</span>${S.final?'<span class="tag h">Ураган! Останній раунд</span>':`<span class="tag">Погода: ${S.weather?'дощ '+S.weather:'сухо'}</span>`}<span style="display:flex;gap:6px">${ONLINE?'':`<button class="btn g" data-a="undo" ${hist.length?'':'disabled'} aria-label="Скасувати останню дію" style="min-height:36px;padding:4px 12px;font-size:14px">↶ Назад</button>`}<button class="btn g" data-a="rules" style="min-height:36px;padding:4px 12px;font-size:14px">Правила</button><button class="btn g" data-a="quit" style="min-height:36px;padding:4px 12px;font-size:14px">Вийти</button></span></div>
 <div class="res"><div class="r">${IC.w}<b>${S.water}</b><small>вода</small></div><div class="r">${IC.f}<b>${S.food}</b><small>їжа</small></div><div class="r">${IC.d}<b>${S.wood}</b><small>дерево</small></div><div class="r">${IC.s}<b>${seats()}/${alive().length}</b><small>місць</small></div></div>
 <div class="chips">${S.players.map((p,i)=>`<span class="chip ${p.alive?'':'dead'} ${(S.scr==='turn'||(ONLINE&&(S.scr==='pass'||S.scr==='res')))&&S.order[S.ti]===i?'now':''}${ONLINE&&i===ONLINE.me?' me':''}">${av(p)}${esc(p.name)} <small style="opacity:.7">${HER[p.hero][0]}</small>${p.alive&&S.players.indexOf(p)===leader()?'<b class="ld">ватажок</b>':''}${p.sick&&p.alive?' · хворий':''}</span>`).join('')}</div>`;
-const heroArt=`<svg viewBox="0 0 400 230" role="img" aria-label="Острів з вулканом, пальмою і плотом"><defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b1a4a"/><stop offset=".45" stop-color="#e0565b"/><stop offset=".8" stop-color="#ffb35c"/></linearGradient><linearGradient id="se" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#138a8f"/><stop offset="1" stop-color="#063845"/></linearGradient></defs>
-<rect width="400" height="230" fill="url(#sk)"/><circle cx="300" cy="150" r="38" fill="#ffe08a"/>
-<path d="M120 160L175 70h22l60 90z" fill="#3b2a3f"/><path d="M175 70h22l-6 14-6-6-6 8z" fill="#ff6a3d"/><g fill="#6d5a70" opacity=".8"><circle cx="190" cy="56" r="9"/><circle cx="200" cy="40" r="12"/><circle cx="214" cy="22" r="14"/></g>
-<rect y="158" width="400" height="72" fill="url(#se)"/>
-<ellipse cx="200" cy="168" rx="130" ry="16" fill="#f3d9a4"/><ellipse cx="200" cy="164" rx="110" ry="8" fill="#ffe9bd"/>
-<path d="M95 166q-6-40 14-80" stroke="#7a4b24" stroke-width="7" fill="none" stroke-linecap="round"/>
-<g fill="#2f8f5b"><path d="M109 86q-30-6-48 14q26-8 48-14z"/><path d="M109 86q-12-26-40-28q22 12 40 28z"/><path d="M109 86q18-24 44-20q-26 6-44 20z"/><path d="M109 86q34 0 46 22q-22-14-46-22z"/></g>
-<g><rect x="250" y="174" width="54" height="10" rx="3" fill="#a0612f"/><path d="M277 174v-34" stroke="#e3d2b0" stroke-width="2"/><path d="M278 142l18 28h-18z" fill="#fff6e3"/></g>
-<g stroke="#9fe3e0" stroke-width="2" fill="none" opacity=".6"><path d="M0 196q20-6 40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0"><animateTransform attributeName="transform" type="translate" values="0 0;-40 0;0 0" dur="6s" repeatCount="indefinite"/></path><path d="M20 214q20-6 40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0"/></g>
-<path d="M60 205l10-14 4 14z" fill="#23343b"/></svg>`;
+const heroArt='<img class="bimg" src="images/banner.webp" alt="Острів на заході сонця, де потерпілі будують пліт">';
 const RULES_BODY=`
 <h3>Про що гра</h3>
 <p>Ваш корабель розбився, і ви застрягли на безлюдному острові. Ви всі в одній команді: треба разом зібрати дерево на пліт, запастися водою та їжею й відплисти до того, як прийде ураган.</p>
@@ -407,6 +411,7 @@ const RULES_BODY=`
 <li>Під час розмов кожен може відкрити свої карти (кнопка «Подивитися свої карти»), віддати флягу, консерву чи інші припаси в табір або передати будь-яку карту іншому гравцю. Якщо після цього припасів вистачає, голосувати вже не треба.</li>
 <li><b>Відкрите голосування</b> (як у настільній грі): на «раз, два, три» всі одночасно показують пальцем, а потім ви позначаєте в телефоні, хто на кого показав. <b>Таємне</b>: телефон передається по колу, і кожен голосує сам. Режим вибирається перед грою.</li>
 <li>Говорити, домовлятися, підкуповувати картами, блефувати й не дотримувати обіцянок можна: у цьому вся гра.</li></ul>
+<h3>Револьвер і патрони</h3><p>У колоді є 2 револьвери й 6 патронів. Маючи і револьвер, і патрон, можна вистрілити у свій хід або під час розмов перед голосуванням: вибраний гравець одразу вибуває з гри, а його карти пропадають. Постріл витрачає один патрон. Стріляти можна навіть тоді, коли припасів вистачає, тож револьвер це і погроза, і спосіб торгуватися: «віддай мені флягу, або…». Патрони можна передавати іншим або тримати в себе, щоб ніхто не вистрілив.</p>
 <h3>Передати карту</h3><p>У свій хід під кожною картою є кнопка «Передати комусь». Карту можна віддати будь-кому живому, наприклад в обмін на голос чи обіцянку. Інші бачать у журналі, що ти щось передав, але не бачать, що саме.</p>
 <h3>Гра з кількох телефонів</h3><p>Вгорі на стартовому екрані виберіть «Кожен зі свого телефона». Один гравець створює гру й отримує код із 4 літер. Інші вписують цей код і своє ім’я. Коли зібралося щонайменше 3 гравці, той, хто створив кімнату, натискає «Почати гру».</p><p>Кожен бачить свої карти тільки на своєму телефоні й ходить, коли настає його черга. Голосування таємне: кожен голосує зі свого телефона, а всі бачать лише підсумок. ${PEERMODE?'Реєструватися не треба. Телефон того, хто створив гру, працює як ведучий: усі інші підключаються до нього, тому на ньому не можна закривати сторінку й блокувати екран, поки йде гра. Якщо зв’язок обірвався, телефони самі перепідключаються.':'Для цього режиму кожен гравець має бути в своєму акаунті Claude, а власник гри має поділитися нею з ним із правом «Contributor».'} Кнопки «Назад» тут немає.</p>
 <h3>Кнопка «↶ Назад»</h3><p>Скасовує останню дію, якщо хтось помилково натиснув не те. Домовтеся заздалегідь, коли нею можна користуватися, бо так можна й «перекинути» невдалий улов.</p>
@@ -427,7 +432,7 @@ const RULES_BODY=`
 <li>Коли дощ 2–3, вигідно набирати воду. Коли сухо, краще рибалити або рубати.</li>
 <li>Ризикувати на дереві найкраще на початку, коли пропущений хід ще не так страшно.</li>
 <li>Фляга й консерва в руці це ваша страховка від вигнання. Подумайте, чи віддавати їх табору.</li></ul>`;
-const RULES=`<details class="panel"><summary>Як грати (усі правила)</summary>${RULES_BODY}<h3 style="margin-top:12px">Герої</h3><div class="heroes">${Object.values(HER).map(h=>`<div><b>${h[0]}</b>${h[1]}</div>`).join('')}</div></details>`;
+const RULES=`<details class="panel"><summary>Як грати (усі правила)</summary>${RULES_BODY}<h3 style="margin-top:12px">Герої</h3><div class="heroes">${Object.entries(HER).map(([k,h])=>`<div><img src="${pic('h_'+k)}" alt=""><b>${h[0]}</b>${h[1]}</div>`).join('')}</div></details>`;
 
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const clone=o=>o==null?o:JSON.parse(JSON.stringify(o));
@@ -449,12 +454,12 @@ function lobbyHTML(){
   ${host?`<button class="btn y w" data-a="ostart" ${pl.length<3?'disabled':''} style="margin-top:10px">${pl.length<3?'Чекаємо щонайменше 3 гравців':'Почати гру'}</button>`:'<p class="mut">Гру запустить той, хто створив кімнату.</p>'}
   <button class="btn g w" data-a="oleave" style="margin-top:10px">Вийти з кімнати</button></div>`}
 const wait=(t,sub='')=>bar()+`<div class="panel big"><h2>${t}</h2>${sub?`<p class="mut">${sub}</p>`:''}</div>${S.log.length?`<div class="panel"><h3>Що сталося</h3><ul class="log">${S.log.slice(-6).map(l=>`<li>${esc(l)}</li>`).join('')}</ul></div>`:''}`;
-function myHand(me){return me&&me.alive?`<div class="panel"><h3>Твої карти (${me.hand.length})</h3><p class="mut">Бачиш лише ти. Карти «у табір» одразу додають припаси, будь-яку карту можна передати іншому.</p>${me.hand.length?`<div class="hand">${me.hand.map(k=>cardHTML(k,(C[k][4]==='pool'?`<button class="btn" data-a="pool" data-v="${k}">Віддати в табір</button>`:'')+`<button class="btn g gv" data-a="give" data-v="${k}">Передати комусь</button>`)).join('')}</div>`:'<p>Порожньо.</p>'}</div>`:''}
+function myHand(me){return me&&me.alive?`<div class="panel"><h3>Твої карти (${me.hand.length})</h3><p class="mut">Бачиш лише ти. Карти «у табір» одразу додають припаси, будь-яку карту можна передати іншому.</p>${me.hand.length?`<div class="hand">${me.hand.map(k=>cardHTML(k,(C[k][4]==='pool'?`<button class="btn" data-a="pool" data-v="${k}">Віддати в табір</button>`:'')+(k==='gun'?`<button class="btn" data-a="shoot">Вистрілити</button>`:'')+`<button class="btn g gv" data-a="give" data-v="${k}">Передати комусь</button>`)).join('')}</div>`:'<p>Порожньо.</p>'}</div>`:''}
 function onl(){
   const m=ONLINE.me,me=m>=0?P(m):null,mine=S.order[S.ti]===m;
   if(m<0)return wait('Гра вже йде','Тебе немає серед гравців цієї партії. Можеш дивитися.');
-  const dead=me.alive?'':`<div class="panel"><b>Тебе вигнали з табору.</b> Дивись, чим закінчиться, і можеш далі підказувати (або заважати) вголос.</div>`;
-  if(S.scr==='pass')return mine?bar()+`<div class="panel big"><div class="av" style="background:${me.col}">${esc(me.name[0]).toUpperCase()}</div><h2>Твій хід, ${esc(me.name)}!</h2><button class="btn y w" data-a="me" style="margin-top:16px">Почати хід</button></div>`:dead+wait(`Ходить ${esc(cur().name)}`,'Чекай на свою чергу. Можна обговорювати вголос.');
+  const dead=me.alive?'':`<div class="panel"><b>Ти вибув із гри.</b> Дивись, чим закінчиться, і можеш далі підказувати (або заважати) вголос.</div>`;
+  if(S.scr==='pass')return mine?bar()+`<div class="panel big"><div class="av" style="background-image:url(${pic('h_'+me.hero)});border-color:${me.col}"></div><h2>Твій хід, ${esc(me.name)}!</h2><button class="btn y w" data-a="me" style="margin-top:16px">Почати хід</button></div>`:dead+wait(`Ходить ${esc(cur().name)}`,'Чекай на свою чергу. Можна обговорювати вголос.');
   if((S.scr==='turn'||S.scr==='res')&&!mine)return dead+wait(`Ходить ${esc(cur().name)}`,S.scr==='res'?'Завершує хід.':'Вибирає дію.');
   if(S.scr==='talk'){const L=lack();
     return bar()+dead+`<div class="panel"><h2>${S.final?'Ураган! Хто сяде на пліт?':'Табору не вистачає припасів'}</h2>
@@ -497,8 +502,8 @@ async function mutate(fn){
   }catch(e){say(e&&e.code==='invalid_argument'?'Немає дозволу ходити: власник гри має поділитися з тобою як «Contributor».':e&&e.code==='busy'?'Сервер зайнятий, спробуй ще раз.':'Не вдалося. Спробуй ще раз.')}
   finally{busy=false;render()}
 }
-const LOCAL=new Set(['rk','mg','close','rules','give','tm','mode','add','del','setopen','undo']);
-const TURN=new Set(['me','fish','water','wood','search','play','tgt','next','okflash']);
+const LOCAL=new Set(['shoot','rk','mg','close','rules','give','tm','mode','add','del','setopen','undo']);
+const TURN=new Set(['me','fish','water','wood','search','play','next','okflash']);
 const PFX='akzub-v1-';let PEER=null,CONN=null,CONNS=new Map(),ACTOR=null;
 if(PEERMODE){try{UID=localStorage.getItem('shark-uid')}catch(e){}if(!UID){UID='p'+Math.random().toString(36).slice(2,12);try{localStorage.setItem('shark-uid',UID)}catch(e){}}}
 const locals=()=>({risk,mega,sheet:sheet?{...sheet}:null,name:setup.myname||''});
@@ -523,7 +528,7 @@ function hostApply(uid,a,v,loc,own){
   if(!own)[risk,mega,sheet]=sv;ACTOR=UID;
   if(r!==false&&JSON.stringify([LOB,S])!==before){ONLINE.seq++;persistHost();broadcast()}
   render()}
-function send(a,v){if(a==='play'&&S&&C[v]&&(C[v][4]==='sick'||C[v][4]==='other')){sheet={k:v};return render()}if(a==='me')risk=0;const loc=locals();if(a==='myvote')mega=false;
+function send(a,v){if(a==='play'&&S&&C[v]&&(C[v][4]==='sick'||C[v][4]==='other'||C[v][4]==='shoot')){sheet={k:v};return render()}if(a==='me')risk=0;const loc=locals();if(a==='myvote')mega=false;
   if(DB)return mutate(()=>{ACTOR=UID;return doAct(a,v,loc)});
   if(!ONLINE)return;
   if(ONLINE.host)return hostApply(UID,a,v,loc,true);
@@ -593,22 +598,22 @@ function render(){
     <h3 style="margin-top:16px">Голосування</h3><div class="row" style="margin-top:8px"><button class="btn ${setup.open?'y':'g'}" data-a="setopen" data-v="1">Відкрите, пальцем (як у настілці)</button><button class="btn ${setup.open?'g':'y'}" data-a="setopen" data-v="0">Таємне, по черзі</button></div>
     <div class="row" style="margin-top:12px">${setup.names.length<12?'<button class="btn g" data-a="add">+ Гравець</button>':''}<button class="btn y" data-a="start">Почати гру</button></div></div>${RULES}`;
   } else if(S.scr==='round'){
-    h=bar()+`<div class="panel"><h2>Раунд ${S.round}</h2><div class="wcard ${S.final?'h':''}" style="margin-top:12px">${wIcon(S.final?'H':S.weather)}<div><h3>${S.final?'Ураган наближається!':S.weather?`Дощ: ${S.weather}`:'Спека, ні краплі'}</h3><p>${S.final?'Це останній раунд. Після нього пліт має відплисти з усіма, хто поміститься.':`Хто набирає воду, отримає ${S.weather}.`}</p></div></div>
+    h=bar()+`<div class="mapbox"><img src="images/map.webp" alt="Мапа острова"><span>Раунд ${S.round}${S.final?' · ураган!':''}</span></div><div class="panel"><h2>Раунд ${S.round}</h2><div class="wcard ${S.final?'h':''}" style="margin-top:12px">${wIcon(S.final?'H':S.weather)}<div><h3>${S.final?'Ураган наближається!':S.weather?`Дощ: ${S.weather}`:'Спека, ні краплі'}</h3><p>${S.final?'Це останній раунд. Після нього пліт має відплисти з усіма, хто поміститься.':`Хто набирає воду, отримає ${S.weather}.`}</p></div></div>
     <p class="mut" style="margin-top:12px">Перший ходить: <b>${esc(P(S.start).name)}</b>. Кінець раунду: кожному треба 1 воду і 1 їжу.</p><button class="btn w" data-a="begin" style="margin-top:8px">Почати раунд</button></div>`;
   } else if(S.scr==='pass'){
     const p=cur();
-    h=bar()+`<div class="panel big"><p class="mut">Передай телефон гравцю</p><div class="av" style="background:${p.col}">${esc(p.name[0]).toUpperCase()}</div><h2>${esc(p.name)}</h2><p class="mut">${HER[p.hero][0]}</p><button class="btn y w" data-a="me" style="margin-top:18px">Я — ${esc(p.name)}</button></div>
+    h=bar()+`<div class="panel big"><p class="mut">Передай телефон гравцю</p><div class="av" style="background-image:url(${pic('h_'+p.hero)});border-color:${p.col}"></div><h2>${esc(p.name)}</h2><p class="mut">${HER[p.hero][0]}</p><button class="btn y w" data-a="me" style="margin-top:18px">Я — ${esc(p.name)}</button></div>
     ${S.log.length?`<div class="panel"><h3>Що сталося</h3><ul class="log">${S.log.slice(-5).map(l=>`<li>${esc(l)}</li>`).join('')}</ul></div>`:''}`;
   } else if(S.scr==='turn'){
     const p=cur();
-    h=bar()+`<h2 style="margin:6px 0 10px">Твій хід, ${esc(p.name)}</h2><div class="hcard" style="--c:${p.col}"><b>${HER[p.hero][0]}</b><span>${HER[p.hero][1]}${hero(p,'scout')?` Наступна погода: <b>${S.wdeck[0]==='H'?'УРАГАН':S.wdeck[0]?'дощ '+S.wdeck[0]:'сухо'}</b>.`:''}${hero(p,'lucky')&&!p.luck?' (удачу вже використано)':''}${hero(p,'diplo')&&!p.shield?' (уже використано)':''}</span></div>
+    h=bar()+`<h2 style="margin:6px 0 10px">Твій хід, ${esc(p.name)}</h2><div class="hcard" style="--c:${p.col}"><img src="${pic('h_'+p.hero)}" alt=""><b>${HER[p.hero][0]}</b><span>${HER[p.hero][1]}${hero(p,'scout')?` Наступна погода: <b>${S.wdeck[0]==='H'?'УРАГАН':S.wdeck[0]?'дощ '+S.wdeck[0]:'сухо'}</b>.`:''}${hero(p,'lucky')&&!p.luck?' (удачу вже використано)':''}${hero(p,'diplo')&&!p.shield?' (уже використано)':''}</span></div>
     ${S.flash?`<div class="panel">${S.flash}<button class="btn g w" data-a="okflash" style="margin-top:10px">Добре</button></div>`:''}
     <div class="acts">
     <button class="act" data-a="fish">${IC.f}<b>Рибалити</b><span>${hero(p,'fisher')?'1–3':'0–3'} їжі${has(p,'rod')?', вудка':''}${S.dolphin?', +1 дельфіни':''}</span></button>
     <button class="act" data-a="water">${IC.w}<b>Набрати воду</b><span>+${S.weather+(has(p,'bucket')?1:0)+(hero(p,'shaman')?1:0)} води</span></button>
     <div class="act" style="cursor:default">${IC.d}<b>Рубати дерево</b><span>Ризик: ще ${risk} кол. (шанс змії ${Math.round(risk/6*100)}%)</span><div class="risk"><button data-a="rk" data-v="-1" aria-label="Менше">−</button><button data-a="wood" style="width:auto;border-radius:12px;padding:0 14px;background:var(--coral)">+${1+risk+(has(p,'axe')?2:0)+(hero(p,'carp')?1:0)}</button><button data-a="rk" data-v="1" aria-label="Більше">+</button></div></div>
     <button class="act" data-a="search">${IC.c}<b>Уламки</b><span>${hero(p,'diver')?'Тягнеш дві карти':'Тягни карту: знахідка чи халепа'}</span></button></div>
-    <div class="panel"><h3>Твої карти (${p.hand.length})</h3><p class="mut">Бачиш лише ти. Грай карти до дії. Карту можна й передати іншому гравцю, наприклад за обіцянку.</p>${p.hand.length?`<div class="hand">${p.hand.map(k=>cardHTML(k,(C[k][4]?`<button class="btn" data-a="play" data-v="${k}">Зіграти</button>`:'<span class="pas">Діє сама</span>')+`<button class="btn g gv" data-a="give" data-v="${k}">Передати комусь</button>`)).join('')}</div>`:'<p>Порожньо. Обшукай уламки.</p>'}</div>`;
+    <div class="panel"><h3>Твої карти (${p.hand.length})</h3><p class="mut">Бачиш лише ти. Грай карти до дії. Карту можна й передати іншому гравцю, наприклад за обіцянку.</p>${p.hand.length?`<div class="hand">${p.hand.map(k=>cardHTML(k,(C[k][4]?`<button class="btn" data-a="play" data-v="${k}">${k==='gun'?'Вистрілити':'Зіграти'}</button>`:'<span class="pas">Діє сама</span>')+`<button class="btn g gv" data-a="give" data-v="${k}">Передати комусь</button>`)).join('')}</div>`:'<p>Порожньо. Обшукай уламки.</p>'}</div>`;
   } else if(S.scr==='res'){
     h=bar()+`<div class="panel"><h2>${S.res.t}</h2><div style="margin-top:10px">${S.res.h}</div><button class="btn w" data-a="next" style="margin-top:14px">Завершити хід</button></div>`;
   } else if(S.scr==='talk'){
@@ -625,11 +630,11 @@ function render(){
     h=bar()+`<div class="panel"><h2>Чиї карти відкрити?</h2><p class="mut">Вибери себе, тоді тобі передадуть телефон.</p><div class="vote" style="margin-top:12px">${S.players.map((q,i)=>q.alive?`<button class="btn" data-a="vw" data-v="${i}">${esc(q.name)}</button>`:'').join('')}</div><button class="btn g w" data-a="hback" style="margin-top:12px">Назад</button></div>`;
   } else if(S.scr==='hpass'){
     const q=P(S.view.who);
-    h=bar()+`<div class="panel big"><p class="mut">Передай телефон гравцю</p><div class="av" style="background:${q.col}">${esc(q.name[0]).toUpperCase()}</div><h2>${esc(q.name)}</h2><button class="btn y w" data-a="hok" style="margin-top:16px">Я — ${esc(q.name)}</button><button class="btn g w" data-a="hback" style="margin-top:10px">Скасувати</button></div>`;
+    h=bar()+`<div class="panel big"><p class="mut">Передай телефон гравцю</p><div class="av" style="background-image:url(${pic('h_'+q.hero)});border-color:${q.col}"></div><h2>${esc(q.name)}</h2><button class="btn y w" data-a="hok" style="margin-top:16px">Я — ${esc(q.name)}</button><button class="btn g w" data-a="hback" style="margin-top:10px">Скасувати</button></div>`;
   } else if(S.scr==='hand'){
     const q=P(S.view.who);
     h=bar()+`<h2 style="margin:6px 0 10px">Карти: ${esc(q.name)}</h2>${S.flash?`<div class="panel">${S.flash}</div>`:''}
-    <div class="panel"><p class="mut">Бачиш лише ти. Карти «у табір» одразу додають припаси. Будь-яку карту можна передати іншому.</p>${q.hand.length?`<div class="hand">${q.hand.map(k=>cardHTML(k,(C[k][4]==='pool'?`<button class="btn" data-a="pool" data-v="${k}">Віддати в табір</button>`:'')+`<button class="btn g gv" data-a="give" data-v="${k}">Передати комусь</button>`)).join('')}</div>`:'<p>Порожньо.</p>'}</div>
+    <div class="panel"><p class="mut">Бачиш лише ти. Карти «у табір» одразу додають припаси. Будь-яку карту можна передати іншому.</p>${q.hand.length?`<div class="hand">${q.hand.map(k=>cardHTML(k,(C[k][4]==='pool'?`<button class="btn" data-a="pool" data-v="${k}">Віддати в табір</button>`:'')+(k==='gun'?`<button class="btn" data-a="shoot">Вистрілити</button>`:'')+`<button class="btn g gv" data-a="give" data-v="${k}">Передати комусь</button>`)).join('')}</div>`:'<p>Порожньо.</p>'}</div>
     <button class="btn y w" data-a="hback">Готово, сховати карти</button>`;
   } else if(S.scr==='ovote'){
     const v=S.vote,ready=v.voters.every(i=>v.sel[i]!=null);
@@ -644,14 +649,14 @@ function render(){
     <button class="btn g w" data-a="revote" style="margin-top:12px">Переголосувати ще раз</button></div>`;
   } else if(S.scr==='vpass'){
     const v=S.vote,p=P(v.voters[v.vi]);
-    h=bar()+`<div class="panel big"><h2>Голосування</h2><p>${S.final?'Пліт не вміщує всіх або бракує припасів.':'Води чи їжі на всіх не вистачає.'} Треба вигнати ще щонайменше <b>${v.need}</b>.</p><p class="mut">Таємно. Передай телефон гравцю</p><div class="av" style="background:${p.col}">${esc(p.name[0]).toUpperCase()}</div><h2>${esc(p.name)}</h2><button class="btn y w" data-a="vstart" style="margin-top:16px">Я — ${esc(p.name)}</button></div>`;
+    h=bar()+`<div class="panel big"><h2>Голосування</h2><p>${S.final?'Пліт не вміщує всіх або бракує припасів.':'Води чи їжі на всіх не вистачає.'} Треба вигнати ще щонайменше <b>${v.need}</b>.</p><p class="mut">Таємно. Передай телефон гравцю</p><div class="av" style="background-image:url(${pic('h_'+p.hero)});border-color:${p.col}"></div><h2>${esc(p.name)}</h2><button class="btn y w" data-a="vstart" style="margin-top:16px">Я — ${esc(p.name)}</button></div>`;
   } else if(S.scr==='vote'){
     const v=S.vote,me=P(v.voters[v.vi]);
     h=bar()+`<div class="panel"><h2>${esc(me.name)}, кого виганяємо?</h2>${has(me,'megaphone')?`<button class="btn ${mega?'y':'g'} w" data-a="mg" style="margin:12px 0">${mega?'Мегафон увімкнено: +1 голос':'Увімкнути мегафон'}</button>`:''}
     <p class="mut">Твої карти (бачиш лише ти): ${me.hand.length?me.hand.map(k=>'«'+C[k][0]+'»').join(', '):'порожньо'}</p><div class="vote" style="margin-top:12px">${v.cands.filter(i=>i!==v.voters[v.vi]).map(i=>`<button class="btn" data-a="vote" data-v="${i}">${esc(P(i).name)}</button>`).join('')}</div></div>`;
   } else if(S.scr==='verdict'){
     const d=S.verdict,p=P(d.i);
-    h=bar()+`<div class="panel big"><p class="mut">Табір вирішив</p><div class="av" style="background:#555">${esc(p.name[0]).toUpperCase()}</div><h2>${esc(p.name)} лишається сам на пляжі</h2>
+    h=bar()+`<div class="panel big"><p class="mut">Табір вирішив</p><div class="av gone" style="background-image:url(${pic('h_'+p.hero)})"></div><h2>${esc(p.name)} лишається сам на пляжі</h2>
     <ul class="log" style="text-align:left;margin-top:12px">${d.tab.map(([n,c])=>`<li>${esc(n)}: ${c} гол.</li>`).join('')}${d.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul><button class="btn w" data-a="after" style="margin-top:16px">Далі</button></div>`;
   } else if(S.scr==='sum'){
     h=bar()+`<div class="panel"><h2>Кінець раунду ${S.round}</h2>${S.notes.map(n=>`<p>${n}</p>`).join('')}<p>Усі напилися й поїли. До плоту бракує: ${Math.max(0,alive().length-seats())} місць.</p><button class="btn w" data-a="nround" style="margin-top:12px">Наступний раунд</button></div>`;
@@ -667,7 +672,7 @@ function render(){
     if(sheet.give){opts=S.players.map((q,i)=>[q,i]).filter(([q])=>q.alive&&q!==hp);title=`Кому передати «${C[sheet.give][0]}»?`;act='gto'}
     else{const k=sheet.k;opts=S.players.map((q,i)=>[q,i]).filter(([q])=>q.alive&&(C[k][4]==='sick'?q.sick:q!==hp));title=`${C[k][0]}: на кого?`;act='tgt'}
     h+=`<div class="ov"><div class="sheet"><h3>${title}</h3><div class="tg" style="margin-top:12px">${opts.length?opts.map(([q,i])=>`<button class="btn" data-a="${act}" data-v="${i}">${esc(q.name)}</button>`).join(''):'<p>Немає підходящих гравців.</p>'}<button class="btn g" data-a="close">Скасувати</button></div></div></div>`}
-  if(showRules)h+=`<div class="ov"><div class="sheet rul"><div class="top"><h2>Правила</h2><button class="btn g" data-a="rules">Закрити</button></div>${RULES_BODY}<h3 style="margin-top:12px">Герої</h3><div class="heroes">${Object.values(HER).map(x=>`<div><b>${x[0]}</b>${x[1]}</div>`).join('')}</div></div></div>`;
+  if(showRules)h+=`<div class="ov"><div class="sheet rul"><div class="top"><h2>Правила</h2><button class="btn g" data-a="rules">Закрити</button></div>${RULES_BODY}<h3 style="margin-top:12px">Герої</h3><div class="heroes">${Object.entries(HER).map(([k,x])=>`<div><img src="${pic('h_'+k)}" alt=""><b>${x[0]}</b>${x[1]}</div>`).join('')}</div></div></div>`;
   if(ONLINE&&ONLINE.lost)h=`<div class="lost">Зв’язок із ведучим втрачено, перепідключаюсь…</div>`+h;
   if(toast)h+=`<div class="toast">${esc(toast)}</div>`;
   app.innerHTML=h;
