@@ -138,9 +138,41 @@ details li{margin:.3em 0}
 .vbox{position:relative;border-radius:14px;overflow:hidden;margin:-4px 0 10px;aspect-ratio:16/9;background:#0b4a57}.vbox video,.scv{display:block;width:100%;height:100%;object-fit:cover}
 .mapbox video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
 .bang{flex-direction:column;gap:10px}.bangv{width:min(420px,86vw);aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.5);animation:bangt 2.6s cubic-bezier(.3,1.6,.5,1) both}.bang{animation-duration:2.6s}.bang b{animation-duration:2.6s}
+
+#bgfx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}#app{position:relative;z-index:1}
+#bgfx i{position:absolute;display:block}#bgfx svg{display:block;width:100%;height:100%}
+.sunray{position:absolute;top:-30vh;left:50%;width:140vmax;height:140vmax;margin-left:-70vmax;background:repeating-conic-gradient(from 0deg,rgba(255,220,140,.07) 0 8deg,transparent 8deg 22deg);animation:spin 120s linear infinite;mask:radial-gradient(circle,#000 10%,transparent 60%);-webkit-mask:radial-gradient(circle,#000 10%,transparent 60%)}
+.cl{width:200px;height:70px;opacity:.13;animation:cloud linear infinite}.c1{top:8%;animation-duration:70s}.c2{top:26%;width:140px;animation-duration:95s;animation-delay:-40s}.c3{top:48%;width:240px;animation-duration:120s;animation-delay:-80s}
+@keyframes cloud{from{transform:translateX(-260px)}to{transform:translateX(calc(100vw + 260px))}}
+.gl{width:34px;height:12px;opacity:.55;animation:gull 26s linear infinite}.g1{top:15%}.g2{top:20%;width:24px;animation-delay:-13s;animation-duration:34s}
+@keyframes gull{0%{transform:translate(110vw,0)}25%{transform:translate(75vw,-20px)}50%{transform:translate(40vw,10px)}75%{transform:translate(10vw,-15px)}100%{transform:translate(-60px,0)}}
+.palm{bottom:40px;width:110px;height:200px;opacity:.55;transform-origin:50% 100%;animation:sway 6s ease-in-out infinite}.pl{left:-30px}.pr{right:-30px;transform:scaleX(-1);animation-name:swayr;animation-delay:-2s}
+@keyframes sway{50%{transform:rotate(3deg)}}@keyframes swayr{0%,100%{transform:scaleX(-1)}50%{transform:scaleX(-1) rotate(3deg)}}
+.wav{position:absolute;left:-200px;right:-200px;height:60px;background-size:200px 60px;background-repeat:repeat-x;animation:wave linear infinite}
+.w1{bottom:20px;opacity:.25;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40'%3E%3Cpath d='M0 20q25-14 50 0t50 0t50 0t50 0V40H0z' fill='%232fb3c9'/%3E%3C/svg%3E");animation-duration:14s}
+.w2{bottom:8px;opacity:.35;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40'%3E%3Cpath d='M0 20q25-14 50 0t50 0t50 0t50 0V40H0z' fill='%23138a8f'/%3E%3C/svg%3E");animation-duration:9s;animation-direction:reverse}
+.w3{bottom:-6px;opacity:.6;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40'%3E%3Cpath d='M0 20q25-14 50 0t50 0t50 0t50 0V40H0z' fill='%230b4a57'/%3E%3C/svg%3E");animation-duration:6s}
+@keyframes wave{to{transform:translateX(200px)}}
+.fin{bottom:46px;width:34px;height:20px;opacity:.7;animation:fin 22s linear infinite}@keyframes fin{0%{transform:translateX(-60px)}45%{transform:translateX(50vw) translateY(4px)}100%{transform:translateX(calc(100vw + 60px))}}
+.jf{bottom:40px;width:34px;height:17px;opacity:0;animation:jump 9s ease-in-out infinite}.jf1{left:22%}.jf2{left:68%;animation-delay:-4.5s}
+@keyframes jump{0%,82%{opacity:0;transform:translate(0,30px) rotate(-60deg)}86%{opacity:.9}91%{transform:translate(40px,-70px) rotate(0)}96%{opacity:.9}100%{opacity:0;transform:translate(80px,30px) rotate(60deg)}}
+.bub b{position:absolute;bottom:-20px;width:8px;height:8px;border-radius:50%;background:rgba(200,250,255,.35);box-shadow:0 0 6px rgba(200,250,255,.5);animation:bub linear infinite}
+@keyframes bub{0%{transform:translate(0,0);opacity:0}10%{opacity:1}50%{transform:translate(14px,-50vh)}100%{transform:translate(-10px,-105vh);opacity:0}}
+.panel{backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.spark{position:fixed;z-index:50;pointer-events:none;width:10px;height:10px;border-radius:50%;animation:sparkp .9s ease-out forwards}
+@keyframes sparkp{from{transform:translate(0,0) scale(1);opacity:1}to{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}}
+.btn,.act{position:relative;overflow:hidden}.btn::after,.act::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);transform:translateX(-120%);animation:shine 5s ease-in-out infinite}
+@keyframes shine{0%,80%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.act:hover{transform:translateY(-3px)}.act{transition:transform .15s}
 .win{font-size:clamp(28px,8vw,44px)}
 </style></head><body>
-<div id="app"><p style="padding:24px;font:16px sans-serif;color:#fff8ec">Завантаження гри…</p></div>
+<div id="bgfx" aria-hidden="true"><div class="sunray"></div>
+<i class="cl c1"><svg viewBox="0 0 200 70"><g fill="#ffffff"><ellipse cx="60" cy="44" rx="50" ry="22"/><ellipse cx="110" cy="32" rx="46" ry="28"/><ellipse cx="150" cy="46" rx="40" ry="18"/></g></svg></i><i class="cl c2"><svg viewBox="0 0 200 70"><g fill="#ffffff"><ellipse cx="60" cy="44" rx="50" ry="22"/><ellipse cx="110" cy="32" rx="46" ry="28"/><ellipse cx="150" cy="46" rx="40" ry="18"/></g></svg></i><i class="cl c3"><svg viewBox="0 0 200 70"><g fill="#ffffff"><ellipse cx="60" cy="44" rx="50" ry="22"/><ellipse cx="110" cy="32" rx="46" ry="28"/><ellipse cx="150" cy="46" rx="40" ry="18"/></g></svg></i>
+<i class="gl g1"><svg viewBox="0 0 40 14"><path d="M0 8q10-10 20 0q10-10 20 0" stroke="#e9fbff" stroke-width="2.4" fill="none"/></svg></i><i class="gl g2"><svg viewBox="0 0 40 14"><path d="M0 8q10-10 20 0q10-10 20 0" stroke="#e9fbff" stroke-width="2.4" fill="none"/></svg></i>
+<i class="palm pl"><svg viewBox="0 0 120 220"><path d="M60 220q-6-90 8-150" stroke="#05222a" stroke-width="10" fill="none" stroke-linecap="round"/><g fill="#05222a"><path d="M68 70q-40-10-62 14q34-6 62-14z"/><path d="M68 70q-14-34-48-38q28 14 48 38z"/><path d="M68 70q22-32 54-26q-32 6-54 26z"/><path d="M68 70q42 0 52 30q-26-18-52-30z"/><path d="M68 70q4-36 30-50q-20 22-30 50z"/></g></svg></i><i class="palm pr"><svg viewBox="0 0 120 220"><path d="M60 220q-6-90 8-150" stroke="#05222a" stroke-width="10" fill="none" stroke-linecap="round"/><g fill="#05222a"><path d="M68 70q-40-10-62 14q34-6 62-14z"/><path d="M68 70q-14-34-48-38q28 14 48 38z"/><path d="M68 70q22-32 54-26q-32 6-54 26z"/><path d="M68 70q42 0 52 30q-26-18-52-30z"/><path d="M68 70q4-36 30-50q-20 22-30 50z"/></g></svg></i>
+<div class="bub"><b style="left:8%;animation-delay:0s;animation-duration:9s"></b><b style="left:22%;animation-delay:3s;animation-duration:12s"></b><b style="left:37%;animation-delay:6s;animation-duration:10s"></b><b style="left:51%;animation-delay:1s;animation-duration:13s"></b><b style="left:66%;animation-delay:4s;animation-duration:9s"></b><b style="left:79%;animation-delay:7s;animation-duration:11s"></b><b style="left:90%;animation-delay:2s;animation-duration:14s"></b><b style="left:14%;animation-delay:8s;animation-duration:12s"></b><b style="left:44%;animation-delay:5s;animation-duration:10s"></b><b style="left:72%;animation-delay:9s;animation-duration:13s"></b></div>
+<i class="fin"><svg viewBox="0 0 40 24"><path d="M0 24C10 20 18 6 26 0c2 10 6 18 14 24z" fill="#0b2f38"/></svg></i><i class="jf jf1"><svg viewBox="0 0 40 20"><path d="M2 10c8-10 22-10 30 0l7-6-2 6 2 6-7-6c-8 10-22 10-30 0z" fill="#ffa24c"/></svg></i><i class="jf jf2"><svg viewBox="0 0 40 20"><path d="M2 10c8-10 22-10 30 0l7-6-2 6 2 6-7-6c-8 10-22 10-30 0z" fill="#ffa24c"/></svg></i>
+<div class="wav w1"></div><div class="wav w2"></div><div class="wav w3"></div></div><div id="app"><p style="padding:24px;font:16px sans-serif;color:#fff8ec">Завантаження гри…</p></div>
 <script>
 {
 const SEAT=5, FISH=[0,1,1,2,2,3];
@@ -415,7 +447,7 @@ function over(win){S.scr='over';S.win=win&&alive().length>0}
 const dv=k=>prevRes&&prevRes.g===S.players.length+'|'+S.players[0].name?S[k]-prevRes[k]:0;
 const dc=k=>{const d=dv(k);return d>0?'up':d<0?'down':''};
 const dd=k=>{const d=dv(k);return d?`<i class="dlt ${d>0?'p':'m'}">${d>0?'+':''}${d}</i>`:''};
-const bar=()=>`<div class="top"><span class="tag">Раунд ${S.round}</span>${S.final?'<span class="tag h">Ураган! Останній раунд</span>':`<span class="tag">Погода: ${S.weather?'дощ '+S.weather:'сухо'}</span>`}<span style="display:flex;gap:6px">${ONLINE?'':`<button class="btn g" data-a="undo" ${hist.length?'':'disabled'} aria-label="Скасувати останню дію" style="min-height:36px;padding:4px 12px;font-size:14px">↶ Назад</button>`}<button class="btn g" data-a="rules" style="min-height:36px;padding:4px 12px;font-size:14px">Правила</button><button class="btn g" data-a="quit" style="min-height:36px;padding:4px 12px;font-size:14px">Вийти</button></span></div>
+const bar=()=>`<div class="top"><span class="tag">Раунд ${S.round}</span>${S.final?'<span class="tag h">Ураган! Останній раунд</span>':`<span class="tag">Погода: ${S.weather?'дощ '+S.weather:'сухо'}</span>`}<span style="display:flex;gap:6px"><button class="btn g" data-a="mute" aria-label="Звук" style="min-height:36px;padding:4px 10px;font-size:14px">${muted?"🔇":"🔊"}</button>${ONLINE?'':`<button class="btn g" data-a="undo" ${hist.length?'':'disabled'} aria-label="Скасувати останню дію" style="min-height:36px;padding:4px 12px;font-size:14px">↶ Назад</button>`}<button class="btn g" data-a="rules" style="min-height:36px;padding:4px 12px;font-size:14px">Правила</button><button class="btn g" data-a="quit" style="min-height:36px;padding:4px 12px;font-size:14px">Вийти</button></span></div>
 <div class="res"><div class="r ${dc('water')}">${IC.w}<b>${S.water}</b>${dd('water')}<small>вода</small></div><div class="r ${dc('food')}">${IC.f}<b>${S.food}</b>${dd('food')}<small>їжа</small></div><div class="r ${dc('wood')}">${IC.d}<b>${S.wood}</b>${dd('wood')}<small>дерево</small></div><div class="r">${IC.s}<b>${seats()}/${alive().length}</b><small>місць</small></div></div>
 <div class="chips">${S.players.map((p,i)=>`<span class="chip ${p.alive?'':'dead'} ${(S.scr==='turn'||(ONLINE&&(S.scr==='pass'||S.scr==='res')))&&S.order[S.ti]===i?'now':''}${ONLINE&&i===ONLINE.me?' me':''}">${av(p)}${esc(p.name)} <small style="opacity:.7">${HER[p.hero][0]}</small>${p.alive&&S.players.indexOf(p)===leader()?'<b class="ld">ватажок</b>':''}${p.sick&&p.alive?' · хворий':''}</span>`).join('')}</div>`;
 const heroArt='<img class="bimg" src="images/banner.webp" alt="Острів на заході сонця, де потерпілі будують пліт">';
@@ -657,6 +689,12 @@ function advice(p){const L=lack(),left=S.order.slice(S.ti+1).filter(i=>P(i).aliv
   return `<div class="advice ${lvl}"><b class="at">${lvl==='ok'?'Табір спокійний':lvl==='warn'?'Табір у небезпеці':'Критично!'}</b>${out.map(x=>`<span>${x}</span>`).join('')}</div>`}
 const VIDS=['fish','rain','dry','wood','snake','search','sick','feast','exile','shot','win','lose','storm'];
 const vid=(k,cls='scv')=>`<video class="${cls}" src="videos/${k}.mp4" autoplay muted playsinline loop preload="auto" poster="videos/${k}.jpg"></video>`;
+let AC=null,muted=false;try{muted=localStorage.getItem('shark-mute')==='1'}catch(e){}
+function sfx(t){if(muted)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain(),n=AC.currentTime;o.connect(g);g.connect(AC.destination);
+  const P={up:[[660,0],[880,.08],[1180,.16]],down:[[300,0],[200,.12]],tap:[[520,0]],bang:[[120,0],[60,.1]]}[t]||[[440,0]];o.type=t==='bang'?'sawtooth':'triangle';
+  P.forEach(([f,d])=>o.frequency.setValueAtTime(f,n+d));g.gain.setValueAtTime(.08,n);g.gain.exponentialRampToValueAtTime(.001,n+(t==='bang'?.5:.3));o.start(n);o.stop(n+.5)}catch(e){}
+  try{navigator.vibrate&&navigator.vibrate(t==='bang'?[60,40,120]:t==='down'?60:25)}catch(e){}}
+function burst(el,cols){const r=el.getBoundingClientRect();for(let i=0;i<14;i++){const b=document.createElement('i');b.className='spark';b.style.left=(r.left+r.width/2)+'px';b.style.top=(r.top+r.height/2)+'px';b.style.background=cols[i%cols.length];b.style.setProperty('--x',(rnd(120)-60)+'px');b.style.setProperty('--y',(rnd(90)-70)+'px');document.body.appendChild(b);setTimeout(()=>b.remove(),950)}}
 function scene(k,n){n=n||0;
   const vk={fish:'fish',water:n?'rain':'dry',wood:'wood',snake:'snake',search:'search',sick:'sick'}[k];
   if(k==='fish'&&!n)return `<div class="vbox"><img class="scv" src="videos/fish0.jpg" alt=""><div class="gain z">0</div></div>`;
@@ -766,14 +804,17 @@ function render(){
   if(conf)h+=`<div class="ov"><div class="sheet conf"><h3>${conf.m}</h3><div class="row" style="margin-top:14px"><button class="btn g" data-a="cno">Ні</button><button class="btn y" data-a="cyes">Так</button></div></div></div>`;
   if(showRules)h+=`<div class="ov"><div class="sheet rul"><div class="top"><h2>Правила</h2><button class="btn g" data-a="rules">Закрити</button></div>${RULES_BODY}<h3 style="margin-top:12px">Герої</h3><div class="heroes">${Object.entries(HER).map(([k,x])=>`<div><img src="${pic('h_'+k)}" alt=""><b>${x[0]}</b>${x[1]}</div>`).join('')}</div></div></div>`;
   if(ONLINE&&ONLINE.lost)h=`<div class="lost">Зв’язок із ведучим втрачено, перепідключаюсь…</div>`+h;
-  if(S){const fx=S.fxn||0;if(seenFx===null)seenFx=fx;else if(fx>seenFx){bangUntil=Date.now()+2600;setTimeout(()=>render(),2700)}seenFx=fx}else seenFx=null;
+  if(S){const fx=S.fxn||0;if(seenFx===null)seenFx=fx;else if(fx>seenFx){bangUntil=Date.now()+2600;sfx('bang');setTimeout(()=>render(),2700)}seenFx=fx}else seenFx=null;
   if(Date.now()<bangUntil)h+=`<div class="bang"><div class="bangv">${vid('shot','scv')}</div><b>БАХ!</b></div>`;
   if(toast)h+=`<div class="toast">${esc(toast)}</div>`;
   app.innerHTML=h;
+  if(S&&prevRes){['water','food','wood'].forEach((k,i)=>{const d=dv(k);if(d){const el=app.querySelectorAll('.res .r')[i];if(el)burst(el,d>0?['#7dff9a','#ffd166','#fff']:['#ff8a7a','#c0392b']);sfx(d>0?'up':'down')}})}
   if(S)prevRes={water:S.water,food:S.food,wood:S.wood,g:S.players.length+'|'+S.players[0].name};else prevRes=null;
 }
 const NOH=new Set(['undo','rules','quit','again','start','tm']);
 app.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b||b.disabled)return;let a=b.dataset.a,v0=b.dataset.v;
+  if(a==='mute'){muted=!muted;try{localStorage.setItem('shark-mute',muted?'1':'0')}catch(e){}return render()}
+  sfx('tap');
   if(a==='cno'){conf=null;return render()}
   if(a==='cyes'){if(!conf)return;a=conf.a;v0=conf.v;conf=null}
   else if(b.dataset.c){conf={a,v:v0,m:b.dataset.c};return render()}
