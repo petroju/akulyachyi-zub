@@ -694,7 +694,7 @@ function sfx(t){if(muted)return;try{AC=AC||new (window.AudioContext||window.webk
   const P={up:[[660,0],[880,.08],[1180,.16]],down:[[300,0],[200,.12]],tap:[[520,0]],bang:[[120,0],[60,.1]]}[t]||[[440,0]];o.type=t==='bang'?'sawtooth':'triangle';
   P.forEach(([f,d])=>o.frequency.setValueAtTime(f,n+d));g.gain.setValueAtTime(.08,n);g.gain.exponentialRampToValueAtTime(.001,n+(t==='bang'?.5:.3));o.start(n);o.stop(n+.5)}catch(e){}
   try{navigator.vibrate&&navigator.vibrate(t==='bang'?[60,40,120]:t==='down'?60:25)}catch(e){}}
-function burst(el,cols){const r=el.getBoundingClientRect();for(let i=0;i<14;i++){const b=document.createElement('i');b.className='spark';b.style.left=(r.left+r.width/2)+'px';b.style.top=(r.top+r.height/2)+'px';b.style.background=cols[i%cols.length];b.style.setProperty('--x',(rnd(120)-60)+'px');b.style.setProperty('--y',(rnd(90)-70)+'px');document.body.appendChild(b);setTimeout(()=>b.remove(),950)}}
+function burst(el,cols){if(!el||!el.getBoundingClientRect)return;const r=el.getBoundingClientRect();for(let i=0;i<14;i++){const b=document.createElement('i');b.className='spark';b.style.left=(r.left+r.width/2)+'px';b.style.top=(r.top+r.height/2)+'px';b.style.background=cols[i%cols.length];b.style.setProperty('--x',(rnd(120)-60)+'px');b.style.setProperty('--y',(rnd(90)-70)+'px');document.body.appendChild(b);setTimeout(()=>b.remove(),950)}}
 function scene(k,n){n=n||0;
   const vk={fish:'fish',water:n?'rain':'dry',wood:'wood',snake:'snake',search:'search',sick:'sick'}[k];
   if(k==='fish'&&!n)return `<div class="vbox"><img class="scv" src="videos/fish0.jpg" alt=""><div class="gain z">0</div></div>`;
