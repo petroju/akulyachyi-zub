@@ -165,6 +165,88 @@ details li{margin:.3em 0}
 @keyframes shine{0%,80%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
 .act:hover{transform:translateY(-3px)}.act{transition:transform .15s}
 .win{font-size:clamp(28px,8vw,44px)}
+/* дошка острова */
+.ib{position:relative;border-radius:22px;overflow:hidden;box-shadow:0 12px 34px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.12);margin:10px 0 4px;background:#0b4a57;isolation:isolate}
+.ib>svg{display:block;width:100%;height:auto}
+.ib .bd{position:absolute;transform:translate(-50%,-100%);display:flex;align-items:center;gap:4px;background:rgba(8,28,36,.78);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:#fff;border-radius:99px;padding:2px 10px 2px 4px;font:800 15px Rubik,sans-serif;border:1.5px solid rgba(255,255,255,.3);box-shadow:0 4px 12px rgba(0,0,0,.35);white-space:nowrap;animation:ibfloat 4s ease-in-out infinite}
+.ib .bd svg{width:20px;height:20px}
+.ib .bd.ok{border-color:rgba(125,255,154,.75)}
+.ib .bd.low{border-color:#ff8a7a;background:rgba(120,25,20,.85);animation:ibfloat 4s ease-in-out infinite,ibpulse 1.4s ease-in-out infinite}
+.ib .ibe,.ib .ibw{position:absolute;top:8px;display:flex;align-items:center;gap:6px;background:rgba(8,28,36,.72);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:#fff;border-radius:99px;padding:3px 11px 3px 4px;font:600 13px Rubik,sans-serif;border:1px solid rgba(255,255,255,.25)}
+.ib .ibe{left:8px;max-width:62%}.ib .ibw{right:8px;padding-left:11px}
+
+.ibn{font-size:14px;color:var(--muted);margin:2px 4px 10px}
+@keyframes ibfloat{50%{transform:translate(-50%,calc(-100% - 3px))}}
+@keyframes ibpulse{50%{box-shadow:0 0 0 6px rgba(255,138,122,.25),0 4px 12px rgba(0,0,0,.35)}}
+.ib .wv{animation:ibwave 9s linear infinite}@keyframes ibwave{to{transform:translateX(-40px)}}
+.ib.storm .wv{animation-duration:2.6s!important}
+.ib .cl{animation:ibdrift 60s linear infinite}@keyframes ibdrift{from{transform:translateX(-80px)}to{transform:translateX(500px)}}
+.ib .rn{animation:ibrain .7s linear infinite}@keyframes ibrain{from{transform:translate(0,-30px)}to{transform:translate(-14px,140px)}}
+.ib .rain.st .rn{animation-name:ibrain2}@keyframes ibrain2{from{transform:translate(20px,-30px)}to{transform:translate(-50px,140px)}}
+.ib .sway{animation:ibsway 5s ease-in-out infinite alternate}@keyframes ibsway{from{transform:rotate(-2.5deg)}to{transform:rotate(3.5deg)}}
+.ib.windy .sway{animation:ibsway2 1.3s ease-in-out infinite alternate}@keyframes ibsway2{from{transform:rotate(-3deg)}to{transform:rotate(11deg)}}
+.ib.storm .sway{animation:ibsway3 .7s ease-in-out infinite alternate}@keyframes ibsway3{from{transform:rotate(-2deg)}to{transform:rotate(18deg)}}
+.ib .rays{animation:ibspin 50s linear infinite}@keyframes ibspin{to{transform:rotate(360deg)}}
+.ib .glow{animation:ibglow 3s ease-in-out infinite alternate}@keyframes ibglow{from{opacity:.7}to{opacity:1}}
+.ib .tw{animation:ibtw 3s ease-in-out infinite}@keyframes ibtw{0%,100%{opacity:0}50%{opacity:1}}
+.ib .foam{animation:ibfoam 4s ease-in-out infinite}@keyframes ibfoam{50%{transform:translateY(-2.5px);opacity:.35}}
+.ib .flame{animation:ibflick .32s ease-in-out infinite alternate}@keyframes ibflick{from{transform:scale(1,1) skewX(0)}to{transform:scale(.92,1.12) skewX(3deg)}}
+.ib .spk{animation:ibspark 2.2s ease-out infinite}@keyframes ibspark{from{transform:translate(0,0);opacity:1}to{transform:translate(var(--x),-30px);opacity:0}}
+.ib .smk{animation:ibsmoke 4.2s ease-out infinite;opacity:0}@keyframes ibsmoke{0%{transform:translate(0,0) scale(.4);opacity:.7}100%{transform:translate(18px,-70px) scale(2.2);opacity:0}}
+.ib .vsm{animation:ibvsm 6s ease-out infinite;opacity:0}@keyframes ibvsm{0%{transform:translate(0,0) scale(.5);opacity:.8}100%{transform:translate(10px,-30px) scale(2);opacity:0}}
+.ib .pop{animation:ibpop .8s cubic-bezier(.3,1.7,.5,1) both}@keyframes ibpop{from{transform:translateY(-26px) scale(.2);opacity:0}}
+.ib .wat{animation:ibwat 2.4s ease-in-out infinite alternate}@keyframes ibwat{to{opacity:.75}}
+.ib .gl{animation:ibgull 30s linear infinite}@keyframes ibgull{from{transform:translateX(-30px)}to{transform:translateX(430px)}}
+.ib .flap{animation:ibflap .5s ease-in-out infinite alternate}@keyframes ibflap{to{transform:scaleY(.35)}}
+.ib .fin{animation:ibfin 18s linear infinite}@keyframes ibfin{from{transform:translateX(-30px)}to{transform:translateX(430px)}}
+.ib .jump{animation:ibjump 3.2s ease-in-out infinite;opacity:0}@keyframes ibjump{0%,55%{transform:translate(0,8px) rotate(-30deg);opacity:0}60%{opacity:1}78%{transform:translate(10px,-12px) rotate(10deg);opacity:1}95%{transform:translate(20px,6px) rotate(50deg);opacity:0}100%{opacity:0}}
+.ib .bob{animation:ibbob 3s ease-in-out infinite}@keyframes ibbob{50%{transform:translate(4px,-2px) rotate(-2deg)}}
+.ib .fog{animation:ibfog 30s ease-in-out infinite alternate}@keyframes ibfog{to{transform:translateX(-90px)}}
+.ib .heat{animation:ibheat 2.4s linear infinite}@keyframes ibheat{from{transform:translateY(0);opacity:.35}to{transform:translateY(-40px);opacity:0}}
+.ib .wnd{animation:ibwnd 2.5s linear infinite}@keyframes ibwnd{from{transform:translateX(-80px);opacity:0}20%{opacity:.6}to{transform:translateX(440px);opacity:0}}
+.ib .crab{animation:ibcrab 16s ease-in-out infinite alternate}@keyframes ibcrab{0%,15%{transform:translateX(0)}45%,60%{transform:translateX(90px)}100%{transform:translateX(30px)}}
+.ib .fly{animation:ibfly 1.2s linear infinite;transform-box:fill-box;transform-origin:center}@keyframes ibfly{from{transform:rotate(0) translateX(var(--r))}to{transform:rotate(360deg) translateX(var(--r))}}
+.ib .bsk.bad path{filter:hue-rotate(60deg) saturate(.7)}
+.ib .sail{animation:ibsail 2.6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}@keyframes ibsail{to{transform:scaleX(1.08) skewY(-2deg)}}
+.ib .flag{animation:ibflag .5s ease-in-out infinite alternate}@keyframes ibflag{to{transform:scaleY(.6) skewY(8deg)}}
+.ib .mast{animation:ibpop .9s .4s cubic-bezier(.3,1.7,.5,1) both;transform-box:fill-box;transform-origin:50% 100%}
+.ib .flash{opacity:0;animation:ibflash 5.5s infinite}.ib .bolt{opacity:0;animation:ibflash 5.5s infinite}
+@keyframes ibflash{0%,86%,100%{opacity:0}87%{opacity:.85}88.5%{opacity:.1}90%{opacity:.7}92%{opacity:0}}
+/* режими */
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.mode{appearance:none;text-align:left;border:2px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(0,0,0,.28);color:var(--ink);padding:8px;cursor:pointer;display:flex;flex-direction:column;gap:3px;font:14px/1.3 Rubik,sans-serif;transition:transform .15s,border-color .15s}
+.mode .mi{display:block;width:100%;aspect-ratio:16/10;border-radius:10px;background:linear-gradient(135deg,#1590a8,#0b4a57) center/cover;margin-bottom:4px}
+.mode b{font:400 16px "Russo One",Rubik,sans-serif}.mode small{color:var(--muted);font-size:12.5px}
+.mode.on{border-color:var(--gold);background:rgba(255,209,102,.14);transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.opt{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;padding:9px 10px;border-radius:14px;background:rgba(0,0,0,.25);margin-top:7px;cursor:pointer}
+.opt .sw{width:46px;height:26px;border-radius:99px;background:#5a6b70;position:relative;transition:background .2s}.opt .sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .2s cubic-bezier(.3,1.5,.5,1)}
+.opt.on .sw{background:#3bb273}.opt.on .sw::after{left:23px}.opt b{display:block}.opt small{display:block;color:var(--muted);font-size:13px;line-height:1.3}
+.ochips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.ochips span{background:rgba(255,209,102,.16);border:1px solid rgba(255,209,102,.4);border-radius:99px;padding:3px 10px;font-size:14px}
+/* події та ролі */
+.evcard{display:grid;grid-template-columns:92px 1fr;gap:12px;align-items:center;background:linear-gradient(135deg,#fff6e3,#f3d9a4);color:var(--cink);border-radius:18px;padding:10px;margin-top:12px;box-shadow:0 6px 18px rgba(0,0,0,.3);animation:evin .7s cubic-bezier(.3,1.5,.5,1) both}
+.evcard .ei{width:92px;height:92px;border-radius:14px;background:linear-gradient(135deg,#ff6a3d,#ffd166) center/cover;border:3px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.25)}
+.evcard small{font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:11px;color:#a0612f}.evcard h3{color:var(--cink)}.evcard p{margin:4px 0 0;font-size:14px}
+@keyframes evin{from{transform:rotateY(80deg) scale(.7);opacity:0}}
+.tag.ev{background:linear-gradient(135deg,#6b4ca8,#3a6fa8);border-color:transparent}
+.role{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:center;background:radial-gradient(circle at 20% 20%,rgba(255,209,102,.22),transparent 60%),rgba(0,0,0,.35);border:2px solid var(--gold);border-radius:20px;padding:12px;margin:10px 0;text-align:left}
+.role .ri{width:110px;height:110px;border-radius:18px;background:linear-gradient(135deg,#1590a8,#0b4a57) center/cover;box-shadow:0 6px 18px rgba(0,0,0,.45);animation:rolepop .8s cubic-bezier(.3,1.6,.5,1) both}
+.role.spy{border-color:#c0392b;background:radial-gradient(circle at 20% 20%,rgba(192,57,43,.35),transparent 60%),rgba(0,0,0,.4)}
+.role.sm{grid-template-columns:52px 1fr;padding:8px 10px;gap:10px}.role.sm .ri{width:52px;height:52px;border-radius:12px;animation:none}.role.sm p{font-size:14px;margin:2px 0 0}
+@keyframes rolepop{from{transform:scale(.3) rotate(-20deg);opacity:0}}
+.mate{margin-top:6px;font-size:14px;color:var(--muted)}
+/* фінал */
+.fin-t{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}.fin-t td,.fin-t th{padding:7px 4px;border-bottom:1px solid rgba(255,255,255,.1);text-align:center;vertical-align:middle}.fin-t td:first-child,.fin-t th:first-child{text-align:left}
+.fin-t .nmc{display:flex;align-items:center;gap:7px}.fin-t .nmc i{flex:0 0 30px;width:30px;height:30px;border-radius:50%;background:#333 center/cover;border:2px solid}
+.fin-t th svg{width:22px;height:22px;vertical-align:middle}.fin-t tr.wn td{background:rgba(255,209,102,.1)}.fin-t .fate{font-size:12px;color:var(--muted);display:block}
+.badge{display:inline-block;font-size:11px;font-weight:700;border-radius:99px;padding:1px 7px;margin-left:4px;vertical-align:middle}.badge.spy{background:#c0392b}.badge.res{background:#2f8f5b}.badge.tm{background:#3a6fa8}.badge.win{background:var(--gold);color:#3a2207}
+.awards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.aw{background:linear-gradient(160deg,rgba(255,209,102,.2),rgba(0,0,0,.25));border:1px solid rgba(255,209,102,.35);border-radius:16px;padding:10px;text-align:center;animation:awin .6s cubic-bezier(.3,1.5,.5,1) both}
+.aw .ai{font-size:28px;line-height:1}.aw b{display:block;font:400 15px "Russo One",Rubik,sans-serif;color:var(--gold);margin-top:4px}.aw span{display:block;font-weight:700}.aw small{color:var(--muted);font-size:12px}
+@keyframes awin{from{transform:translateY(20px) scale(.8);opacity:0}}
+.verdict-roles{margin-top:12px;padding:12px;border-radius:16px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.15)}
+
+.fi{position:relative;display:grid;place-items:center;overflow:hidden}.fi i{font-style:normal;font-size:44px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}.fi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.role.sm .fi i{font-size:28px}.ib .ibe .eic{position:relative;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:15px;overflow:hidden;background:rgba(255,255,255,.15)}.ib .ibe .eic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
 </style></head><body>
 <div id="bgfx" aria-hidden="true"><div class="sunray"></div>
 <i class="cl c1"><svg viewBox="0 0 200 70"><g fill="#ffffff"><ellipse cx="60" cy="44" rx="50" ry="22"/><ellipse cx="110" cy="32" rx="46" ry="28"/><ellipse cx="150" cy="46" rx="40" ry="18"/></g></svg></i><i class="cl c2"><svg viewBox="0 0 200 70"><g fill="#ffffff"><ellipse cx="60" cy="44" rx="50" ry="22"/><ellipse cx="110" cy="32" rx="46" ry="28"/><ellipse cx="150" cy="46" rx="40" ry="18"/></g></svg></i><i class="cl c3"><svg viewBox="0 0 200 70"><g fill="#ffffff"><ellipse cx="60" cy="44" rx="50" ry="22"/><ellipse cx="110" cy="32" rx="46" ry="28"/><ellipse cx="150" cy="46" rx="40" ry="18"/></g></svg></i>
@@ -255,6 +337,93 @@ lucky:['Щасливчик','Перший укус змії за гру його
 thief:['Злодійка','Починає гру з трьома картами замість однієї.'],
 diplo:['Дипломатка','Один раз за гру переконує табір не виганяти її.']};
 const ITEMS=Object.keys(C).filter(k=>C[k][1]==='i');
+/* ===== Нові режими, події й особливі карти ===== */
+Object.assign(C,{
+shell:['Черепаший панцир','i','#2f8f5b','Грати не треба, діє сама. Якщо в тебе вистрілять із револьвера, куля відскочить від панцира, і ти лишишся в грі. Після цього карта зникає.'],
+rumor:['Плітка','i','#6b4ca8','Натисни «Зіграти» й вибери гравця. Ти потай розпускаєш про нього чутки: на найближчому голосуванні проти нього одразу буде +1 голос. Ніхто не знає, що це ти.','other'],
+oath:['Клятва дружби','i','#b8860b','Натисни «Зіграти» й вибери гравця. На найближчому голосуванні ви двоє не зможете голосувати одне проти одного.','other'],
+compass:['Компас','i','#3a6fa8','Натисни «Зіграти»: дивишся три верхні карти уламків і береш одну з них. Решта йде під низ колоди. Це окрім твоєї звичайної дії.','self'],
+flare:['Сигнальна ракета','i','#ff6a3d','Натисни «Зіграти»: судно на обрії помічає ракету й скидає рятувальний човен. До кінця гри на плоту на 1 місце більше.','pool',{s:1}],
+ballot:['Таємна скринька','i','#3a6fa8','Натисни «Зіграти»: найближче голосування буде таємним, навіть якщо ви граєте з відкритим. Ніхто не дізнається, хто за кого.','self'],
+raid:['Нічна крадіжка','i','#6b4ca8','Натисни «Зіграти»: уночі ти тягнеш 2 їжі зі спільної комори й ховаєш собі як «Консерву». Табору мінус 2 їжі, тобі особиста їжа. Інші не знають, хто це.','self'],
+cave:['Печера','i','#5f6b73','Натисни «Зіграти»: ти ховаєшся в печері до кінця раунду. На голосуванні цього раунду тебе не можна вигнати, але й ти не голосуєш. Твій хід на цьому закінчується, дію не робиш.','self']});
+const SPN={shell:2,rumor:2,oath:2,compass:2,flare:1,ballot:2,raid:2,cave:2};
+const EVI={
+sharks:['Акули біля берега','Рибалити небезпечно: кожен улов цього раунду на 1 менший.'],
+shoal:['Косяк риби','Риба сама йде в руки: кожен улов цього раунду на 1 більший.'],
+poison:['Отруйна їжа','Частина запасів зіпсувалась: табір одразу втрачає 2 їжі.'],
+fire:['Пожежа в таборі','Іскра з багаття підпалила колоди: пліт одразу втрачає 3 дерева.'],
+find:['Знахідка на узбережжі','Хвилі винесли купу уламків: хто цього раунду обшукує уламки, тягне на 1 карту більше.'],
+wind:['Сильний вітер','Рубати дерево цього раунду не можна, зате вітер жене хмари: набирання води дає +1.'],
+heat:['Спека','Набирання води дає на 1 менше, а в кінці раунду з бочок випаровується ще 1 вода.'],
+fog:['Туман','Нічого не видно: голосування цього раунду тільки таємне.'],
+moon:['Повний місяць','Змії виповзли полювати: коли рубаєш дерево, шанс укусу більший.'],
+drift:['Колоди на хвилях','Море пригнало колоди: пліт одразу отримує +2 дерева.'],
+rainbow:['Веселка','Після дощу всім полегшало: усі хворі одразу одужують.'],
+calm:['Тихий день','Нічого особливого. Звичайний день на острові.']};
+const EMO0=0;const EMO={e_sharks:'🦈',e_shoal:'🐟',e_poison:'🤢',e_fire:'🔥',e_find:'📦',e_wind:'🌬️',e_heat:'🥵',e_fog:'🌫️',e_moon:'🌕',e_drift:'🪵',e_rainbow:'🌈',e_calm:'🌴',sharks:'🦈',shoal:'🐟',poison:'🤢',fire:'🔥',find:'📦',wind:'🌬️',heat:'🥵',fog:'🌫️',moon:'🌕',drift:'🪵',rainbow:'🌈',calm:'🌴',r_cast:'🏝️',r_spy:'🕵️',r_res:'🛟',r_team:'🤝'};
+const fimg=(k,cls)=>`<span class="${cls} fi"><i>${EMO[k]||'🏝️'}</i><img src="images/${k}.webp" alt="" onerror="this.remove()"></span>`;
+const DEFO={mode:'classic',events:true,special:true,fast:false,hard:false};
+const MODES=[['classic','Звичайна','Усі разом проти острова.','r_cast'],['spy','Шпигун','Серед вас таємний шпигун, якому треба, щоб острів переміг.','r_spy'],['spyres','Шпигун і Рятівник','Шпигун шкодить, а таємний рятівник рятує половину табору.','r_res'],['team','Командна','Граєте парами: перемагає пара, яка відпливе повністю.','r_team']];
+const TOGS=[['events','Події острова','Щораунду подія: акули, пожежа, туман, спека, повний місяць…'],['special','Особливі карти','15 нових карт: плітки, клятви, печера, компас, сигнальна ракета…'],['fast','Швидка гра','Ураган приходить уже на 4–6 раунді, зате пліт частково збудований.'],['hard','Жорстка гра','Менше припасів, частіше сухо, події лише погані й нейтральні.']];
+const O=()=>(S&&S.opts)||{};
+const ev=k=>!!(O().events&&S.ev===k);
+const NOST={f:0,w:0,d:0,vr:0,sh:0,gv:0,tr:0};
+const st=p=>{if(!S.st)return {...NOST};const i=S.players.indexOf(p);return S.st[i]||(S.st[i]={...NOST})};
+const wg=p=>Math.max(0,S.weather+(has(p,'bucket')?1:0)+(hero(p,'shaman')?1:0)+(ev('wind')?1:0)-(ev('heat')?1:0));
+const snakeP=r=>{const s=ev('moon')?2:1;let q=1;for(let i=0;i<r;i++)q*=Math.max(0,6-s-i)/(6-i);return Math.round((1-q)*100)};
+const canV=(i,j)=>!(S.oaths||[]).some(([a,b])=>(a===i&&b===j)||(a===j&&b===i));
+const vcands=(v,i)=>{const c=v.cands.filter(j=>j!==i&&canV(i,j));return c.length?c:v.cands.filter(j=>j!==i)};
+const half=()=>Math.ceil(S.players.length/2);
+function seedVotes(v){v.votes={};v.cands.forEach(i=>{const r=P(i).rumor||0;if(r){v.votes[i]=r;const t=`Плітки про ${P(i).name}: +${r} гол.`;if(!v.notes.includes(t))v.notes.push(t)}})}
+function countVR(v){Object.entries(v.votes).forEach(([i,n])=>{st(P(+i)).vr+=n})}
+function roleInfo(p){const m=O().mode,n=S.players.length;if(!m||m==='classic')return null;
+  if(m==='team'){const mates=S.players.filter(q=>q!==p&&q.team===p.team);return {c:'',img:'r_team',t:'Командна гра',d:`Твоя команда: <b>${mates.map(q=>esc(q.name)).join(', ')}</b>. Ви перемагаєте, тільки якщо <b>уся</b> команда відпливе на плоту. Ви бачите карти одне одного.`}}
+  const spies=S.players.filter(q=>q.role==='spy'),others=spies.filter(q=>q!==p);
+  if(p.role==='spy')return {c:'spy',img:'r_spy',t:'Ти Шпигун',d:`Тобі треба, щоб з острова врятувалось <b>менше ${half()}</b> із ${n} гравців. Сам можеш і не вижити. Нікому не кажи! На старті отримав «Підставу».${others.length?` Твій спільник: <b>${others.map(q=>esc(q.name)).join(', ')}</b>.`:''}`};
+  if(p.role==='res')return {c:'',img:'r_res',t:'Ти Рятівник',d:`Тобі треба, щоб врятувалось <b>щонайменше ${half()}</b> із ${n} гравців, навіть якщо ти сам ні. Серед вас ${spies.length>1?'є двоє шпигунів':'є шпигун'}. На старті отримав «Аптечку».`};
+  return {c:'',img:'r_cast',t:'Ти потерпілий',d:`Твоя мета: відплисти на плоту. Серед вас ${spies.length>1?'ховаються двоє шпигунів':'ховається шпигун'}${m==='spyres'?' і таємний рятівник':''}. Шукайте шпигуна!`}}
+function roleHTML(p,sm){const r=roleInfo(p);if(!r)return '';return `<div class="role ${r.c}${sm?' sm':''}">${fimg(r.img,"ri")}<div>${sm?`<b>${r.t}</b>`:`<p class="mut" style="margin:0">Таємно, бачиш лише ти</p><h2>${r.t}</h2>`}<p>${r.d}</p></div></div>`}
+function mateHTML(p){if(O().mode!=='team')return '';const ms=S.players.filter(q=>q!==p&&q.team===p.team&&q.alive);if(!ms.length)return '';
+  return `<div class="panel"><h3>Карти напарника</h3>${ms.map(q=>`<p class="mate">${av(q)} <b>${esc(q.name)}</b>: ${q.hand.length?q.hand.map(k=>'«'+C[k][0]+'»').join(', '):'порожньо'}</p>`).join('')}</div>`}
+function optsHTML(o,act,ro){o={...DEFO,...(o||{})};
+  if(ro)return `<div class="ochips"><span>${MODES.find(x=>x[0]===o.mode)[1]}</span>${TOGS.filter(([k])=>o[k]).map(([,t])=>`<span>${t}</span>`).join('')}</div>`;
+  return `<div class="modes">${MODES.map(([k,t,d,im])=>`<button class="mode ${o.mode===k?'on':''}" data-a="${act}" data-v="mode:${k}">${fimg(im,"mi")}<b>${t}</b><small>${d}</small></button>`).join('')}</div>
+  ${TOGS.map(([k,t,d])=>`<div class="opt ${o[k]?'on':''}" data-a="${act}" data-v="${k}"><span class="sw"></span><span><b>${t}</b><small>${d}</small></span></div>`).join('')}`}
+function compassHTML(){return `<div class="panel"><h3>Компас: візьми одну карту</h3><p class="mut">Решта піде під низ колоди.</p><div class="hand">${S.comp.map((k,i)=>cardHTML(k,`<button class="btn y" data-a="cpick" data-v="${i}">Взяти цю</button>`)).join('')}</div></div>`}
+function evHTML(){if(!S.ev||!O().events)return '';const e=EVI[S.ev];return `<div class="evcard">${fimg("e_"+S.ev,"ei")}<div><small>Подія острова</small><h3>${e[0]}</h3><p>${e[1]}</p></div></div>`}
+function winners(){const n=S.players.length,m=O().mode,esc_=S.win?S.players.filter(p=>p.alive):[],ok=esc_.length>=half();
+  return S.players.map(p=>{if(m==='spy'||m==='spyres'){if(p.role==='spy')return !ok;if(p.role==='res')return ok}
+    if(m==='team')return S.players.filter(q=>q.team===p.team).every(q=>S.win&&q.alive);
+    return S.win&&p.alive})}
+function overHTML(){const w=alive(),m=O().mode,n=S.players.length,W=winners(),nEsc=S.win?w.length:0;
+  let head=S.win?'Ви врятувалися!':'Острів переміг',sub=S.win?`Пліт відплив за ${S.round} раунд(ів). Врятувалось ${nEsc} із ${n}.`:'Ніхто не дістався до великої землі.';
+  let rolesBox='';
+  if(m==='spy'||m==='spyres'){const spies=S.players.filter(p=>p.role==='spy'),sw=nEsc<half();head=sw?'Шпигун переміг!':(S.win?'Табір переграв шпигуна!':head);
+    rolesBox=`<div class="verdict-roles"><h3>Ролі розкрито</h3><p>Шпигун: <b>${spies.map(p=>esc(p.name)).join(', ')}</b> — ${sw?'<b style="color:var(--gold)">переміг</b>':'програв'}. Треба було, щоб врятувалось менше ${half()}.</p>${m==='spyres'?`<p>Рятівник: <b>${S.players.filter(p=>p.role==='res').map(p=>esc(p.name)).join(', ')}</b> — ${sw?'програв':'<b style="color:var(--gold)">переміг</b>'}.</p>`:''}</div>`}
+  if(m==='team'){const teams=[...new Set(S.players.map(p=>p.team))].map(t=>S.players.filter(p=>p.team===t)),won=teams.filter(t=>t.every(p=>S.win&&p.alive));
+    head=won.length?`Перемогла команда!`:'Жодна команда не врятувалась повністю';
+    rolesBox=`<div class="verdict-roles"><h3>Команди</h3>${teams.map(t=>`<p>${t.every(p=>S.win&&p.alive)?'🏆 ':''}<b>${t.map(p=>esc(p.name)).join(' + ')}</b> — ${t.filter(p=>S.win&&p.alive).length}/${t.length} відпливли</p>`).join('')}</div>`}
+  const fate=p=>S.win&&p.alive?'відплив на плоту':p.fate?p.fate.t==='sh'?`вибув від пострілу (${esc(p.fate.by)}), раунд ${p.fate.r}`:`вигнали в раунді ${p.fate.r}`:'лишився на острові';
+  const badge=p=>p.role==='spy'?'<span class="badge spy">шпигун</span>':p.role==='res'?'<span class="badge res">рятівник</span>':m==='team'?`<span class="badge tm">команда ${p.team+1}</span>`:'';
+  const s=S.st||[];const g=(i,k)=>(s[i]||NOST)[k]||0;
+  const rows=S.players.map((p,i)=>`<tr class="${W[i]?'wn':''}"><td><span class="nmc"><i style="background-image:url(${pic('h_'+p.hero)});border-color:${p.col}"></i><span>${esc(p.name)}${badge(p)}${W[i]?'<span class="badge win">переміг</span>':''}<span class="fate">${fate(p)}</span></span></span></td><td>${g(i,'f')}</td><td>${g(i,'w')}</td><td>${g(i,'d')}</td><td>${g(i,'vr')}</td></tr>`).join('');
+  const AW=[['f','🎣','Годувальник','найбільше риби'],['w','💧','Водонос','найбільше води'],['d','🪓','Будівельник','найбільше дерева'],['vr','🎯','Головна мішень','найбільше голосів проти'],['sh','🔫','Стрілець','найбільше пострілів'],['gv','🎁','Щедра душа','найбільше віддав іншим'],['tr','🕵️','Інтриган','найбільше підступних карт']];
+  const aw=AW.map(([k,ic,t,d],j)=>{const mx=Math.max(0,...S.players.map((_,i)=>g(i,k)));if(!mx)return '';const who=S.players.filter((_,i)=>g(i,k)===mx).map(p=>esc(p.name)).join(', ');return `<div class="aw" style="animation-delay:${.3+j*.12}s"><div class="ai">${ic}</div><b>${t}</b><span>${who}</span><small>${d}: ${mx}</small></div>`}).join('');
+  return `<div class="hero">${vid(S.win?'win':'lose','bimg')}${S.win?raftScene().replace(/<svg[\s\S]*?<\/svg>/,''):''}</div><div class="panel big"><h2 class="win">${head}</h2><p>${sub}</p>${S.win?`<div class="chips" style="justify-content:center">${w.map(p=>`<span class="chip">${av(p)}${esc(p.name)}</span>`).join('')}</div>`:''}${rolesBox}</div>
+  <div class="panel"><h3>Хто що зробив</h3><table class="fin-t"><tr><th>Гравець</th><th title="їжа">${IC.f}</th><th title="вода">${IC.w}</th><th title="дерево">${IC.d}</th><th>Голосів проти</th></tr>${rows}</table>${aw?`<div class="awards">${aw}</div>`:''}
+  <button class="btn y w" data-a="again" style="margin-top:14px">Нова гра</button></div>`}
+const RULES_MODES=`<h3 style="margin-top:14px">Режими гри</h3>
+<p><b>Звичайна.</b> Усі разом проти острова, як описано вище.</p>
+<p><b>Шпигун.</b> На початку кожен таємно бачить свою роль. Один гравець (з 9 гравців — двоє) — Шпигун. Він виграє, якщо врятується <b>менше половини</b> гравців, навіть якщо сам загине. Усі інші виграють, якщо відпливуть. На старті шпигун отримує «Підставу».</p>
+<p><b>Шпигун і Рятівник.</b> Те саме, плюс таємний Рятівник: він виграє, якщо врятується <b>щонайменше половина</b> гравців, навіть якщо сам ні. На старті отримує «Аптечку».</p>
+<p><b>Командна.</b> Гравці діляться на пари (при непарній кількості одна трійка). Ви знаєте свою команду й бачите карти одне одного. Команда виграє, лише якщо на пліт сяде <b>уся</b> команда.</p>
+<p><b>Швидка гра.</b> Ураган приходить на 4–6 раунді, але пліт на старті вже частково збудований.</p>
+<p><b>Жорстка гра.</b> Менше води й їжі на старті, частіше сухо, події лише погані й нейтральні.</p>
+<h3 style="margin-top:14px">Події острова</h3><p>Якщо увімкнено, на початку кожного раунду відкривається подія. Вона діє лише цей раунд.</p><ul>${Object.values(EVI).map(([t,d])=>`<li><b>${t}.</b> ${d}</li>`).join('')}</ul>
+<h3 style="margin-top:14px">Особливі карти</h3><p>Якщо увімкнено, в уламках трапляються ще 15 карт:</p><ul>${Object.keys(SPN).map(k=>`<li><b>${C[k][0]}</b> (${SPN[k]} шт.). ${C[k][3]}</li>`).join('')}</ul>
+<h3 style="margin-top:14px">Підсумки гри</h3><p>Наприкінці гра показує, хто скільки приніс їжі, води й дерева, скільки голосів отримав, і роздає звання: Годувальник, Водонос, Будівельник, Головна мішень, Стрілець, Щедра душа, Інтриган.</p>`;
+
 const RB=new Uint32Array(64);let rbi=64;
 const r32=()=>{if(rbi>=64){try{crypto.getRandomValues(RB)}catch(e){for(let i=0;i<64;i++)RB[i]=Math.floor(Math.random()*4294967296)}rbi=0}return RB[rbi++]};
 const rnd=n=>{if(n<=1)return 0;const lim=4294967296-(4294967296%n);let x;do{x=r32()}while(x>=lim);return x%n}, pick=a=>a[rnd(a.length)];
@@ -265,7 +434,7 @@ const PEERMODE=!window.claude;
 let bangUntil=0,conf=null,showRules=false,seenFx=null,prevRes=null;
 let ONLINE=null,LOB=null,DB=null,UID=null,quiet=false,busy=false,mode='one',toast='';
 let hist=[],tmr=null,tmrEnd=0;
-let S=null, setup={names:['Оля','Тарас','Марко','Ліза'],open:true}, risk=0, sheet=null, mega=false;
+let S=null, setup={names:['Оля','Тарас','Марко','Ліза'],open:true,opts:{...DEFO}}, risk=0, sheet=null, mega=false;
 try{const s=localStorage.getItem('shark-tooth');if(s)S=JSON.parse(s)}catch(e){}
 if(S&&S.scr==='over')S=null;
 const P=i=>S.players[i], alive=()=>S.players.filter(p=>p.alive), cur=()=>P(S.order[S.ti]);
@@ -274,11 +443,11 @@ const hero=(p,k)=>p.hero===k;
 const holder=()=>ONLINE?P(ONLINE.me):(S.scr==='hand'?P(S.view.who):cur());
 function lack(){const al=alive();let nw=0,nf=0;al.forEach(p=>{if(!has(p,'flask'))nw++;if(!has(p,'can')&&!hero(p,'cook'))nf++});
   const tr=S.final?al.length:0,lw=Math.max(0,nw+tr-S.water),lf=Math.max(0,nf+tr-S.food),ls=S.final?Math.max(0,al.length-seats()):0;return {al,nw,nf,lw,lf,ls,short:Math.max(lw,lf,ls)}}
-const seats=()=>Math.floor((S.wood+(S.players.some(p=>p.alive&&hero(p,'capt'))?2:0))/SEAT);
+const seats=()=>Math.floor((S.wood+(S.players.some(p=>p.alive&&hero(p,'capt'))?2:0))/SEAT)+(S.xseat||0);
 const sicken=p=>{if(hero(p,'doc'))return false;p.sick=true;return true};
 const log=t=>{S.log.push(t);if(S.log.length>40)S.log.shift()};
 // колода без карт, що зараз на руках; перемішування з розведенням однакових карт
-const deckBuild=()=>{const cnt={...N};if(S&&S.players)S.players.forEach(p=>p.hand.forEach(k=>{if(cnt[k]>0)cnt[k]--}));
+const deckBuild=()=>{const cnt={...N,...(S&&S.opts&&S.opts.special?SPN:{})};if(S&&S.players)S.players.forEach(p=>p.hand.forEach(k=>{if(cnt[k]>0)cnt[k]--}));
   const d=shuffle(Object.entries(cnt).flatMap(([k,n])=>Array(n).fill(k)));
   for(let pass=0;pass<3;pass++)for(let i=1;i<d.length;i++){if(d[i]===d[i-1]||(i>1&&d[i]===d[i-2])){for(let t=0;t<12;t++){const j=rnd(d.length);if(d[j]!==d[i-1]&&d[j]!==d[i]&&d[j-1]!==d[i]&&d[j+1]!==d[i]){[d[i],d[j]]=[d[j],d[i]];break}}}}
   return d};
@@ -290,14 +459,18 @@ const pic=k=>'images/'+k+'.webp';
 const cardHTML=(k,btn='')=>{const c=C[k];return `<div class="card" style="--c:${c[2]}"><div class="art" style="background-image:url(${pic('c_'+k)})"></div><span class="kd">${c[1]==='e'?'Подія':c[4]?'Предмет · треба зіграти':'Предмет · діє сам'}</span><h3>${c[0]}</h3><p>${c[3]}</p>${btn}</div>`};
 const av=p=>p.hero?`<i class="hp" style="background-image:url(${pic('h_'+p.hero)});border-color:${p.col}"></i>`:`<i style="background:${p.col}">${esc(p.name[0]||'?').toUpperCase()}</i>`;
 
-function newGame(names){
-  const n=names.length, wd=shuffle([0,0,0,1,1,1,1,2,2,2,3,3]);
-  wd.splice(6+rnd(6),0,'H');
+function newGame(names,opts){
+  opts={...DEFO,...(opts||{})};
+  const n=names.length, wd=shuffle(opts.hard?[0,0,0,0,0,1,1,1,1,2,2,3]:[0,0,0,1,1,1,1,2,2,2,3,3]);
+  wd.splice(opts.fast?3+rnd(3):6+rnd(6),0,'H');
   const hs=shuffle(Object.keys(HER));
-  S={players:names.map((nm,i)=>({name:nm,alive:true,sick:false,hand:[],col:COLS[i],hero:hs[i],shield:hs[i]==='diplo',luck:hs[i]==='lucky'})),water:2*n+2,food:2*n+2,wood:0,round:0,start:rnd(n)-1,wdeck:wd,weather:1,final:false,deck:[],order:[],ti:0,log:[],traps:0,catchers:0,dolphin:false,scr:'round',openVote:setup.open};
+  S={players:names.map((nm,i)=>({name:nm,alive:true,sick:false,hand:[],col:COLS[i],hero:hs[i],shield:hs[i]==='diplo',luck:hs[i]==='lucky'})),water:opts.hard?n+2:2*n+2,food:opts.hard?n+2:2*n+2,wood:opts.fast?2*n:0,opts,st:names.map(()=>({...NOST})),edeck:[],ev:null,xseat:0,oaths:[],round:0,start:rnd(n)-1,wdeck:wd,weather:1,final:false,deck:[],order:[],ti:0,log:[],traps:0,catchers:0,dolphin:false,scr:'round',openVote:setup.open};
   S.deck=deckBuild();const given=[];
   S.players.forEach(p=>{const m=hero(p,'thief')?3:1;for(let j=0;j<m;j++){const k=dealItem(given.concat(p.hand));p.hand.push(k);given.push(k)}});
+  if(opts.mode==='spy'||opts.mode==='spyres'){const idx=shuffle(S.players.map((_,i)=>i)),ns=n>=9?2:1;idx.slice(0,ns).forEach(i=>{P(i).role='spy';P(i).hand.push('betray')});if(opts.mode==='spyres'){P(idx[ns]).role='res';P(idx[ns]).hand.push('medkit')}}
+  if(opts.mode==='team'){const idx=shuffle(S.players.map((_,i)=>i)),nt=Math.floor(n/2);idx.forEach((pi,j)=>P(pi).team=Math.min(Math.floor(j/2),nt-1))}
   nextRound();
+  if(opts.mode!=='classic'){S.rv=0;S.scr='rpass'}
 }
 function nextRound(){
   S.round++;S.dolphin=false;S.notes=[];
@@ -307,9 +480,11 @@ function nextRound(){
   do{s=(s+1)%n}while(!P(s).alive);S.start=s;
   S.order=[];for(let i=0;i<n;i++){const j=(s+i)%n;if(P(j).alive)S.order.push(j)}
   S.ti=0;S.scr='round';
+  S.ev=null;if(O().events){if(!S.edeck||!S.edeck.length)S.edeck=shuffle(Object.keys(EVI).filter(k=>!(O().hard&&['calm','drift','rainbow','shoal'].includes(k))));S.ev=S.edeck.pop();
+    if(S.ev==='poison')S.food=Math.max(0,S.food-2);if(S.ev==='fire')S.wood=Math.max(0,S.wood-3);if(S.ev==='drift')S.wood+=2;if(S.ev==='rainbow')S.players.forEach(q=>q.sick=false);log(`Подія: ${EVI[S.ev][0]}`)}
 }
 function apply(e,out){
-  if(e.w){S.water=Math.max(0,S.water+e.w)}if(e.f){S.food=Math.max(0,S.food+e.f)}if(e.d){S.wood=Math.max(0,S.wood+e.d)}
+  if(e.w){S.water=Math.max(0,S.water+e.w)}if(e.f){S.food=Math.max(0,S.food+e.f)}if(e.d){S.wood=Math.max(0,S.wood+e.d)}if(e.s){S.xseat=(S.xseat||0)+e.s}
 }
 function draw(p,out,depth=0){
   if(!S.deck.length)S.deck=deckBuild();
@@ -331,27 +506,36 @@ function draw(p,out,depth=0){
 const ACT={
   add(){if(setup.names.length<12)setup.names.push('');render();const ins=app.querySelectorAll('.nm input');ins[ins.length-1].focus()},
   del(i){setup.names.splice(+i,1);render()},
-  start(){const n=setup.names.map(s=>s.trim()).filter(Boolean);if(n.length<3)return;newGame(n);render()},
+  start(){const n=setup.names.map(s=>s.trim()).filter(Boolean);if(n.length<3)return;newGame(n,setup.opts);render()},
+  sopt(v){const [k,x]=String(v).split(':');if(k==='mode')setup.opts.mode=x;else if(k in DEFO)setup.opts[k]=!setup.opts[k];render()},
+  rme(){S.scr='rshow';render()},
+  rnext(){S.rv++;S.scr=S.rv>=S.players.length?'round':'rpass';render()},
+  cpick(i){const p=cur();if(!S.comp||S.scr!=='turn')return;const k=S.comp.splice(+i,1)[0];if(!k)return;S.deck.unshift(...S.comp);S.comp=null;S.deck.push(k);const out=[];draw(p,out);S.flash=`<div class="hand">${out.filter(x=>x.startsWith('<div')).join('')}</div>${out.filter(x=>!x.startsWith('<div')).join('')}`;render()},
   resume(){render()},
   quit(){S=null;try{localStorage.removeItem('shark-tooth')}catch(e){}render()},
   begin(){S.scr='pass';render()},
   me(){const p=cur();if(p.sick){p.sick=false;S.res={k:'sick',t:'Ти хворієш',h:'<p>Лежиш у тіні пальми й пропускаєш цей хід. Наступного разу вже будеш у формі.</p>'};log(`${p.name} хворіє й пропускає хід`);S.scr='res'}else{risk=0;S.flash=null;S.scr='turn'}render()},
-  fish(){const p=cur();let g=pick(FISH);let t='';if(has(p,'rod')){const g2=pick(FISH);t=` (вудка: ${g} і ${g2})`;g=Math.max(g,g2)}if(hero(p,'fisher')&&g<1){g=1;t+=' Рибалка без улову не лишається.'}if(has(p,'spear')&&g>=1){g++;t+=' Спис додав +1.'}if(S.dolphin)g++;S.food+=g;log(`${p.name} рибалив: +${g} їжі`);S.res={k:'fish',n:g,t:g?`Улов: +${g} їжі`:'Нічого не клюнуло',h:`<p>${g?'Риба на вечерю!':'Лише водорості на гачку.'}${t}${S.dolphin?' Дельфіни додали +1.':''}</p>`};S.scr='res';render()},
-  water(){const p=cur();const g=S.weather+(has(p,'bucket')?1:0)+(hero(p,'shaman')?1:0);S.water+=g;log(`${p.name} набрав води: +${g}`);S.res={k:'water',n:g,t:g?`Вода: +${g}`:'Сухо',h:`<p>${S.weather?'Дощова вода в бочках.':'Сьогодні ні хмаринки.'}${has(p,'bucket')?' Відро додало +1.':''}</p>`};S.scr='res';render()},
+  fish(){const p=cur();let g=pick(FISH);let t='';if(has(p,'rod')){const g2=pick(FISH);t=` (вудка: ${g} і ${g2})`;g=Math.max(g,g2)}if(hero(p,'fisher')&&g<1){g=1;t+=' Рибалка без улову не лишається.'}if(has(p,'spear')&&g>=1){g++;t+=' Спис додав +1.'}if(S.dolphin)g++;if(ev('sharks')){g=Math.max(0,g-1);t+=' Акули сполохали рибу: −1.'}if(ev('shoal')){g++;t+=' Косяк риби: +1.'}S.food+=g;st(p).f+=g;log(`${p.name} рибалив: +${g} їжі`);S.res={k:'fish',n:g,t:g?`Улов: +${g} їжі`:'Нічого не клюнуло',h:`<p>${g?'Риба на вечерю!':'Лише водорості на гачку.'}${t}${S.dolphin?' Дельфіни додали +1.':''}</p>`};S.scr='res';render()},
+  water(){const p=cur();const g=wg(p);S.water+=g;st(p).w+=g;log(`${p.name} набрав води: +${g}`);S.res={k:'water',n:g,t:g?`Вода: +${g}`:'Сухо',h:`<p>${S.weather?'Дощова вода в бочках.':'Сьогодні ні хмаринки.'}${has(p,'bucket')?' Відро додало +1.':''}</p>`};S.scr='res';render()},
   rk(v){risk=Math.max(0,Math.min(5,risk+ +v));render()},
-  wood(){const p=cur();const bag=shuffle([0,0,0,0,0,1]).slice(0,risk);let snake=bag.includes(1),h='';
+  wood(){const p=cur();if(ev('wind'))return;const bag=shuffle(ev('moon')?[0,0,0,0,1,1]:[0,0,0,0,0,1]).slice(0,risk);let snake=bag.includes(1),h='';
     if(snake&&has(p,'antidote')){take(p,'antidote');snake=false;h='<p>Змія вкусила, але протиотрута спрацювала!</p>'}
     if(snake&&p.luck){p.luck=false;snake=false;h='<p>Змія кинулась, але Щасливчику пощастило!</p>'}
     if(snake&&hero(p,'doc')){snake=false;h='<p>Змія вкусила, але Лікарка не хворіє. Колоди твої!</p>'}
     if(snake){p.sick=true;log(`${p.name} рубав дерево, але його вкусила змія`);S.res={k:'snake',t:'Укус змії!',h:'<p>Ти поліз за колодою, а там змія. Дерева нема, наступний хід пропускаєш.</p>'}}
-    else{const g=1+risk+(has(p,'axe')?2:0)+(hero(p,'carp')?1:0);S.wood+=g;log(`${p.name} нарубав +${g} дерева`);S.res={k:'wood',n:g,t:`Дерево: +${g}`,h:h+`<p>Колоди складено біля плоту.${has(p,'axe')?' Сокира додала +2.':''}</p>`}}
+    else{const g=1+risk+(has(p,'axe')?2:0)+(hero(p,'carp')?1:0);S.wood+=g;st(p).d+=g;log(`${p.name} нарубав +${g} дерева`);S.res={k:'wood',n:g,t:`Дерево: +${g}`,h:h+`<p>Колоди складено біля плоту.${has(p,'axe')?' Сокира додала +2.':''}</p>`}}
     S.scr='res';render()},
-  search(){const p=cur(),out=[];draw(p,out);if(hero(p,'diver'))draw(p,out);S.res={k:'search',t:'Уламки корабля',h:`<div class="hand">${out.filter(x=>x.startsWith('<div')).map((x,i)=>x.replace('class="card" style="','class="card reveal" style="--d:'+(0.9+i*0.45)+'s;')).join('')}</div>${out.filter(x=>!x.startsWith('<div')).join('')}`};S.scr='res';render()},
+  search(){const p=cur(),out=[];draw(p,out);if(hero(p,'diver'))draw(p,out);if(ev('find'))draw(p,out);S.res={k:'search',t:'Уламки корабля',h:`<div class="hand">${out.filter(x=>x.startsWith('<div')).map((x,i)=>x.replace('class="card" style="','class="card reveal" style="--d:'+(0.9+i*0.45)+'s;')).join('')}</div>${out.filter(x=>!x.startsWith('<div')).join('')}`};S.scr='res';render()},
   play(k){const p=cur(),c=C[k];
     if(k==='native'&&S.food<1){S.flash='У таборі немає їжі для обміну.';return render()}
     if(k==='dance'&&typeof S.wdeck[0]!=='number'){S.flash='Ураган танцем не відвернути.';return render()}
-    if(c[4]==='pool'){take(p,k);apply(c[5]);log(`${p.name} зіграв «${c[0]}»`);S.flash=`Зіграно «${c[0]}».`}
-    else if(c[4]==='self'){take(p,k);log(`${p.name} зіграв «${c[0]}»`);
+    if(c[4]==='pool'){take(p,k);apply(c[5]);st(p).gv++;log(`${p.name} зіграв «${c[0]}»`);S.flash=`Зіграно «${c[0]}».`}
+    else if(c[4]==='self'){if(k==='raid'&&S.food<2){S.flash='У коморі менше 2 їжі, красти нічого.';return render()}
+      take(p,k);if(!['raid','ballot','compass'].includes(k))log(`${p.name} зіграв «${c[0]}»`);
+      if(k==='raid'){S.food-=2;p.hand.push('can');st(p).tr++;S.flash='Ти потай виніс 2 їжі з комори й сховав собі «Консерву».';log('Уночі з комори зникло 2 їжі')}
+      if(k==='ballot'){S.secretNext=true;S.flash='Найближче голосування буде таємним.';log('Хтось поставив таємну скриньку для голосів')}
+      if(k==='compass'){if(S.deck.length<3)S.deck=deckBuild().concat(S.deck);S.comp=S.deck.splice(-3,3);S.flash=null}
+      if(k==='cave'){p.cave=S.round;S.flash=null;S.res={k:'cave',t:'Ти сховався в печері',h:'<p>До кінця раунду тебе не можна вигнати, але й голосувати ти не будеш. Хід закінчено.</p>'};S.scr='res'}
       if(k==='native'){S.food--;S.wood+=3;S.flash='Тубілець забрав їжу й залишив 3 колоди.'}
       if(k==='dance'){S.wdeck[0]=Math.max(S.wdeck[0],2);S.flash='Небо хмарніє. Наступного раунду буде дощ.'}
       if(k==='map'||k==='treasure'){const out=[];for(let i=0;i<(k==='map'?2:3);i++)draw(p,out);S.flash=`<div class="hand">${out.filter(x=>x.startsWith('<div')).join('')}</div>${out.filter(x=>!x.startsWith('<div')).join('')}`}
@@ -362,8 +546,10 @@ const ACT={
     else{sheet={k}}
     render()},
   tgt(i){const p=holder(),q=P(+i),k=sheet.k;
-    if(k==='gun'){sheet=null;if(!has(p,'gun')||!q.alive||q===p)return render();if(!has(p,'patron')){S.flash='Немає патрона: револьвер клацнув упусту.';return render()}take(p,'patron');S.fxn=(S.fxn||0)+1;q.alive=false;q.hand=[];log(`${p.name} вистрілив у ${q.name}!`);S.flash=`Постріл! ${esc(q.name)} вибуває з гри.`;return render()}
-    if(S.scr!=='turn'||cur()!==p)return;take(p,k);sheet=null;
+    if(k==='gun'){sheet=null;if(!has(p,'gun')||!q.alive||q===p)return render();if(!has(p,'patron')){S.flash='Немає патрона: револьвер клацнув упусту.';return render()}take(p,'patron');st(p).sh++;S.fxn=(S.fxn||0)+1;if(has(q,'shell')){take(q,'shell');log(`${p.name} вистрілив у ${q.name}, але куля відскочила від панцира`);S.flash=`Постріл! Але куля відскочила від черепашого панцира: ${esc(q.name)} лишається в грі.`;return render()}q.fate={t:'sh',r:S.round,by:p.name};q.alive=false;q.hand=[];log(`${p.name} вистрілив у ${q.name}!`);S.flash=`Постріл! ${esc(q.name)} вибуває з гри.`;return render()}
+    if(S.scr!=='turn'||cur()!==p)return;take(p,k);sheet=null;if(['thief','betray','spy','swap','rumor','oath'].includes(k))st(p).tr++;
+    if(k==='rumor'){q.rumor=(q.rumor||0)+1;S.flash=`Плітки про ${esc(q.name)} поповзли табором: на голосуванні проти нього буде +1.`;log('Хтось пліткує в таборі')}
+    if(k==='oath'){S.oaths=(S.oaths||[]).concat([[S.players.indexOf(p),+i]]);S.flash=`Ви з ${esc(q.name)} поклялися не голосувати одне проти одного.`;log(`${p.name} і ${q.name} уклали клятву дружби`)}
     if(k==='medkit'){q.sick=false;S.flash=`${esc(q.name)} видужав.`;log(`${p.name} вилікував ${q.name}`)}
     if(k==='betray'){if(sicken(q)){S.flash=`${esc(q.name)} отруєний і захворіє.`}else S.flash='Лікарку не отруїти.';log(`${p.name} щось підлаштував`)}
     if(k==='spy'){S.flash=`Карти ${esc(q.name)}: ${q.hand.length?q.hand.map(x=>'«'+C[x][0]+'»').join(', '):'порожньо'}.`;log(`${p.name} підслухав когось`)}
@@ -377,29 +563,31 @@ const ACT={
   undo(){if(!hist.length)return;S=JSON.parse(hist.pop());sheet=null;mega=false;render()},
   give(k){sheet={give:k};render()},
   shoot(){sheet={k:'gun'};render()},
-  gto(i){const p=holder(),q=P(+i),k=sheet.give;take(p,k);q.hand.push(k);sheet=null;log(`${p.name} передав карту гравцю ${q.name}`);S.flash=`Ти передав «${C[k][0]}» гравцю ${esc(q.name)}.`;render()},
-  pool(k){const p=holder(),c=C[k];take(p,k);apply(c[5]);log(`${p.name} віддав табору «${c[0]}»`);S.flash=`«${c[0]}» віддано в спільний запас.`;render()},
+  gto(i){const p=holder(),q=P(+i),k=sheet.give;take(p,k);q.hand.push(k);st(p).gv++;sheet=null;log(`${p.name} передав карту гравцю ${q.name}`);S.flash=`Ти передав «${C[k][0]}» гравцю ${esc(q.name)}.`;render()},
+  pool(k){const p=holder(),c=C[k];take(p,k);apply(c[5]);st(p).gv++;log(`${p.name} віддав табору «${c[0]}»`);S.flash=`«${c[0]}» віддано в спільний запас.`;render()},
   who(){S.view={ret:S.scr};S.flash=null;S.scr='pickwho';render()},
   vw(i){S.view.who=+i;S.scr='hpass';render()},
   hok(){S.scr='hand';render()},
   hback(){S.scr=S.view.ret;S.view=null;S.flash=null;render()},
   tm(m){clearInterval(tmr);tmrEnd=Date.now()+m*60000;tmr=setInterval(()=>{const el=document.getElementById('tmr');const r=Math.max(0,tmrEnd-Date.now());if(el)el.textContent=r?`${Math.floor(r/60000)}:${String(Math.floor(r/1000)%60).padStart(2,'0')}`:'Час вийшов!';if(!r)clearInterval(tmr)},250);render()},
   govote(){clearInterval(tmr);tmrEnd=0;const {al,short}=lack();if(!short){resolve();return render()}
-    const ids=al.map(p=>S.players.indexOf(p));let vs=ids.filter(i=>!P(i).sick);if(!vs.length)vs=ids.slice();
-    S.vote={need:short,votes:{},vi:0,voters:vs,cands:ids,notes:ids.length>vs.length?[`Хворі не голосували: ${ids.filter(i=>!vs.includes(i)).map(i=>P(i).name).join(', ')}`]:[],sel:{},mg:{}};S.scr=(S.online||S.openVote)?'ovote':'vpass';render()},
+    let ids=al.map(p=>S.players.indexOf(p));const cv=ids.filter(i=>P(i).cave===S.round);if(cv.length&&cv.length<ids.length)ids=ids.filter(i=>!cv.includes(i));
+    let vs=ids.filter(i=>!P(i).sick);if(!vs.length)vs=ids.slice();const notes=[];if(ids.length>vs.length)notes.push(`Хворі не голосували: ${ids.filter(i=>!vs.includes(i)).map(i=>P(i).name).join(', ')}`);if(cv.length&&ids.length<al.length)notes.push(`Сховались у печері: ${cv.map(i=>P(i).name).join(', ')}`);
+    const secret=!!(S.secretNext||ev('fog'));if(secret)notes.push(ev('fog')?'Туман: голосування таємне':'Таємна скринька: голосування таємне');
+    S.vote={need:short,votes:{},vi:0,voters:vs,cands:ids,notes,sel:{},mg:{},secret};seedVotes(S.vote);S.scr=(S.online||(S.openVote&&!secret))?'ovote':'vpass';render()},
   ocount(){const v=S.vote;if(v.voters.some(i=>v.sel[i]==null))return;
     v.voters.forEach(i=>{const me=P(i);let n=hero(me,'sly')?2:1;if(v.mg[i]){if(has(me,'megaphone')){take(me,'megaphone');n++;v.notes.push(`${me.name} кричав у мегафон`)}else v.notes.push(`${me.name} блефував мегафоном, але його не було`)}v.votes[v.sel[i]]=(v.votes[v.sel[i]]||0)+n});
-    tally();render()},
+    countVR(v);tally();render()},
   osel(x){const [i,t]=x.split(':').map(Number);S.vote.sel[i]=t;render()},
   omg(i){S.vote.mg[i]=!S.vote.mg[i];render()},
   tiepick(i){const ex=S.tie.ex;S.tie=null;i=+i;if(trySave(i,ex))tally(ex);else eliminate(i);render()},
-  revote(){const v=S.vote;v.votes={};v.vi=0;v.sel={};v.mg={};v.notes.push('Нічия, переголосування');S.tie=null;S.scr=(S.online||S.openVote)?'ovote':'vpass';render()},
+  revote(){const v=S.vote;seedVotes(v);v.vi=0;v.sel={};v.mg={};v.notes.push('Нічия, переголосування');S.tie=null;S.scr=(S.online||(S.openVote&&!v.secret))?'ovote':'vpass';render()},
   setopen(v){setup.open=v==='1';render()},
   vstart(){mega=false;S.scr='vote';render()},
   mg(){mega=!mega;render()},
   vote(i){const v=S.vote,me=P(v.voters[v.vi]);let n=hero(me,'sly')?2:1;if(mega&&has(me,'megaphone')){take(me,'megaphone');n++;v.notes.push(`${me.name} кричав у мегафон`)}
     v.votes[i]=(v.votes[i]||0)+n;v.vi++;mega=false;
-    if(v.vi>=v.voters.length)tally();else S.scr='vpass';render()},
+    if(v.vi>=v.voters.length){countVR(v);tally()}else S.scr='vpass';render()},
   after(){resolve();render()},
   nround(){nextRound();render()},
   sail(){const a=alive().length;S.water-=a;S.food-=a;over(true);render()},
@@ -409,6 +597,7 @@ function endRound(){
   S.notes=[];
   if(S.traps){S.food+=S.traps;S.notes.push(`Пастки для крабів: +${S.traps} їжі`)}
   if(S.catchers&&S.weather>0){S.water+=S.catchers;S.notes.push(`Збирачі дощу: +${S.catchers} води`)}
+  if(ev('heat')&&S.water>0){S.water--;S.notes.push('Спека: з бочок випарувалась 1 вода')}
   resolve();
 }
 function resolve(){
@@ -440,14 +629,14 @@ function tally(ex=[]){
     return eliminate(pool[0]);
   }
 }
-function eliminate(out){const v=S.vote,p=P(out);p.alive=false;p.hand=[];log(`${p.name} вигнали з табору`);
+function eliminate(out){const v=S.vote,p=P(out);p.alive=false;p.hand=[];p.fate={t:'ex',r:S.round};S.players.forEach(q=>q.rumor=0);S.oaths=[];S.secretNext=false;log(`${p.name} вигнали з табору`);
   S.verdict={i:out,n:v.votes[out]||0,notes:v.notes,tab:v.cands.map(i=>[P(i).name,v.votes[i]||0])};S.scr='verdict'}
 function over(win){S.scr='over';S.win=win&&alive().length>0}
 
 const dv=k=>prevRes&&prevRes.g===S.players.length+'|'+S.players[0].name?S[k]-prevRes[k]:0;
 const dc=k=>{const d=dv(k);return d>0?'up':d<0?'down':''};
 const dd=k=>{const d=dv(k);return d?`<i class="dlt ${d>0?'p':'m'}">${d>0?'+':''}${d}</i>`:''};
-const bar=()=>`<div class="top"><span class="tag">Раунд ${S.round}</span>${S.final?'<span class="tag h">Ураган! Останній раунд</span>':`<span class="tag">Погода: ${S.weather?'дощ '+S.weather:'сухо'}</span>`}<span style="display:flex;gap:6px"><button class="btn g" data-a="mute" aria-label="Звук" style="min-height:36px;padding:4px 10px;font-size:14px">${muted?"🔇":"🔊"}</button>${ONLINE?'':`<button class="btn g" data-a="undo" ${hist.length?'':'disabled'} aria-label="Скасувати останню дію" style="min-height:36px;padding:4px 12px;font-size:14px">↶ Назад</button>`}<button class="btn g" data-a="rules" style="min-height:36px;padding:4px 12px;font-size:14px">Правила</button><button class="btn g" data-a="quit" style="min-height:36px;padding:4px 12px;font-size:14px">Вийти</button></span></div>
+const bar=()=>`<div class="top"><span class="tag">Раунд ${S.round}</span>${S.final?'<span class="tag h">Ураган! Останній раунд</span>':`<span class="tag">Погода: ${S.weather?'дощ '+S.weather:'сухо'}</span>`}${S.ev&&O().events?`<span class="tag ev">${EVI[S.ev][0]}</span>`:''}<span style="display:flex;gap:6px"><button class="btn g" data-a="mute" aria-label="Звук" style="min-height:36px;padding:4px 10px;font-size:14px">${muted?"🔇":"🔊"}</button>${ONLINE?'':`<button class="btn g" data-a="undo" ${hist.length?'':'disabled'} aria-label="Скасувати останню дію" style="min-height:36px;padding:4px 12px;font-size:14px">↶ Назад</button>`}<button class="btn g" data-a="rules" style="min-height:36px;padding:4px 12px;font-size:14px">Правила</button><button class="btn g" data-a="quit" style="min-height:36px;padding:4px 12px;font-size:14px">Вийти</button></span></div>
 <div class="res"><div class="r ${dc('water')}">${IC.w}<b>${S.water}</b>${dd('water')}<small>вода</small></div><div class="r ${dc('food')}">${IC.f}<b>${S.food}</b>${dd('food')}<small>їжа</small></div><div class="r ${dc('wood')}">${IC.d}<b>${S.wood}</b>${dd('wood')}<small>дерево</small></div><div class="r">${IC.s}<b>${seats()}/${alive().length}</b><small>місць</small></div></div>
 <div class="chips">${S.players.map((p,i)=>`<span class="chip ${p.alive?'':'dead'} ${(S.scr==='turn'||(ONLINE&&(S.scr==='pass'||S.scr==='res')))&&S.order[S.ti]===i?'now':''}${ONLINE&&i===ONLINE.me?' me':''}">${av(p)}${esc(p.name)} <small style="opacity:.7">${HER[p.hero][0]}</small>${p.alive&&S.players.indexOf(p)===leader()?'<b class="ld">ватажок</b>':''}${p.sick&&p.alive?' · хворий':''}</span>`).join('')}</div>`;
 const heroArt='<img class="bimg" src="images/banner.webp" alt="Острів на заході сонця, де потерпілі будують пліт">';
@@ -527,7 +716,7 @@ const RULES_BODY=`
 <li>Коли дощ 2–3, вигідно набирати воду. Коли сухо, краще рибалити або рубати.</li>
 <li>Ризикувати на дереві найкраще на початку, коли пропущений хід ще не так страшно.</li>
 <li>Фляга й консерва в руці це ваша страховка від вигнання. Подумайте, чи віддавати їх табору.</li></ul>`;
-const RULES=`<details class="panel"><summary>Як грати (усі правила)</summary>${RULES_BODY}<h3 style="margin-top:12px">Герої</h3><div class="heroes">${Object.entries(HER).map(([k,h])=>`<div><img src="${pic('h_'+k)}" alt=""><b>${h[0]}</b>${h[1]}</div>`).join('')}</div></details>`;
+const RULES=`<details class="panel"><summary>Як грати (усі правила)</summary>${RULES_BODY}${RULES_MODES}<h3 style="margin-top:12px">Герої</h3><div class="heroes">${Object.entries(HER).map(([k,h])=>`<div><img src="${pic('h_'+k)}" alt=""><b>${h[0]}</b>${h[1]}</div>`).join('')}</div></details>`;
 
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const clone=o=>o==null?o:JSON.parse(JSON.stringify(o));
@@ -546,10 +735,11 @@ function lobbyHTML(){
   return `<div class="hero">${heroArt}<div class="t"><h1>Кімната ${esc(ONLINE.code)}</h1><p style="color:#fff">Скажи цей код друзям.</p></div></div>${PEERMODE?`<div class="panel"><p>${ONLINE.host?(ONLINE.ready?'Кімната відкрита.':'Відкриваю кімнату…')+' Ти ведучий: не закривай сторінку й не блокуй екран, поки йде гра.':'Ти підключений до ведучого.'}</p><button class="btn g w" data-a="copy">Скопіювати посилання на гру</button></div>`:''}
   <div class="panel"><h3>Гравці (${pl.length}/12)</h3><div class="chips">${pl.map((x,i)=>`<span class="chip ${x.uid===UID?'me':''}"><i style="background:${COLS[i%12]}">${esc((x.name||'?')[0]).toUpperCase()}</i>${esc(x.name)}${x.uid===LOB.host?' <small style="opacity:.7">створив</small>':''}</span>`).join('')}</div>
   ${inn?'':`<p>Тебе ще немає в списку.</p><button class="btn w" data-a="ojoin2">Приєднатися</button>`}
+  <h3 style="margin-top:14px">Режим гри</h3>${host?optsHTML(LOB.opts,'lopt'):optsHTML(LOB.opts,'',true)+'<p class="mut">Режим вибирає той, хто створив кімнату.</p>'}
   ${host?`<button class="btn y w" data-a="ostart" ${pl.length<3?'disabled':''} style="margin-top:10px">${pl.length<3?'Чекаємо щонайменше 3 гравців':'Почати гру'}</button>`:'<p class="mut">Гру запустить той, хто створив кімнату.</p>'}
   <button class="btn g w" data-a="oleave" style="margin-top:10px">Вийти з кімнати</button></div>`}
-const wait=(t,sub='')=>bar()+`<div class="panel big"><h2>${t}</h2>${sub?`<p class="mut">${sub}</p>`:''}</div>${S.log.length?`<div class="panel"><h3>Що сталося</h3><ul class="log">${S.log.slice(-6).map(l=>`<li>${esc(l)}</li>`).join('')}</ul></div>`:''}`;
-function myHand(me){return me&&me.alive?`<div class="panel"><h3>Твої карти (${me.hand.length})</h3><p class="mut">Бачиш лише ти. Карти «у табір» одразу додають припаси, будь-яку карту можна передати іншому.</p>${me.hand.length?`<div class="hand">${me.hand.map(k=>cardHTML(k,(C[k][4]==='pool'?`<button class="btn" data-a="pool" data-v="${k}" data-c="Віддати «${C[k][0]}» в спільний запас?">Віддати в табір</button>`:'')+(k==='gun'?`<button class="btn" data-a="shoot">Вистрілити</button>`:'')+`<button class="btn g gv" data-a="give" data-v="${k}">Передати комусь</button>`)).join('')}</div>`:'<p>Порожньо.</p>'}</div>`:''}
+const wait=(t,sub='')=>bar()+`<div class="panel big"><h2>${t}</h2>${sub?`<p class="mut">${sub}</p>`:''}</div>${islandBoard()}${S.log.length?`<div class="panel"><h3>Що сталося</h3><ul class="log">${S.log.slice(-6).map(l=>`<li>${esc(l)}</li>`).join('')}</ul></div>`:''}`;
+function myHand(me){return me&&me.alive?roleHTML(me,true)+mateHTML(me)+`<div class="panel"><h3>Твої карти (${me.hand.length})</h3><p class="mut">Бачиш лише ти. Карти «у табір» одразу додають припаси, будь-яку карту можна передати іншому.</p>${me.hand.length?`<div class="hand">${me.hand.map(k=>cardHTML(k,(C[k][4]==='pool'?`<button class="btn" data-a="pool" data-v="${k}" data-c="Віддати «${C[k][0]}» в спільний запас?">Віддати в табір</button>`:'')+(k==='gun'?`<button class="btn" data-a="shoot">Вистрілити</button>`:'')+`<button class="btn g gv" data-a="give" data-v="${k}">Передати комусь</button>`)).join('')}</div>`:'<p>Порожньо.</p>'}</div>`:''}
 function onl(){
   const m=ONLINE.me,me=m>=0?P(m):null,mine=S.order[S.ti]===m;
   if(m<0)return wait('Гра вже йде','Тебе немає серед гравців цієї партії. Можеш дивитися.');
@@ -566,7 +756,7 @@ function onl(){
   if(S.scr==='ovote'){const v=S.vote,can=v.voters.includes(m),done=v.sel[m]!=null,left=v.voters.filter(i=>v.sel[i]==null);
     if(!can||done)return bar()+dead+`<div class="panel big"><h2>${done?'Твій голос прийнято':'Ти не голосуєш'}</h2><p class="mut">${can?'':'Хворі й вигнані не голосують. '}Чекаємо: ${left.map(i=>esc(P(i).name)).join(', ')||'—'}</p></div>`;
     return bar()+`<div class="panel"><h2>Кого виганяємо?</h2><p>Треба вигнати щонайменше <b>${v.need}</b>. Голос таємний: інші побачать лише підсумок.</p>${has(me,'megaphone')?`<button class="btn ${mega?'y':'g'} w" data-a="mg" style="margin:10px 0">${mega?'Мегафон увімкнено: +1 голос':'Увімкнути мегафон'}</button>`:''}
-    <div class="vote" style="margin-top:10px">${v.cands.filter(i=>i!==m).map(i=>`<button class="btn" data-a="myvote" data-v="${i}" data-c="Голосуєш проти ${esc(P(i).name)}?">${esc(P(i).name)}</button>`).join('')}</div></div>${myHand(me)}`}
+    <div class="vote" style="margin-top:10px">${vcands(v,m).map(i=>`<button class="btn" data-a="myvote" data-v="${i}" data-c="Голосуєш проти ${esc(P(i).name)}?">${esc(P(i).name)}</button>`).join('')}</div></div>${myHand(me)}`}
   if(S.scr==='tie'&&leader()!==m){const t=S.tie;return bar()+dead+`<div class="panel big"><h2>Нічия!</h2><p>Однаково голосів у: <b>${t.pool.map(i=>esc(P(i).name)).join(', ')}</b>.</p><p class="talkhint">Вирішує ватажок <b>${esc(P(leader()).name)}</b>. Переконуйте його!</p></div>`}
   if(S.scr==='over')return '';
   return dead?'':'';
@@ -598,7 +788,7 @@ async function mutate(fn){
   finally{busy=false;render()}
 }
 const LOCAL=new Set(['shoot','rk','mg','close','rules','give','tm','mode','add','del','setopen','undo']);
-const TURN=new Set(['me','fish','water','wood','search','play','next','okflash']);
+const TURN=new Set(['me','fish','water','wood','search','play','next','okflash','cpick']);
 const PFX='akzub-v1-';let PEER=null,CONN=null,CONNS=new Map(),ACTOR=null;
 if(PEERMODE){try{UID=localStorage.getItem('shark-uid')}catch(e){}if(!UID){UID='p'+Math.random().toString(36).slice(2,12);try{localStorage.setItem('shark-uid',UID)}catch(e){}}}
 const locals=()=>({risk,mega,sheet:sheet?{...sheet}:null,name:setup.myname||''});
@@ -606,7 +796,8 @@ function doAct(a,v,loc){
   risk=+loc.risk||0;mega=!!loc.mega;sheet=loc.sheet||null;
   if(a==='ojoin2'){if(!LOB)return false;LOB.players=LOB.players||[];const nm=String(loc.name||'Гравець').slice(0,14);const x=LOB.players.find(q=>q.uid===ACTOR);
     if(x){x.name=nm;return}if(S){say('Гра вже почалась');return false}if(LOB.players.length>=12){say('Кімната повна');return false}LOB.players.push({uid:ACTOR,name:nm});return}
-  if(a==='ostart'){if(LOB.host!==ACTOR||LOB.players.length<3||S)return false;newGame(LOB.players.map(q=>q.name));S.players.forEach((q,i)=>q.uid=LOB.players[i].uid);S.online=true;return}
+  if(a==='lopt'){if(!LOB||LOB.host!==ACTOR||S)return false;LOB.opts={...DEFO,...(LOB.opts||{})};const [k,x]=String(v).split(':');if(k==='mode'&&MODES.some(m=>m[0]===x))LOB.opts.mode=x;else if(k in DEFO&&k!=='mode')LOB.opts[k]=!LOB.opts[k];else return false;return}
+  if(a==='ostart'){if(LOB.host!==ACTOR||LOB.players.length<3||S)return false;newGame(LOB.players.map(q=>q.name),LOB.opts);S.players.forEach((q,i)=>q.uid=LOB.players[i].uid);S.online=true;if(S.scr==='rpass')S.scr='round';return}
   if(a==='again'){if(!S||S.scr!=='over')return false;S=null;return}
   if(!S)return false;
   const m=S.players.findIndex(q=>q.uid===ACTOR);ONLINE.me=m;
@@ -677,6 +868,7 @@ const ONL={
   quit(){leave()},
   again(){send('again')},
   myvote(t){send('myvote',t)},
+  lopt(v){send('lopt',v)},
   copy(){try{navigator.clipboard.writeText(location.href.split('#')[0]).then(()=>say('Посилання скопійовано'),()=>say('Скопіюй адресу сторінки вручну'))}catch(e){say('Скопіюй адресу сторінки вручну')}}
 };
 function advice(p){const L=lack(),left=S.order.slice(S.ti+1).filter(i=>P(i).alive&&!P(i).sick).length,out=[];let lvl='ok';
@@ -712,6 +904,101 @@ function scene(k,n){n=n||0;
 function eatScene(){const a=S.ate;if(!a||(!a.w&&!a.f))return '';return `<div class="vbox">${vid('feast')}</div><div class="eat">${a.w?`<span>${IC.w}<b>−${a.w}</b></span>`:''}${a.f?`<span style="animation-delay:.25s">${IC.f}<b>−${a.f}</b></span>`:''}</div>`}
 function raftScene(){return `<svg class="ovs" viewBox="0 0 400 230"><g class="raft"><rect x="0" y="176" width="70" height="12" rx="4" fill="#a0612f"/><path d="M35 176v-46" stroke="#e3d2b0" stroke-width="3"/><path d="M37 132l26 40H37z" fill="#fff6e3"/></g></svg><div class="confetti">${Array.from({length:40},(_,i)=>`<i style="left:${rnd(100)}%;background:${COLS[i%12]};animation-delay:${(rnd(150)/100).toFixed(2)}s;animation-duration:${(2+rnd(150)/100).toFixed(2)}s"></i>`).join('')}</div>`}
 function waveScene(){return `<svg class="ovs" viewBox="0 0 400 230"><path class="bigwave" d="M-20 230V140q60-60 120-20t100 0 120 10 100-10V230z" fill="#0d5e6e" opacity=".85"/></svg>`}
+/* ===== Дошка острова ===== */
+function islandBoard(){
+  const al=alive().length,O1=O(),e=O1.events?S.ev:null,storm=!!S.final,wt=storm?3:S.weather;
+  const night=e==='moon',heat=e==='heat',fog=e==='fog',wind=e==='wind'||storm;
+  const same=prevRes&&prevRes.g===S.players.length+'|'+S.players[0].name;
+  const pw=same?prevRes.water:S.water,pf=same?prevRes.food:S.food,pd=same?prevRes.wood:S.wood;
+  const sky=storm?['#141c27','#3d4856']:night?['#08122c','#2a3b70']:heat?['#ff8f3d','#ffe2a0']:wt>=2?['#56778a','#b8c7cc']:wt===1?['#5d9ec6','#efd9b0']:['#2f9fe0','#ffe0a3'];
+  const seaC=storm?['#1e4a57','#0c2630']:night?['#16365a','#081a30']:['#1fb2c4','#0a6a80'];
+  const R=(a,b)=>a+rnd(b-a+1);
+  // хмари
+  const cloud=(x,y,s,c,d,dl)=>`<g class="cl" style="animation-duration:${d}s;animation-delay:-${dl}s"><g transform="translate(${x} ${y}) scale(${s})" fill="${c}"><ellipse cx="0" cy="8" rx="30" ry="9"/><circle cx="-14" cy="3" r="10"/><circle cx="2" cy="-3" r="14"/><circle cx="17" cy="3" r="10"/></g></g>`;
+  const nCl=storm?7:wt>=2?6:wt===1?4:2,cc=storm?'#2a333f':wt>=2?'#8796a0':wt===1?'#dfe8ee':'#ffffff';
+  let clouds='';for(let i=0;i<nCl;i++)clouds+=cloud(0,18+rnd(48),.6+rnd(60)/100,cc,storm?22+rnd(12):55+rnd(40),rnd(90));
+  // дощ
+  let rain='';const nR=storm?60:wt*16;for(let i=0;i<nR;i++){const x=rnd(440)-10,y=rnd(120);rain+=`<line class="rn" x1="${x}" y1="${y}" x2="${x-4}" y2="${y+10}" style="animation-duration:${(storm?.45:.7)+rnd(30)/100}s;animation-delay:-${rnd(100)/100}s"/>`}
+  // хвилі
+  const wave=(y,c,o,d,amp)=>{let p=`M-80 ${y}`;for(let x=-80;x<480;x+=40)p+=` q10 -${amp} 20 0 t20 0`;return `<path class="wv" d="${p} V160 H-80Z" fill="${c}" opacity="${o}" style="animation-duration:${d}s"/>`};
+  const amp=storm?5:wind?3.2:2;
+  let spark='';if(!storm)for(let i=0;i<9;i++)spark+=`<path class="tw" d="M${R(10,390)} ${R(124,150)}l1.5 -3 1.5 3 -1.5 3z" fill="#fff" style="animation-delay:-${rnd(30)/10}s"/>`;
+  // пальма
+  const palm=(bx,by,cx,cy,flip)=>{const lv=[-160,-125,-95,-60,-25,10,40].map((a,i)=>`<path d="M0 0 Q22 -13 46 3 Q24 -3 0 0Z" fill="${i%2?'#2f9e44':'#3fb954'}" transform="rotate(${flip?180-a:a})"/>`).join('');
+    return `<path d="M${bx} ${by} Q${(bx+cx)/2+(flip?10:-10)} ${(by+cy)/2} ${cx} ${cy}" stroke="#8a5a2b" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M${bx} ${by} Q${(bx+cx)/2+(flip?10:-10)} ${(by+cy)/2} ${cx} ${cy}" stroke="#b07a40" stroke-width="7" fill="none" stroke-dasharray="2 5"/>
+    <g class="sway" style="transform-origin:${cx}px ${cy}px"><g transform="translate(${cx} ${cy})">${lv}<circle cx="-3" cy="5" r="3.2" fill="#6b4421"/><circle cx="3" cy="6" r="3.2" fill="#7a4e26"/></g></g>`};
+  // бочки з водою
+  const nb=Math.min(6,Math.ceil(S.water/3)),pb=Math.min(6,Math.ceil(pw/3));
+  const BP=[[60,176],[86,178],[112,176],[73,163],[99,164],[125,162]];
+  const barrel=(i)=>{const [x,y]=BP[i],u=Math.min(3,S.water-i*3),pop=i>=pb?' pop':'';
+    return `<g class="bar${pop}" style="transform-origin:${x+12}px ${y+30}px;animation-delay:${.2+(i-pb)*.18}s"><g transform="translate(${x} ${y})"><ellipse cx="12" cy="29" rx="12" ry="2.6" fill="#0003"/><path d="M2 4Q0 15 2 26Q12 31 22 26Q24 15 22 4Q12 -1 2 4Z" fill="url(#ibW)" stroke="#5b3517" stroke-width=".8"/><path d="M1.3 9Q12 13 22.7 9M1.3 21Q12 25 22.7 21" stroke="#3b2612" stroke-width="1.6" fill="none"/><ellipse cx="12" cy="4" rx="10" ry="3.2" fill="#4a2c12"/><ellipse class="wat" cx="12" cy="${4.6+(3-u)*.5}" rx="${6+u*.9}" ry="${1.7+u*.25}" fill="url(#ibWat)"/><path d="M7 3.9q3 -1 6 0" stroke="#e6faff" stroke-width=".7" fill="none" opacity=".9"/></g></g>`};
+  let barrels='';[3,4,5,0,1,2].forEach(i=>{if(i<nb)barrels+=barrel(i)});
+  // кошики з рибою
+  const nk=Math.min(6,Math.ceil(S.food/3)),pk=Math.min(6,Math.ceil(pf/3));
+  const KP=[[204,184],[232,186],[260,184],[218,172],[246,173],[274,171]];
+  const basket=(i)=>{const [x,y]=KP[i],u=Math.min(3,S.food-i*3),pop=i>=pk?' pop':'';
+    const fish=Array.from({length:u},(_,j)=>`<g transform="translate(${6+j*6} 7) rotate(${-70+j*35})"><path d="M0 0c3 -4 9 -4 12 0l3.5 -2.6v5.2L12 0c-3 4 -9 4 -12 0z" fill="${['#ff9f4a','#ffb35c','#f08a3a'][j]}" stroke="#c45f16" stroke-width=".5"/><circle cx="2.6" cy="-.6" r=".7" fill="#2a1d12"/></g>`).join('');
+    return `<g class="bsk${pop}${e==='poison'?' bad':''}" style="transform-origin:${x+13}px ${y+20}px;animation-delay:${.3+(i-pk)*.18}s"><g transform="translate(${x} ${y})"><ellipse cx="13" cy="20" rx="13" ry="2.4" fill="#0003"/>${fish}<path d="M1 6L4 18Q13 21 22 18L25 6Z" fill="url(#ibB)" stroke="#6e4b1e" stroke-width=".7"/><path d="M2.4 10h21.2M3.4 14h19.2M8 6.5v12.5M13 6.5v13.5M18 6.5v12.5" stroke="#8b6428" stroke-width=".8"/><ellipse cx="13" cy="6" rx="12" ry="2.3" fill="none" stroke="#c9974a" stroke-width="1.6"/></g></g>`};
+  let baskets='';[3,4,5,0,1,2].forEach(i=>{if(i<nk)baskets+=basket(i)});
+  let flies='';if(e==='poison')for(let i=0;i<6;i++)flies+=`<circle class="fly" cx="${230+rnd(40)}" cy="${176+rnd(10)}" r="1.1" fill="#7ad94a" style="animation-delay:-${rnd(20)/10}s;--r:${6+rnd(8)}px"/>`;
+  // пліт
+  const capt=S.players.some(p=>p.alive&&hero(p,'capt'))?2:0,need=Math.max(1,al),have=(S.wood+capt)/SEAT+(S.xseat||0);
+  const ratio=Math.min(1,have/need),NL=12,k=ratio>=1?NL:Math.min(NL-1,Math.round(NL*ratio));
+  const pratio=same?Math.min(1,((pd+capt)/SEAT+(S.xseat||0))/need):ratio,pk2=pratio>=1?NL:Math.min(NL-1,Math.round(NL*pratio));
+  let logs='';for(let i=0;i<NL;i++){const x=i*8.3;if(i<k)logs+=`<g class="${i>=pk2?'pop':''}" style="transform-origin:${x+4}px 34px;animation-delay:${.3+(i-pk2)*.12}s"><rect x="${x}" y="0" width="7.6" height="32" rx="3.6" fill="url(#ibL)" stroke="#5e3a17" stroke-width=".6"/><ellipse cx="${x+3.8}" cy="2.6" rx="3.2" ry="1.8" fill="#e3b27a" stroke="#a0612f" stroke-width=".5"/></g>`;else logs+=`<rect x="${x+.4}" y=".4" width="6.8" height="31.2" rx="3.4" fill="#ffffff22" stroke="#fffc" stroke-width=".8" stroke-dasharray="2.4 1.8"/>`}
+  const bw=k*8.3-.7,ropes=k?`<path d="M-1 9H${bw+1}M-1 23H${bw+1}" stroke="#e8d39a" stroke-width="1.6"/>`:'';
+  const sail=ratio>=1?`<g class="mast"><path d="M62 4V-58" stroke="#6b4421" stroke-width="2.8"/><path d="M50 -50H76" stroke="#6b4421" stroke-width="2"/><path class="sail" d="M51 -49Q66 -30 52 -10H75Q86 -30 75 -49Z" fill="#fff6e3" stroke="#d9c7a3" stroke-width=".8"/><path d="M58 -40h12M57 -30h14M57 -20h13" stroke="#e8d9b8" stroke-width=".8"/><path class="flag" d="M62 -58l11 3 -11 3z" fill="#ff6a3d" style="transform-origin:348px 92px"/></g>`:'';
+  const raft=`<g transform="translate(286 150) skewX(-14)"><ellipse cx="50" cy="35" rx="56" ry="4" fill="#0003"/>${logs}${ropes}${sail}</g>`;
+  // вогнище
+  const fireBig=e==='fire';
+  const fire=`<g transform="translate(176 200)"><circle class="glow" r="${night?30:20}" fill="url(#ibG)"/><ellipse cy="4" rx="13" ry="3.4" fill="#0004"/><path d="M-10 2l20 -5M-10 -3l20 5" stroke="#5e3a17" stroke-width="3.2" stroke-linecap="round"/>${[-12,-7,0,7,12].map((x,i)=>`<circle cx="${x}" cy="${3+(i%2)}" r="2.4" fill="#8a8f96"/>`).join('')}<g class="flame" style="transform-origin:176px 201px"><path d="M0 1C-${fireBig?11:7} -4 -4 -${fireBig?20:13} 0 -${fireBig?28:19}C4 -${fireBig?20:13} ${fireBig?11:7} -4 0 1Z" fill="#ff6a1f"/><path d="M0 0C-4 -3 -2 -8 0 -${fireBig?17:12}C2 -8 4 -3 0 0Z" fill="#ffd45a"/></g>${Array.from({length:fireBig?8:4},(_,i)=>`<circle class="spk" cx="${rnd(8)-4}" cy="-10" r=".9" fill="#ffd166" style="--x:${rnd(20)-10}px;animation-delay:-${rnd(22)/10}s"/>`).join('')}</g>`;
+  const smoke=fireBig||storm?'':'';
+  const plume=fireBig?Array.from({length:7},(_,i)=>`<circle class="smk" cx="${176+rnd(10)-5}" cy="176" r="${6+rnd(5)}" fill="#5b5f66" style="transform-origin:176px 176px;animation-delay:-${(i*.6).toFixed(1)}s"/>`).join(''):'';
+  // віддалений вулкан
+  const far=night?'#2c3e66':storm?'#38434f':'#6f9fb0';
+  const volcano=`<path d="M118 119Q140 106 160 108L177 88Q183 85 189 88L204 106Q232 104 262 119Z" fill="${far}" opacity=".9"/>${storm?'':Array.from({length:4},(_,i)=>`<circle class="vsm" cx="183" cy="84" r="${4+i}" fill="${night?'#556':'#c9d3d6'}" style="transform-origin:183px 84px;animation-delay:-${i*1.5}s"/>`).join('')}`;
+  // небесні тіла
+  const sun=night?`<circle cx="330" cy="40" r="26" fill="url(#ibMoonG)"/><circle cx="330" cy="40" r="13" fill="#f4f1dc"/><circle cx="335" cy="36" r="12" fill="${sky[0]}" opacity=".0"/>${Array.from({length:22},()=>`<circle class="tw" cx="${rnd(400)}" cy="${rnd(90)}" r="${(rnd(9)+4)/10}" fill="#fff" style="animation-delay:-${rnd(40)/10}s"/>`).join('')}`
+    :storm?'':`<g opacity="${wt>=2?.25:wt===1?.75:1}"><circle class="glow" cx="330" cy="44" r="${heat?44:34}" fill="url(#ibSunG)"/><g class="rays" style="transform-origin:330px 44px">${Array.from({length:12},(_,i)=>`<path d="M330 ${44-(heat?30:24)}l2.6 -9 2.6 9z" fill="#ffd75e" opacity=".75" transform="rotate(${i*30} 330 44)"/>`).join('')}</g><circle cx="330" cy="44" r="${heat?19:15}" fill="#ffd34d"/><circle cx="330" cy="44" r="${heat?15:11}" fill="#ffe680"/></g>`;
+  const gulls=night||storm?'':[0,1].map(i=>`<g class="gl" style="animation-duration:${26+i*9}s;animation-delay:-${i*11}s"><path class="flap" d="M0 0q4 -4 8 0q4 -4 8 0" stroke="#fff" stroke-width="1.5" fill="none" transform="translate(0 ${36+i*14})" style="transform-origin:8px ${36+i*14}px"/></g>`).join('');
+  // події на морі
+  let sea2='';
+  if(e==='sharks')sea2+=[0,1].map(i=>`<g class="fin" style="animation-duration:${16+i*7}s;animation-delay:-${i*6}s"><g transform="translate(0 ${130+i*12})"><path d="M0 0L7 -11Q10 -3 13 0Z" fill="#41606e"/><path d="M-6 1q9 3 25 0" stroke="#d9f4ff" stroke-width="1" fill="none" opacity=".8"/></g></g>`).join('');
+  if(e==='shoal')sea2+=[60,150,250].map((x,i)=>`<g class="jump" style="transform-origin:${x}px 132px;animation-delay:-${i*1.1}s"><path d="M${x} 132c3 -3 7 -3 9 0l3 -2v4l-3 -2c-2 3 -6 3 -9 0z" fill="#ffb35c"/></g>`).join('');
+  if(e==='drift'||e==='find')sea2+=[70,190,250].map((x,i)=>`<g class="bob" style="animation-delay:-${i*.8}s">${e==='drift'?`<rect x="${x}" y="${136+i*4}" width="26" height="6" rx="3" fill="#a0612f" stroke="#5e3a17" stroke-width=".6"/>`:`<rect x="${x}" y="${132+i*4}" width="12" height="10" fill="#b77a3d" stroke="#5e3a17" stroke-width=".7"/><path d="M${x} ${137+i*4}h12" stroke="#5e3a17" stroke-width=".7"/>`}</g>`).join('');
+  const rainbow=e==='rainbow'?`<g opacity=".55" fill="none" stroke-width="3.2">${['#ff5b5b','#ffa64d','#ffe14d','#6ee06e','#5bb6ff','#a77bff'].map((c,i)=>`<path d="M60 120A140 110 0 0 1 340 120" stroke="${c}" transform="translate(0 ${i*3.2})"/>`).join('')}</g>`:'';
+  const fogL=fog?[0,1,2].map(i=>`<ellipse class="fog" cx="${120+i*110}" cy="${110+i*30}" rx="170" ry="${26+i*6}" fill="#fff" opacity=".42" filter="url(#ibBlur)" style="animation-duration:${30+i*12}s;animation-delay:-${i*7}s"/>`).join(''):'';
+  const heatL=heat?[0,1,2,3].map(i=>`<path class="heat" d="M${60+i*90} 220q6 -10 0 -20t0 -20t0 -20" stroke="#fff" stroke-width="1.4" fill="none" opacity=".35" style="animation-delay:-${i*.7}s"/>`).join(''):'';
+  const windL=wind&&!storm?Array.from({length:6},(_,i)=>`<path class="wnd" d="M0 ${30+i*16}q30 -6 60 0" stroke="#fff" stroke-width="1" fill="none" opacity=".5" style="animation-delay:-${(i*.5).toFixed(1)}s"/>`).join(''):'';
+  const crab=night||storm?'':`<g class="crab"><g transform="translate(130 212)"><ellipse rx="4.5" ry="3" fill="#e4572e"/><path d="M-4 1l-3 2M-3 2l-2 3M4 1l3 2M3 2l2 3" stroke="#c0392b" stroke-width=".8"/><circle cx="-6" cy="-2" r="1.8" fill="#e4572e"/><circle cx="6" cy="-2" r="1.8" fill="#e4572e"/><circle cx="-1.4" cy="-2.6" r=".6" fill="#111"/><circle cx="1.4" cy="-2.6" r=".6" fill="#111"/></g></g>`;
+  const flash=storm?`<rect class="flash" width="400" height="225" fill="#fff"/><path class="bolt" d="M250 0l-14 40h10l-12 38 26 -48h-11l13 -30z" fill="#fff8d0"/>`:'';
+  const svg=`<svg viewBox="0 0 400 225" role="img" aria-label="Табір на острові"><defs>
+<linearGradient id="ibSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sky[0]}"/><stop offset="1" stop-color="${sky[1]}"/></linearGradient>
+<linearGradient id="ibSea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${seaC[0]}"/><stop offset="1" stop-color="${seaC[1]}"/></linearGradient>
+<linearGradient id="ibSand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${night?'#b8a47c':storm?'#a99a7a':'#f8dfa9'}"/><stop offset="1" stop-color="${night?'#8e7b58':storm?'#857558':'#e3b871'}"/></linearGradient>
+<linearGradient id="ibW" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6e4019"/><stop offset=".45" stop-color="#c0803f"/><stop offset="1" stop-color="#6e4019"/></linearGradient>
+<linearGradient id="ibL" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7a4a22"/><stop offset=".5" stop-color="#b9783e"/><stop offset="1" stop-color="#6e4019"/></linearGradient>
+<linearGradient id="ibB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0ae5c"/><stop offset="1" stop-color="#a8762f"/></linearGradient>
+<radialGradient id="ibWat"><stop offset="0" stop-color="#9be7ff"/><stop offset="1" stop-color="#1e9bd7"/></radialGradient>
+<radialGradient id="ibSunG"><stop offset="0" stop-color="#fff3b0" stop-opacity=".95"/><stop offset=".5" stop-color="#ffd15c" stop-opacity=".45"/><stop offset="1" stop-color="#ffb627" stop-opacity="0"/></radialGradient>
+<radialGradient id="ibMoonG"><stop offset="0" stop-color="#fffbe0" stop-opacity=".6"/><stop offset="1" stop-color="#fffbe0" stop-opacity="0"/></radialGradient>
+<radialGradient id="ibG"><stop offset="0" stop-color="#ffb347" stop-opacity=".7"/><stop offset="1" stop-color="#ff6a1f" stop-opacity="0"/></radialGradient>
+<filter id="ibBlur" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+</defs>
+<rect width="400" height="122" fill="url(#ibSky)"/>${sun}${rainbow}${clouds}${volcano}${gulls}${windL}
+<rect y="118" width="400" height="50" fill="url(#ibSea)"/>${wave(124,'#5fd3df',.35,9,amp)}${wave(133,'#2bb8c9',.45,13,amp)}${spark}${sea2}${wave(143,'#139bb1',.6,7,amp*1.2)}
+<path d="M0 160Q60 149 120 155T240 151T400 145V225H0Z" fill="url(#ibSand)"/><path class="foam" d="M0 159Q60 148 120 154T240 150T400 144" stroke="#fff" stroke-width="2.2" fill="none" opacity=".75"/><path d="M0 163Q60 152 120 158T240 154T400 148" stroke="#c99b55" stroke-width="5" fill="none" opacity=".35"/>
+${palm(26,212,46,96,false)}${palm(404,196,392,86,true)}
+${raft}${plume}${barrels}${fire}${baskets}${flies}${crab}${heatL}${fogL}<g class="rain${storm?' st':''}" stroke="${storm?'#c6d4e0':'#d6ecff'}" stroke-width="1" opacity=".75">${rain}</g>${flash}
+${night?'<rect width="400" height="225" fill="#0a1a40" opacity=".28"/>':''}</svg>`;
+  const L=lack(),seatsNow=seats();
+  const bd=(x,y,ic,txt,cls,lbl)=>`<div class="bd ${cls}" style="left:${x}%;top:${y}%" aria-label="${lbl}">${ic}<b>${txt}</b></div>`;
+  const lowW=S.water<al,lowF=S.food<al,lowS=seatsNow<al;
+  return `<div class="ib${wind?' windy':''}${storm?' storm':''}">${svg}
+  ${bd(23,74,IC.w,S.water,lowW?'low':'ok','Вода')}${bd(60,77,IC.f,S.food,lowF?'low':'ok','Їжа')}${bd(71,62,IC.s,`${seatsNow}/${al}`,lowS?(storm?'low':''):'ok','Місць на плоту')}
+  ${e?`<div class="ibe"><span class="eic">${EMO[e]}<img src="images/e_${e}.webp" alt="" onerror="this.remove()"></span>${EVI[e][0]}</div>`:''}<div class="ibw">${storm?'Ураган!':wt?`Дощ ${wt}`:'Сухо'}</div></div>
+  <p class="ibn">Щовечора табір п’є й їсть: <b>${al}</b> води і <b>${al}</b> їжі. ${seatsNow>=al?'Пліт уже вміщує всіх.':`Для плоту бракує ще <b>${Math.max(0,al*SEAT-S.wood-capt-(S.xseat||0)*SEAT)}</b> дерева.`}</p>`}
+
 function render(){
   if(quiet)return;
   if(ONLINE&&S)ONLINE.me=S.players.findIndex(p=>p.uid===UID);
@@ -723,31 +1010,38 @@ function render(){
   else if(!S){
     h=`<div class="hero">${heroArt}<div class="t"><h1>Акулячий Зуб</h1><p style="color:#fff;max-width:26ch">Пліт, ураган і чесні друзі. Поки вистачає їжі.</p></div></div>
     ${modeHTML()}<div class="panel"><h3>Гравці (3–12) на одному телефоні</h3><div class="names" style="margin-top:10px">${setup.names.map((n,i)=>`<div class="nm"><input id="n${i}" data-i="${i}" value="${esc(n)}" placeholder="Ім’я гравця ${i+1}" maxlength="14">${setup.names.length>3?`<button data-a="del" data-v="${i}" aria-label="Прибрати">×</button>`:''}</div>`).join('')}</div>
+    <h3 style="margin-top:16px">Режим гри</h3>${optsHTML(setup.opts,'sopt')}
     <h3 style="margin-top:16px">Голосування</h3><div class="row" style="margin-top:8px"><button class="btn ${setup.open?'y':'g'}" data-a="setopen" data-v="1">Відкрите, пальцем (як у настілці)</button><button class="btn ${setup.open?'g':'y'}" data-a="setopen" data-v="0">Таємне, по черзі</button></div>
     <div class="row" style="margin-top:12px">${setup.names.length<12?'<button class="btn g" data-a="add">+ Гравець</button>':''}<button class="btn y" data-a="start">Почати гру</button></div></div>${RULES}`;
   } else if(S.scr==='round'){
-    h=bar()+`${S.final?'<div class="lightning"></div>':''}<div class="mapbox ${S.final?'quake':''}">${S.final?vid('storm','mapv'):'<img src="images/map.webp" alt="Мапа острова">'}<span>Раунд ${S.round}${S.final?' · ураган!':''}</span></div><div class="panel"><h2>Раунд ${S.round}</h2><div class="wcard ${S.final?'h':''}" style="margin-top:12px">${wIcon(S.final?'H':S.weather)}<div><h3>${S.final?'Ураган наближається!':S.weather?`Дощ: ${S.weather}`:'Спека, ні краплі'}</h3><p>${S.final?'Це останній раунд. Після нього пліт має відплисти з усіма, хто поміститься.':`Хто набирає воду, отримає ${S.weather}.`}</p></div></div>
+    h=bar()+`${S.final?'<div class="lightning"></div>':''}${islandBoard()}${ONLINE&&S.round===1&&ONLINE.me>=0?roleHTML(P(ONLINE.me)):''}<div class="panel"><h2>Раунд ${S.round}</h2>${evHTML()}<div class="wcard ${S.final?'h':''}" style="margin-top:12px">${wIcon(S.final?'H':S.weather)}<div><h3>${S.final?'Ураган наближається!':S.weather?`Дощ: ${S.weather}`:'Спека, ні краплі'}</h3><p>${S.final?'Це останній раунд. Після нього пліт має відплисти з усіма, хто поміститься.':`Хто набирає воду, отримає ${S.weather}.`}</p></div></div>
     <p class="mut" style="margin-top:12px">Перший ходить: <b>${esc(P(S.start).name)}</b>. Кінець раунду: кожному треба 1 воду і 1 їжу.</p><button class="btn w" data-a="begin" style="margin-top:8px">Почати раунд</button></div>`;
   } else if(S.scr==='pass'){
     const p=cur();
-    h=bar()+`<div class="panel big"><p class="mut">Передай телефон гравцю</p><div class="av" style="background-image:url(${pic('h_'+p.hero)});border-color:${p.col}"></div><h2>${esc(p.name)}</h2><p class="mut">${HER[p.hero][0]}</p><button class="btn y w" data-a="me" style="margin-top:18px">Я — ${esc(p.name)}</button></div>
+    h=bar()+`<div class="panel big"><p class="mut">Передай телефон гравцю</p><div class="av" style="background-image:url(${pic('h_'+p.hero)});border-color:${p.col}"></div><h2>${esc(p.name)}</h2><p class="mut">${HER[p.hero][0]}</p><button class="btn y w" data-a="me" style="margin-top:18px">Я — ${esc(p.name)}</button></div>${islandBoard()}
     ${S.log.length?`<div class="panel"><h3>Що сталося</h3><ul class="log">${S.log.slice(-5).map(l=>`<li>${esc(l)}</li>`).join('')}</ul></div>`:''}`;
   } else if(S.scr==='turn'){
     const p=cur();
     h=bar()+`<h2 style="margin:6px 0 10px">Твій хід, ${esc(p.name)}</h2><div class="hcard" style="--c:${p.col}"><img src="${pic('h_'+p.hero)}" alt=""><b>${HER[p.hero][0]}</b><span>${HER[p.hero][1]}${hero(p,'scout')?` Наступна погода: <b>${S.wdeck[0]==='H'?'УРАГАН':S.wdeck[0]?'дощ '+S.wdeck[0]:'сухо'}</b>.`:''}${hero(p,'lucky')&&!p.luck?' (удачу вже використано)':''}${hero(p,'diplo')&&!p.shield?' (уже використано)':''}</span></div>
     ${S.flash?`<div class="panel">${S.flash}<button class="btn g w" data-a="okflash" style="margin-top:10px">Добре</button></div>`:''}
-    ${advice(p)}
+    ${roleHTML(p,true)}${S.comp?compassHTML():advice(p)+`
     <div class="acts">
     <button class="act" data-a="fish"${ONLINE?` data-c="Рибалити цього ходу?"`:''}>${IC.f}<b>Рибалити</b><span>${hero(p,'fisher')?'1–3':'0–3'} їжі${has(p,'rod')?', вудка':''}${S.dolphin?', +1 дельфіни':''}</span></button>
-    <button class="act" data-a="water"${ONLINE?` data-c="Набрати воду: +${S.weather+(has(p,'bucket')?1:0)+(hero(p,'shaman')?1:0)}?"`:''}>${IC.w}<b>Набрати воду</b><span>+${S.weather+(has(p,'bucket')?1:0)+(hero(p,'shaman')?1:0)} води</span></button>
-    <div class="act" style="cursor:default">${IC.d}<b>Рубати дерево</b><span>Ризик: ще ${risk} кол. (шанс змії ${Math.round(risk/6*100)}%)</span><div class="risk"><button data-a="rk" data-v="-1" aria-label="Менше">−</button><button data-a="wood"${ONLINE?` data-c="Рубати дерево: +${1+risk+(has(p,'axe')?2:0)+(hero(p,'carp')?1:0)}, шанс змії ${Math.round(risk/6*100)}%?"`:''} style="width:auto;border-radius:12px;padding:0 14px;background:var(--coral)">+${1+risk+(has(p,'axe')?2:0)+(hero(p,'carp')?1:0)}</button><button data-a="rk" data-v="1" aria-label="Більше">+</button></div></div>
-    <button class="act" data-a="search"${ONLINE?` data-c="Обшукати уламки?"`:''}>${IC.c}<b>Уламки</b><span>${hero(p,'diver')?'Тягнеш дві карти':'Тягни карту: знахідка чи халепа'}</span></button></div>
+    <button class="act" data-a="water"${ONLINE?` data-c="Набрати воду: +${wg(p)}?"`:''}>${IC.w}<b>Набрати воду</b><span>+${wg(p)} води</span></button>
+    ${ev('wind')?`<div class="act" style="cursor:default;opacity:.55">${IC.d}<b>Рубати дерево</b><span>Сильний вітер: сьогодні не можна</span></div>`:`<div class="act" style="cursor:default">${IC.d}<b>Рубати дерево</b><span>Ризик: ще ${risk} кол. (шанс змії ${snakeP(risk)}%${ev('moon')?', повний місяць':''})</span><div class="risk"><button data-a="rk" data-v="-1" aria-label="Менше">−</button><button data-a="wood"${ONLINE?` data-c="Рубати дерево: +${1+risk+(has(p,'axe')?2:0)+(hero(p,'carp')?1:0)}, шанс змії ${snakeP(risk)}%?"`:''} style="width:auto;border-radius:12px;padding:0 14px;background:var(--coral)">+${1+risk+(has(p,'axe')?2:0)+(hero(p,'carp')?1:0)}</button><button data-a="rk" data-v="1" aria-label="Більше">+</button></div></div>`}
+    <button class="act" data-a="search"${ONLINE?` data-c="Обшукати уламки?"`:''}>${IC.c}<b>Уламки</b><span>${hero(p,'diver')?'Тягнеш дві карти':'Тягни карту: знахідка чи халепа'}${ev('find')?', +1 знахідка':''}</span></button></div>`}${mateHTML(p)}
     <div class="panel"><h3>Твої карти (${p.hand.length})</h3><p class="mut">Бачиш лише ти. Грай карти до дії. Карту можна й передати іншому гравцю, наприклад за обіцянку.</p>${p.hand.length?`<div class="hand">${p.hand.map(k=>cardHTML(k,(C[k][4]?`<button class="btn" data-a="play" data-v="${k}"${C[k][4]==='pool'||C[k][4]==='self'?(ONLINE?` data-c="Зіграти «${C[k][0]}»?"`:''):''}>${k==='gun'?'Вистрілити':'Зіграти'}</button>`:'<span class="pas">Діє сама</span>')+`<button class="btn g gv" data-a="give" data-v="${k}">Передати комусь</button>`)).join('')}</div>`:'<p>Порожньо. Обшукай уламки.</p>'}</div>`;
   } else if(S.scr==='res'){
     h=bar()+`<div class="panel resp">${scene(S.res.k,S.res.n)}<h2>${S.res.t}</h2><div style="margin-top:10px">${S.res.h}</div><button class="btn w" data-a="next" style="margin-top:14px">Завершити хід</button></div>`;
+  } else if(S.scr==='rpass'){
+    const p=P(S.rv);
+    h=`<div class="panel big"><p class="mut">Таємні ролі · ${S.rv+1} з ${S.players.length}</p><h2>Передай телефон</h2><div class="av" style="background-image:url(${pic('h_'+p.hero)});border-color:${p.col}"></div><h2>${esc(p.name)}</h2><p class="mut">Інші не дивляться!</p><button class="btn y w" data-a="rme" style="margin-top:16px">Я — ${esc(p.name)}</button></div>`;
+  } else if(S.scr==='rshow'){
+    const p=P(S.rv);
+    h=`<div class="panel big"><h2>${esc(p.name)}</h2>${roleHTML(p)}<button class="btn y w" data-a="rnext" style="margin-top:12px">Запам’ятав, сховати</button></div>`;
   } else if(S.scr==='talk'){
     const L=lack();
-    h=bar()+`<div class="panel"><h2>${S.final?'Ураган! Хто сяде на пліт?':'Табору не вистачає припасів'}</h2>
+    h=bar()+islandBoard()+`<div class="panel"><h2>${S.final?'Ураган! Хто сяде на пліт?':'Табору не вистачає припасів'}</h2>
     <div class="need">${L.lw?`<div>${IC.w}<b>−${L.lw}</b> води</div>`:''}${L.lf?`<div>${IC.f}<b>−${L.lf}</b> їжі</div>`:''}${L.ls?`<div>${IC.s}<b>−${L.ls}</b> місць</div>`:''}</div>
     <p>Якщо нічого не зміниться, з табору доведеться вигнати <b>${L.short}</b> ${L.short===1?'гравця':'гравців'}.</p>
     <p class="talkhint">Зараз час говорити вголос. Хто що має в руці? Хто віддасть флягу чи консерву табору? Кого виганяти? Можна просити, обіцяти, підкуповувати картами, блефувати й погрожувати. А чи дотримувати обіцянки, вирішує кожен сам.</p>
@@ -762,13 +1056,13 @@ function render(){
     h=bar()+`<div class="panel big"><p class="mut">Передай телефон гравцю</p><div class="av" style="background-image:url(${pic('h_'+q.hero)});border-color:${q.col}"></div><h2>${esc(q.name)}</h2><button class="btn y w" data-a="hok" style="margin-top:16px">Я — ${esc(q.name)}</button><button class="btn g w" data-a="hback" style="margin-top:10px">Скасувати</button></div>`;
   } else if(S.scr==='hand'){
     const q=P(S.view.who);
-    h=bar()+`<h2 style="margin:6px 0 10px">Карти: ${esc(q.name)}</h2>${S.flash?`<div class="panel">${S.flash}</div>`:''}
+    h=bar()+`<h2 style="margin:6px 0 10px">Карти: ${esc(q.name)}</h2>${S.flash?`<div class="panel">${S.flash}</div>`:''}${roleHTML(q,true)}${mateHTML(q)}
     <div class="panel"><p class="mut">Бачиш лише ти. Карти «у табір» одразу додають припаси. Будь-яку карту можна передати іншому.</p>${q.hand.length?`<div class="hand">${q.hand.map(k=>cardHTML(k,(C[k][4]==='pool'?`<button class="btn" data-a="pool" data-v="${k}" data-c="Віддати «${C[k][0]}» в спільний запас?">Віддати в табір</button>`:'')+(k==='gun'?`<button class="btn" data-a="shoot">Вистрілити</button>`:'')+`<button class="btn g gv" data-a="give" data-v="${k}">Передати комусь</button>`)).join('')}</div>`:'<p>Порожньо.</p>'}</div>
     <button class="btn y w" data-a="hback">Готово, сховати карти</button>`;
   } else if(S.scr==='ovote'){
     const v=S.vote,ready=v.voters.every(i=>v.sel[i]!=null);
     h=bar()+`<div class="panel"><h2>Відкрите голосування</h2><p>Порахуйте вголос «раз, два, три», і на «три» кожен одночасно показує пальцем на того, кого виганяє. Потім позначте тут, хто на кого показав.</p>
-    ${v.voters.map(i=>{const me=P(i);return `<div class="ovr"><div class="ovn">${av(me)}<b>${esc(me.name)}</b>${hero(me,'sly')?'<small>голос ×2</small>':''} вказує на:</div><div class="ovt">${v.cands.filter(j=>j!==i).map(j=>`<button class="pill ${v.sel[i]===j?'on':''}" data-a="osel" data-v="${i}:${j}">${esc(P(j).name)}</button>`).join('')}</div><button class="pill mg ${v.mg[i]?'on':''}" data-a="omg" data-v="${i}">${v.mg[i]?'Каже, що грає мегафон (+1, якщо він справді є)':'Грає мегафон?'}</button></div>`}).join('')}
+    ${v.voters.map(i=>{const me=P(i);return `<div class="ovr"><div class="ovn">${av(me)}<b>${esc(me.name)}</b>${hero(me,'sly')?'<small>голос ×2</small>':''} вказує на:</div><div class="ovt">${vcands(v,i).map(j=>`<button class="pill ${v.sel[i]===j?'on':''}" data-a="osel" data-v="${i}:${j}">${esc(P(j).name)}</button>`).join('')}</div><button class="pill mg ${v.mg[i]?'on':''}" data-a="omg" data-v="${i}">${v.mg[i]?'Каже, що грає мегафон (+1, якщо він справді є)':'Грає мегафон?'}</button></div>`}).join('')}
     <button class="btn y w" data-a="ocount" ${ready?'':'disabled'} style="margin-top:12px">${ready?'Підрахувати голоси':'Позначте всіх'}</button></div>`;
   } else if(S.scr==='tie'){
     const t=S.tie,v=S.vote,L=P(leader());
@@ -782,27 +1076,24 @@ function render(){
   } else if(S.scr==='vote'){
     const v=S.vote,me=P(v.voters[v.vi]);
     h=bar()+`<div class="panel"><h2>${esc(me.name)}, кого виганяємо?</h2>${has(me,'megaphone')?`<button class="btn ${mega?'y':'g'} w" data-a="mg" style="margin:12px 0">${mega?'Мегафон увімкнено: +1 голос':'Увімкнути мегафон'}</button>`:''}
-    <p class="mut">Твої карти (бачиш лише ти): ${me.hand.length?me.hand.map(k=>'«'+C[k][0]+'»').join(', '):'порожньо'}</p><div class="vote" style="margin-top:12px">${v.cands.filter(i=>i!==v.voters[v.vi]).map(i=>`<button class="btn" data-a="vote" data-v="${i}" data-c="Голосуєш проти ${esc(P(i).name)}?">${esc(P(i).name)}</button>`).join('')}</div></div>`;
+    <p class="mut">Твої карти (бачиш лише ти): ${me.hand.length?me.hand.map(k=>'«'+C[k][0]+'»').join(', '):'порожньо'}</p><div class="vote" style="margin-top:12px">${vcands(v,v.voters[v.vi]).map(i=>`<button class="btn" data-a="vote" data-v="${i}" data-c="Голосуєш проти ${esc(P(i).name)}?">${esc(P(i).name)}</button>`).join('')}</div></div>`;
   } else if(S.scr==='verdict'){
     const d=S.verdict,p=P(d.i);
     h=bar()+`<div class="panel big"><p class="mut">Табір вирішив</p><div class="vbox">${vid('exile')}</div><div class="sinkbox"><div class="av gone sink" style="background-image:url(${pic('h_'+p.hero)})"></div><svg class="splash" viewBox="0 0 200 40"><path d="M0 22q25-12 50 0t50 0t50 0t50 0V40H0z" fill="#1590a8"/><circle cx="100" cy="20" r="6" fill="none" stroke="#bfefff" stroke-width="3"/><circle cx="100" cy="20" r="6" fill="none" stroke="#bfefff" stroke-width="2" style="animation-delay:.4s"/></svg></div><h2>${esc(p.name)} лишається сам на пляжі</h2>
     <ul class="log" style="text-align:left;margin-top:12px">${d.tab.map(([n,c])=>`<li>${esc(n)}: ${c} гол.</li>`).join('')}${d.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul><button class="btn w" data-a="after" style="margin-top:16px">Далі</button></div>`;
   } else if(S.scr==='sum'){
-    h=bar()+`<div class="panel">${eatScene()}<h2>Кінець раунду ${S.round}</h2>${S.notes.map(n=>`<p>${n}</p>`).join('')}<p>Усі напилися й поїли. До плоту бракує: ${Math.max(0,alive().length-seats())} місць.</p><button class="btn w" data-a="nround" style="margin-top:12px">Наступний раунд</button></div>`;
+    h=bar()+islandBoard()+`<div class="panel">${eatScene()}<h2>Кінець раунду ${S.round}</h2>${S.notes.map(n=>`<p>${n}</p>`).join('')}<p>Усі напилися й поїли. До плоту бракує: ${Math.max(0,alive().length-seats())} місць.</p><button class="btn w" data-a="nround" style="margin-top:12px">Наступний раунд</button></div>`;
   } else if(S.scr==='depart'){
-    h=bar()+`<div class="panel big"><h2>Пліт готовий!</h2><p>Місць, води та їжі вистачає на всіх ${alive().length}. Відпливаєте?</p><button class="btn y w" data-a="sail" style="margin-top:14px">Відпливаємо!</button><button class="btn g w" data-a="nround" style="margin-top:10px">Ще раунд на острові</button></div>`;
+    h=bar()+islandBoard()+`<div class="panel big"><h2>Пліт готовий!</h2><p>Місць, води та їжі вистачає на всіх ${alive().length}. Відпливаєте?</p><button class="btn y w" data-a="sail" style="margin-top:14px">Відпливаємо!</button><button class="btn g w" data-a="nround" style="margin-top:10px">Ще раунд на острові</button></div>`;
   } else if(S.scr==='over'){
-    const w=alive();
-    h=`<div class="hero">${vid(S.win?'win':'lose','bimg')}${S.win?raftScene().replace(/<svg[\s\S]*?<\/svg>/,''):''}</div><div class="panel big"><h2 class="win">${S.win?'Ви врятувалися!':'Острів переміг'}</h2>
-    <p>${S.win?`Пліт відплив за ${S.round} раунд(ів). На борту:`:'Ніхто не дістався до великої землі.'}</p>${S.win?`<div class="chips" style="justify-content:center">${w.map(p=>`<span class="chip">${av(p)}${esc(p.name)}</span>`).join('')}</div>`:''}
-    <button class="btn y w" data-a="again" style="margin-top:14px">Нова гра</button></div>`;
+    h=overHTML();
   }
   if(S&&sheet){const hp=holder();let opts,title,act;
     if(sheet.give){opts=S.players.map((q,i)=>[q,i]).filter(([q])=>q.alive&&q!==hp);title=`Кому передати «${C[sheet.give][0]}»?`;act='gto'}
     else{const k=sheet.k;opts=S.players.map((q,i)=>[q,i]).filter(([q])=>q.alive&&(C[k][4]==='sick'?q.sick:q!==hp));title=`${C[k][0]}: на кого?`;act='tgt'}
     h+=`<div class="ov"><div class="sheet"><h3>${title}</h3><div class="tg" style="margin-top:12px">${opts.length?opts.map(([q,i])=>`<button class="btn" data-a="${act}" data-v="${i}" data-c="${sheet.give?`Передати «${C[sheet.give][0]}» гравцю ${esc(q.name)}?`:sheet.k==='gun'?`Вистрілити в ${esc(q.name)}? Це не можна скасувати.`:`«${C[sheet.k][0]}» на гравця ${esc(q.name)}?`}">${esc(q.name)}</button>`).join(''):'<p>Немає підходящих гравців.</p>'}<button class="btn g" data-a="close">Скасувати</button></div></div></div>`}
   if(conf)h+=`<div class="ov"><div class="sheet conf"><h3>${conf.m}</h3><div class="row" style="margin-top:14px"><button class="btn g" data-a="cno">Ні</button><button class="btn y" data-a="cyes">Так</button></div></div></div>`;
-  if(showRules)h+=`<div class="ov"><div class="sheet rul"><div class="top"><h2>Правила</h2><button class="btn g" data-a="rules">Закрити</button></div>${RULES_BODY}<h3 style="margin-top:12px">Герої</h3><div class="heroes">${Object.entries(HER).map(([k,x])=>`<div><img src="${pic('h_'+k)}" alt=""><b>${x[0]}</b>${x[1]}</div>`).join('')}</div></div></div>`;
+  if(showRules)h+=`<div class="ov"><div class="sheet rul"><div class="top"><h2>Правила</h2><button class="btn g" data-a="rules">Закрити</button></div>${RULES_BODY}${RULES_MODES}<h3 style="margin-top:12px">Герої</h3><div class="heroes">${Object.entries(HER).map(([k,x])=>`<div><img src="${pic('h_'+k)}" alt=""><b>${x[0]}</b>${x[1]}</div>`).join('')}</div></div></div>`;
   if(ONLINE&&ONLINE.lost)h=`<div class="lost">Зв’язок із ведучим втрачено, перепідключаюсь…</div>`+h;
   if(S){const fx=S.fxn||0;if(seenFx===null)seenFx=fx;else if(fx>seenFx){bangUntil=Date.now()+2600;sfx('bang');setTimeout(()=>render(),2700)}seenFx=fx}else seenFx=null;
   if(Date.now()<bangUntil)h+=`<div class="bang"><div class="bangv">${vid('shot','scv')}</div><b>БАХ!</b></div>`;
