@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Митниця</title>
+<style>
+/* VOICE: гамірний портовий ринок, хитрощі й хабарі
+   IDEA: дерев'яна ятка й митний стіл: карти, мішки, монети
+   PICTURE: банер митниці, товари на картах, портрети купців
+   COLOUR and TYPE: нічне море + теплий пергамент і золото; Kurale + Rubik
+   LAYOUT: одна колонка під телефон: шапка, ятки гравців, дія */
+:root{--bg:#141c26;--ink:#f6eedd;--mut:#b9b2a3;--gold:#f2b544;--red:#d9534f;--grn:#3ba56b;--parch:#f7ecd4;--cink:#3a2a18;color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;color:var(--ink);font:16px/1.5 Rubik,system-ui,sans-serif;background:#141c26;overflow-x:clip}
+#bgfx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:linear-gradient(rgba(14,20,30,.80),rgba(14,20,30,.93)),url(images/bg.webp) center/420px repeat}
+#app{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:12px 12px 70px}
+h1,h2,h3{font-family:Kurale,Georgia,serif;font-weight:400;margin:0;line-height:1.1}
+h1{font-size:clamp(34px,9vw,48px);color:var(--gold);text-shadow:0 3px 0 #5a3410}h2{font-size:26px}h3{font-size:19px}
+p{margin:.4em 0}.mut{color:var(--mut)}b.g{color:var(--gold)}
+.btn{position:relative;overflow:hidden;appearance:none;border:0;border-radius:12px;padding:10px 16px;min-height:46px;font:600 16px Rubik,system-ui;cursor:pointer;background:linear-gradient(#f6c457,#d9962a);color:#3a2207;box-shadow:0 4px 0 #8a5512;transition:transform .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #8a5512}
+.btn.g{background:rgba(255,255,255,.1);color:var(--ink);box-shadow:none}.btn.r{background:linear-gradient(#e86a5f,#b83a32);color:#fff;box-shadow:0 4px 0 #7a1f19}.btn.gr{background:linear-gradient(#4cc27f,#2f8a57);color:#fff;box-shadow:0 4px 0 #1b5a37}
+.btn.w{width:100%}.btn:disabled{opacity:.4;cursor:default}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);transform:translateX(-120%);animation:shine 6s infinite}
+@keyframes shine{0%,85%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.panel{background:rgba(30,40,54,.82);border:1px solid rgba(242,181,68,.18);border-radius:18px;padding:14px;margin:10px 0;backdrop-filter:blur(3px)}
+.parch{background:var(--parch);color:var(--cink);border-radius:16px;padding:14px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1 1 120px}
+.top{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between;margin-bottom:8px}.top .row>*{flex:0 0 auto}
+.tag{background:rgba(0,0,0,.4);border:1px solid rgba(242,181,68,.25);border-radius:99px;padding:4px 10px;font-size:14px;display:inline-flex;align-items:center;gap:6px}
+.tag img{width:22px;height:22px;border-radius:50%;object-fit:cover}
+.hero{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.4);margin-bottom:10px}.hero img,.hero video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}.hero .t{position:absolute;inset:0;padding:12px 16px;background:linear-gradient(rgba(10,14,20,.75),rgba(10,14,20,.25) 55%,transparent)}.hero .t p{color:#fff;text-shadow:0 2px 6px #000;max-width:24ch}
+.pl{display:grid;gap:6px}
+.pi{display:grid;grid-template-columns:44px 1fr auto;gap:8px;align-items:center;background:rgba(16,23,32,.9);border-radius:14px;padding:6px 8px;border:1px solid transparent}
+.pi.sh{border-color:var(--gold);box-shadow:0 0 0 2px rgba(242,181,68,.25) inset}
+.av{width:44px;height:44px;border-radius:12px;background:#333 center/cover;border:2px solid rgba(255,255,255,.2)}
+.pi .nm{font-weight:600}.pi .ch{font-size:12px;color:var(--mut)}
+.coins{display:inline-flex;align-items:center;gap:4px;font:700 16px Rubik;color:var(--gold)}.coins i{width:20px;height:20px;border-radius:50%;background:url(images/coin.webp) center/cover;display:inline-block}
+.stand{display:flex;flex-wrap:wrap;gap:3px;margin-top:2px}.st{display:inline-flex;align-items:center;gap:2px;font-size:12px;background:rgba(255,255,255,.08);border-radius:99px;padding:1px 6px 1px 1px}.st i{width:18px;height:18px;border-radius:50%;background:#555 center/cover;display:inline-block}
+.hand{display:grid;grid-template-columns:repeat(auto-fill,minmax(102px,1fr));gap:8px}
+.card{position:relative;background:var(--parch);color:var(--cink);border-radius:12px;overflow:hidden;cursor:pointer;user-select:none;box-shadow:0 4px 0 #b8a57f,0 6px 14px rgba(0,0,0,.35);transition:transform .15s,box-shadow .15s;border:3px solid var(--c)}
+.card .art{aspect-ratio:1;background:#ddd center/cover}
+.card .cb{padding:4px 6px 6px}.card b{display:block;font:400 15px Kurale,serif;line-height:1.1}.card small{font-size:11px;color:#7a6548}
+.card .v,.card .pn{position:absolute;top:4px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:800 13px Rubik}
+.card .v{left:4px;background:radial-gradient(#ffd977,#c98c1c);color:#3a2207;box-shadow:0 1px 3px #000}.card .pn{right:4px;background:radial-gradient(#e86a5f,#9a2a22);color:#fff;box-shadow:0 1px 3px #000}
+.card.contra{border-color:#2b1d3a}.card.contra .cb{background:#2b1d3a;color:#f0e6ff}.card.contra small{color:#c9b6e6}
+.card.royal{border-color:#e2b23a}.card.royal .cb{background:linear-gradient(#fff4cf,#f2d27c)}
+.card.sel{transform:translateY(-8px) rotate(-1deg);box-shadow:0 0 0 4px var(--gold),0 10px 18px rgba(0,0,0,.5)}
+.goods{display:flex;flex-wrap:wrap;gap:6px}.gd{background:rgba(255,255,255,.1);border-radius:99px;padding:3px 10px;font-size:14px;display:inline-flex;align-items:center;gap:4px}
+.big{text-align:center;padding:22px 12px}
+.portrait{width:120px;height:120px;border-radius:24px;margin:6px auto 10px;background:#333 center/cover;border:4px solid var(--gold);box-shadow:0 8px 24px rgba(0,0,0,.5);animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}@keyframes pop{from{transform:scale(.3) rotate(-15deg);opacity:0}}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.65);display:flex;align-items:flex-end;justify-content:center;z-index:9}
+.sheet{background:#1f2a37;border-top:3px solid var(--gold);width:min(760px,100%);border-radius:20px 20px 0 0;padding:16px;max-height:88vh;overflow:auto;animation:up .25s ease-out}@keyframes up{from{transform:translateY(40px);opacity:0}}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:rgba(0,0,0,.35);border-radius:14px;padding:5px;margin-bottom:8px}.seg button{border:0;border-radius:10px;min-height:44px;font:600 15px Rubik;background:transparent;color:var(--ink);cursor:pointer}.seg .on{background:var(--gold);color:#3a2207}
+input{font:16px Rubik;padding:10px;border-radius:10px;border:0;min-height:44px;width:100%;background:var(--parch);color:var(--cink)}
+.nm2{display:flex;gap:6px}.nm2 button{width:46px;border:0;border-radius:10px;background:rgba(255,255,255,.12);color:var(--ink);font-size:20px}
+.opt{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;padding:8px;border-radius:12px;background:rgba(0,0,0,.25);margin-top:6px;cursor:pointer}.opt .sw{width:46px;height:26px;border-radius:99px;background:#555;position:relative}.opt .sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .15s}.opt.on .sw{background:var(--grn)}.opt.on .sw::after{left:23px}.opt small{display:block;color:var(--mut);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:5px 4px;border-bottom:1px solid rgba(255,255,255,.1);text-align:right}td:first-child,th:first-child{text-align:left}
+.res-ok{color:#8be8b0}.res-bad{color:#ff9a92}
+.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 16px;border-radius:12px;z-index:20}
+.lost{background:var(--red);color:#fff;padding:8px;border-radius:10px;text-align:center;margin-bottom:8px}
+details summary{cursor:pointer;font-weight:600;min-height:40px;display:flex;align-items:center}
+.step{display:flex;gap:6px;margin:8px 0}.step i{flex:1;height:6px;border-radius:99px;background:rgba(255,255,255,.15)}.step i.on{background:var(--gold)}
+.stepper{display:flex;align-items:center;gap:8px}.stepper button{width:44px;height:44px;border-radius:50%;border:0;font:800 18px Rubik;background:rgba(255,255,255,.15);color:var(--ink)}
+.evc{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center}.evc img{width:96px;height:96px;border-radius:14px;object-fit:cover;border:3px solid var(--gold)}
+.evchip{background:linear-gradient(#3b2a5a,#2a1d40);border-color:#9b7ad6}
+.bagrow{display:grid;grid-template-columns:70px 1fr;gap:10px;align-items:center}.bag{width:70px;height:70px;background:url(images/b_bag.webp) center/cover;border-radius:14px;position:relative}.bag b{position:absolute;right:-4px;bottom:-4px;background:var(--gold);color:#3a2207;border-radius:99px;padding:0 7px;font:800 14px Rubik}
+.bag.shake{animation:shk .5s 2}@keyframes shk{25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.vbox{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:16/9;background:#0e141c;margin:8px 0}.vbox video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vbox .v2{opacity:0;animation:fadein .4s 2.6s forwards}@keyframes fadein{to{opacity:1}}
+.reveal{animation:flip .6s var(--d,0s) cubic-bezier(.3,1.3,.5,1) both}@keyframes flip{from{transform:rotateY(90deg) scale(.7);opacity:0}}
+.spark{position:fixed;z-index:50;pointer-events:none;width:10px;height:10px;border-radius:50%;animation:sp .9s ease-out forwards}@keyframes sp{to{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}}
+.coinfly{position:fixed;z-index:50;pointer-events:none;width:22px;height:22px;border-radius:50%;background:url(images/coin.webp) center/cover;animation:sp .8s ease-in forwards}
+.bump{animation:bump .6s}@keyframes bump{40%{transform:scale(1.4)}}
+.flags{position:absolute;left:-5%;right:-5%;top:0;height:60px;display:flex;justify-content:space-around;transform-origin:top;animation:sway 4s ease-in-out infinite}
+.flags i{width:26px;height:34px;clip-path:polygon(0 0,100% 0,50% 100%);opacity:.75;animation:flap 1.8s ease-in-out infinite}
+@keyframes sway{50%{transform:translateY(4px) rotate(.6deg)}}@keyframes flap{50%{transform:rotate(6deg) translateY(2px)}}
+.lant{position:absolute;top:56px;width:20px;height:30px;border-radius:8px;background:radial-gradient(#ffe39a,#e0952a);box-shadow:0 0 22px 8px rgba(255,190,80,.35);transform-origin:50% -30px;animation:swing 3.2s ease-in-out infinite}
+.lant::before{content:"";position:absolute;left:9px;top:-30px;width:2px;height:30px;background:#3a2a18}
+@keyframes swing{50%{transform:rotate(8deg)}}
+.dust{position:absolute;bottom:-10px;width:6px;height:6px;border-radius:50%;background:rgba(255,215,130,.55);box-shadow:0 0 8px rgba(255,200,90,.7);animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translate(30px,-105vh);opacity:0}}
+.gull{position:absolute;width:30px;height:10px;opacity:.5;animation:gull 28s linear infinite}@keyframes gull{from{transform:translateX(110vw)}to{transform:translateX(-60px) translateY(-30px)}}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:30;overflow:hidden}.confetti i{position:absolute;top:-12px;width:8px;height:12px;border-radius:2px;animation:conf linear forwards}@keyframes conf{to{transform:translateY(105vh) rotate(720deg)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.card.spec{border-color:#7a3fb0}.card.spec .cb{background:linear-gradient(#3a1d5a,#24123a);color:#f3e6ff}.card.spec small{color:#d9c2ff}.card.spec .v{background:radial-gradient(#d6a6ff,#7a3fb0);color:#fff}
+.xp{margin-top:12px;padding:10px;border-radius:14px;background:rgba(122,63,176,.18);border:1px solid rgba(214,166,255,.35)}
+.xrow{display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:start;margin-top:8px}.xrow .xi{width:56px;height:56px;border-radius:12px;background:#333 center/cover}.xrow small{display:block;color:var(--mut);font-size:13px;line-height:1.35}.xrow em{display:block;font-size:13px;color:#d9c2ff;margin-top:4px}
+.rumor{margin-top:10px;padding:8px 10px;border-radius:12px;background:rgba(122,63,176,.25);border:1px dashed #d6a6ff;font-size:14px}
+.sniff{margin:4px 0 0;color:#ffd977;font-size:14px}
+.st-t{font-size:13px}.st-t td,.st-t th{text-align:center;padding:6px 3px}
+.awards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.aw{background:linear-gradient(160deg,rgba(242,181,68,.22),rgba(0,0,0,.25));border:1px solid rgba(242,181,68,.4);border-radius:16px;padding:10px;text-align:center;animation:awin .6s cubic-bezier(.3,1.5,.5,1) both}
+.aw .ai{font-size:28px;line-height:1}.aw b{display:block;font:400 16px Kurale,serif;color:var(--gold);margin-top:4px}.aw span{display:block;font-weight:700}.aw small{color:var(--mut);font-size:12px}
+@keyframes awin{from{transform:translateY(20px) scale(.8);opacity:0}}
+</style></head><body>
+<div id="bgfx" aria-hidden="true"></div>
+<div id="app">Завантаження…</div>
+<script>
+{
+/* ===== Дані ===== */
+// key: [назва, ціна, штраф, легальний, король, королева, кількість, колір, рахується як (рідкісні)]
+const G={
+apple:['Яблука',2,2,1,20,10,48,'#c0392b'],cheese:['Сир',3,2,1,15,10,36,'#e6b800'],bread:['Хліб',3,2,1,15,10,36,'#b5793a'],fish:['Риба',4,2,1,10,5,24,'#2e86ab'],
+spice:['Прянощі',6,4,0,0,0,22,'#8e44ad'],rum:['Ром',7,4,0,0,0,21,'#6d4c41'],silk:['Шовк',8,4,0,0,0,12,'#d35400'],powder:['Порох',9,4,0,0,0,5,'#34495e'],
+rapple:['Золоте яблуко',8,4,0,0,0,3,'#e2b23a','apple'],rcheese:['Королівський сир',10,5,0,0,0,3,'#e2b23a','cheese'],rbread:['Святковий коровай',10,5,0,0,0,3,'#e2b23a','bread'],rfish:['Царський осетер',11,5,0,0,0,3,'#e2b23a','fish']};
+const LEGAL=['apple','cheese','bread','fish'],CONTRA=Object.keys(G).filter(k=>!G[k][3]);
+const ROYAL=['rapple','rcheese','rbread','rfish'],PLAIN=['spice','rum','silk','powder'];
+const CH={
+smug:['Контрабандист','Коли його ловлять, штраф за кожну незаконну карту на 2 менший (не менше 1).'],
+honest:['Чесна Марта','Якщо її перевірили, а вона чесна, шериф платить подвійний штраф.'],
+rich:['Пан Багач','Починає гру з 70 золотих замість 50.'],
+bribe:['Пан Хабарник','Коли він шериф, за кожну угоду ще +3 золотих від міста.'],
+eagle:['Орлине Око','Коли вона шериф, раз за раунд може підглянути 1 випадкову карту в будь-якому мішку.'],
+market:['Ринкова Галя','На ринку скидає до 6 карт і може брати навіть з купки, куди скинула.'],
+sailor:['Старий Моряк','Кожна риба на його ятці в кінці гри дає ще +1.'],
+widow:['Хитра Вдова','Якщо її мішок пропустили без огляду й без угоди, отримує +2 золотих.']};
+const EV={
+fair:['Ярмарок','Кожен купець, чий мішок пройшов без огляду (пропуск або угода), отримує +2 золотих.'],
+audit:['Королівська ревізія','Усі штрафи цього раунду подвоюються.'],
+feast:['Свято врожаю','Хабарі заборонені: угод цього раунду немає.'],
+fog:['Туман','Шериф може перевірити не більше одного мішка.'],
+tax:['Податок','На початку раунду кожен купець платить шерифу 2 золотих.'],
+storm:['Шторм','Кораблі запізнюються: у мішок не більше 3 карт.'],
+amnesty:['Амністія','Спіймані купці не платять штраф, але товар однаково конфіскують.'],
+spy:['Донощик','Шериф бачить по одній випадковій карті з кожного мішка.'],
+quiet:['Тихий день','Нічого особливого. Звичайний день на митниці.']};
+Object.assign(CH,{
+pirate:['Пірат Чорновус','Кожен ром на його ятці в кінці гри дає ще +2.'],
+baker:['Пекарка Ганна','Кожен хліб на її ятці в кінці гри дає ще +1.'],
+noble:['Пані Шляхтичка','Кожен її бонус Короля чи Королеви дає ще +5.'],
+judge:['Суддя Мирон','Коли він шериф, спіймані брехуни платять йому подвійний штраф.'],
+beggar:['Жебрак Федько','Починає лише з 30 золотих, але щораунду отримує +3 від міста.']});
+Object.assign(EV,{
+rush:['Поспіх','Купці цього раунду не скидають і не добирають карти: одразу збирають мішок.'],
+bigbag:['Великі мішки','Цього раунду в мішок можна покласти до 6 карт.'],
+gift:['Щедрий бургомістр','На початку раунду кожен купець отримує 3 золотих від міста.'],
+black:['Чорний ринок','Кожна контрабанда, що пройшла без огляду (пропуск чи угода), дає купцю ще +1 золото.'],
+dogs:['Пси-шукачі','Шериф один раз за раунд може дізнатися, скільки контрабанди в одному мішку.']});
+// особливі карти: [назва, коротко, повний опис, хто грає]
+const X={
+seal:['Фальшива печатка','Спіймали? Штраф 0','Зіграй на ринку. Якщо цього раунду шериф знайде у твоєму мішку контрабанду, ти не платиш штраф (контрабанду однаково заберуть).','m'],
+guard:['Підкуплений вартовий','Мішок не відкрити','Зіграй на ринку. Якщо шериф спробує перевірити твій мішок, вартовий не дасть: мішок пройде як пропущений.','m'],
+bottom:['Подвійне дно','Ховає 2 контрабанди','Зіграй на ринку. Якщо мішок перевірять, до 2 карт контрабанди сховаються в подвійному дні й потраплять на твою ятку.','m'],
+pardon:['Помилування','Товар лишається','Зіграй на ринку. Якщо тебе спіймають, штраф платиш, але контрабанду не забирають: усе йде на ятку.','m'],
+rumor:['Чутка','Наклеп на іншого','Зіграй на ринку й вибери іншого купця. Шериф почує анонімну чутку, що той везе контрабанду. Правда це чи ні, знаєш лише ти.','m'],
+loan:['Позика лихваря','+12 зараз, −15 в кінці','Зіграй на ринку: одразу отримуєш 12 золотих, а в кінці гри віддаєш 15.','m'],
+caravan:['Караван','+2 карти','Зіграй на ринку: одразу береш 2 карти з колоди (рука може бути більшою за 6).','m'],
+dog:['Собака-нюхач','Для шерифа','Тримай, поки не станеш шерифом. На огляді натисни «Нюхач» біля мішка: дізнаєшся, скільки там контрабанди.','s']};
+const XN={seal:3,guard:2,bottom:2,pardon:2,rumor:3,loan:2,caravan:2,dog:2};
+const isX=k=>!!X[k];
+const NOST={lie:0,hon:0,smug:0,caught:0,bribe:0,recv:0,fines:0,paidH:0,checks:0};
+const st=p=>{if(!S.st)return {...NOST};const i=S.players.indexOf(p);return S.st[i]||(S.st[i]={...NOST})};
+const cval=k=>G[k]?G[k][1]:0;
+let SND={};
+function snd(k,delay){if(muted)return;const go=()=>{try{const a=SND[k]||(SND[k]=new Audio('sounds/'+k+'.mp3'));a.currentTime=0;a.volume=.75;const p=a.play();p&&p.catch&&p.catch(()=>{})}catch(e){}};delay?setTimeout(go,delay):go()}
+const HAND=6;
+const PEERMODE=!window.claude;
+/* ===== Утиліти ===== */
+const RB=new Uint32Array(64);let rbi=64;
+const r32=()=>{if(rbi>=64){try{crypto.getRandomValues(RB)}catch(e){for(let i=0;i<64;i++)RB[i]=Math.floor(Math.random()*4294967296)}rbi=0}return RB[rbi++]};
+const rnd=n=>{if(n<=1)return 0;const lim=4294967296-(4294967296%n);let x;do{x=r32()}while(x>=lim);return x%n};
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const app=document.getElementById('app');
+let S=null,setup={names:['Оля','Тарас','Марко','Ліза'],opts:{chars:true,events:true,royal:true,special:true,fast:false}},sel=new Set(),pile=0,dealv=null,conf=null,toast='',quiet=false,showRules=false,hist=[],muted=false,prevGold=null,lastFx=null;
+let ONLINE=null,LOB=null,DB=null,UID=null,busy=false,mode='one',ACTOR=null;
+try{const s=localStorage.getItem('mytnytsia2');if(s)S=JSON.parse(s);if(S&&S.scr==='over')S=null;muted=localStorage.getItem('myt-mute')==='1'}catch(e){}
+const P=i=>S.players[i],N=()=>S.players.length;
+const merchants=()=>{const a=[];for(let k=1;k<N();k++)a.push((S.sheriff+k)%N());return a};
+const ch=(p,c)=>S.opts.chars&&p.ch===c;
+const ev=e=>S.opts.events&&S.ev===e;
+function say(t){toast=t;render();clearTimeout(say.t);say.t=setTimeout(()=>{toast='';render()},3000)}
+const gname=k=>G[k]?G[k][0]:X[k]?X[k][0]:k;
+const img=k=>`images/${k}.webp`;
+const cardHTML=(k,i,cls='',d=0)=>isX(k)?`<div class="card spec ${cls}" style="--c:#7a3fb0;--d:${d}s" ${i!=null?`data-a="tog" data-v="${i}"`:''} title="${X[k][2]}"><div class="art" style="background-image:url(images/x_${k}.webp)"></div><span class="v">✦</span><div class="cb"><b>${X[k][0]}</b><small>${X[k][1]}</small></div></div>`:`<div class="card ${G[k][3]?'':ROYAL.includes(k)?'royal':'contra'} ${cls}" style="--c:${G[k][7]};--d:${d}s" ${i!=null?`data-a="tog" data-v="${i}"`:''}><div class="art" style="background-image:url(images/g_${k}.webp)"></div><span class="v">${G[k][1]}</span><span class="pn">${G[k][2]}</span><div class="cb"><b>${gname(k)}</b><small>${G[k][3]?'легальний':ROYAL.includes(k)?'рідкісний · як 2 '+gname(G[k][8]).toLowerCase():'контрабанда'}</small></div></div>`;
+const coins=n=>`<span class="coins"><i></i>${n}</span>`;
+const pav=p=>p.ch?img('c_'+p.ch):img('s_sheriff');
+/* ===== Колода ===== */
+function buildDeck(){const d=shuffle(Object.entries(G).filter(([k])=>S.opts.royal||!ROYAL.includes(k)).flatMap(([k,v])=>Array(v[6]).fill(k)).concat(S.opts.special?Object.entries(XN).flatMap(([k,n])=>Array(n).fill(k)):[]));
+  for(let i=1;i<d.length;i++)if(d[i]===d[i-1]){const j=rnd(d.length);if(d[j]!==d[i]&&d[j-1]!==d[i]&&d[j+1]!==d[i])[d[i],d[j]]=[d[j],d[i]]}return d}
+function drawDeck(){if(!S.deck.length){const keep=S.disc.map(p=>p.pop()).filter(Boolean);S.deck=shuffle(S.disc.flat());S.disc=[[],[]];keep.forEach((k,i)=>S.disc[i].push(k));if(!S.deck.length)return null}return S.deck.pop()}
+/* ===== Нова гра / раунди ===== */
+function newGame(names,opts){
+  const n=names.length;opts={...setup.opts,...(opts||{})};
+  const chars=shuffle(Object.keys(CH));
+  S={opts,players:names.map((nm,i)=>({name:nm,gold:50,hand:[],stand:Object.fromEntries(Object.keys(G).map(k=>[k,0])),bag:[],decl:null,step:null,blocked:[false,false],res:null,ch:opts.chars?chars[i]:null,debt:0,fx:{}})),st:names.map(()=>({...NOST})),rum:[],sniff:{},
+    deck:[],disc:[[],[]],sheriff:rnd(n),round:0,total:opts.fast?n:n*(n===3?3:2),scr:'round',q:[],qi:0,log:[],online:false,evdeck:[],ev:null,fx:0,peek:null,spy:null,checks:0};
+  S.players.forEach(p=>{if(p.ch==='rich')p.gold=70;if(p.ch==='beggar')p.gold=30});
+  S.deck=buildDeck();
+  S.players.forEach(p=>{for(let j=0;j<HAND;j++)p.hand.push(drawDeck())});
+  for(let i=0;i<5;i++){S.disc[0].push(drawDeck());S.disc[1].push(drawDeck())}
+  S.sheriff=(S.sheriff+n-1)%n;nextRound();
+}
+function nextRound(){
+  S.round++;S.sheriff=(S.sheriff+1)%N();S.peek=null;S.spy=null;S.checks=0;S.rum=[];S.sniff={};S.dogUsed=false;
+  S.players.forEach(p=>{p.bag=[];p.decl=null;p.res=null;p.step=null;p.blocked=[false,false];p.fx={};if(ch(p,'beggar')&&S.round>1)p.gold+=3});
+  merchants().forEach(i=>P(i).step='disc');
+  S.ev=null;if(S.opts.events){if(!S.evdeck.length)S.evdeck=shuffle(Object.keys(EV));S.ev=S.evdeck.pop();
+    if(S.ev==='tax')merchants().forEach(i=>pay(P(i),P(S.sheriff),2));
+    if(S.ev==='gift')merchants().forEach(i=>P(i).gold+=3);
+    if(S.ev==='rush')merchants().forEach(i=>P(i).step='bag')}
+  S.q=merchants();S.qi=0;S.scr='round';
+}
+const log=t=>{S.log.push(t);if(S.log.length>40)S.log.shift()};
+function pay(from,to,amount){let left=amount;const paid={gold:0,goods:[]};
+  const g=Math.min(from.gold,left);from.gold-=g;if(to)to.gold+=g;left-=g;paid.gold=g;
+  if(left>0){const order=Object.keys(G).sort((a,b)=>G[a][1]-G[b][1]);for(const k of order){while(left>0&&from.stand[k]>0){from.stand[k]--;if(to)to.stand[k]++;left-=G[k][1];paid.goods.push(k)}}}
+  return paid}
+function toInspect(){S.scr='inspect';if(ev('spy')){S.spy={};merchants().forEach(i=>{const b=P(i).bag;S.spy[i]=b[rnd(b.length)]})}}
+const actorIdx=()=>ONLINE?ONLINE.me:(S.scr==='market'?S.q[S.qi]:S.sheriff);
+const bagMax=()=>ev('storm')?3:ev('bigbag')?6:5;
+/* ===== Дії ===== */
+const ACT={
+  begin(){if(S.scr!=='round')return false;S.scr=S.online?'market':'pass';sel.clear()},
+  me(){if(S.scr!=='pass')return false;S.scr='market';sel.clear()},
+  tog(v){const i=+v;sel.has(i)?sel.delete(i):sel.add(i);return false},
+  pile(v){pile=+v;return false},
+  disc(v){const m=actorIdx(),p=P(m);if(p.step!=='disc')return false;
+    const [ids,pl]=String(v||'|0').split('|');const idx=ids?ids.split(',').map(Number).filter(i=>i>=0&&i<p.hand.length):[];
+    if(idx.length>(ch(p,'market')?6:5))return false;const k=+pl===1?1:0;
+    idx.sort((a,b)=>b-a).forEach(i=>{S.disc[k].push(p.hand.splice(i,1)[0])});
+    if(idx.length&&!ch(p,'market'))p.blocked[k]=true;
+    p.step=p.hand.length<HAND?'draw':'bag';log(`${p.name} скинув ${idx.length} карт`)},
+  draw(v){const m=actorIdx(),p=P(m);if(p.step!=='draw')return false;
+    let c=null;if(v==='deck')c=drawDeck();else{const k=+v;if(p.blocked[k]||!S.disc[k].length)return false;c=S.disc[k].pop()}
+    if(!c)return false;p.hand.push(c);if(p.hand.length>=HAND)p.step='bag'},
+  bag(v){const m=actorIdx(),p=P(m);if(p.step!=='bag')return false;
+    const [ids,g]=String(v||'').split('|');const idx=ids?ids.split(',').map(Number).filter(i=>i>=0&&i<p.hand.length):[];
+    if(idx.length<1||idx.length>bagMax()||!LEGAL.includes(g)||idx.some(i=>isX(p.hand[i])))return false;
+    idx.sort((a,b)=>b-a).forEach(i=>p.bag.push(p.hand.splice(i,1)[0]));if(p.bag.some(k=>k!==g))st(p).lie++;else st(p).hon++;
+    p.decl={g,n:p.bag.length};p.step='done';log(`${p.name} заявив: ${p.decl.n} × ${gname(g)}`);
+    if(!S.online){S.qi++;if(S.qi<S.q.length)S.scr='pass';else toInspect()}
+    else if(merchants().every(i=>P(i).step==='done'))toInspect()},
+  xplay(v){const [si,t]=String(v).split('|');const m=actorIdx(),p=P(m);if(!p)return false;const i=+si,k=p.hand[i];if(!isX(k))return false;
+    if(k==='dog'){if(S.scr!=='inspect'||m!==S.sheriff)return false;const q=P(+t);if(!q||q.res||+t===S.sheriff)return false;S.sniff[+t]=q.bag.filter(c=>c!==q.decl.g).length;log('Шериф пустив собаку-нюхача')}
+    else{if(S.scr!=='market'||m===S.sheriff||!p.step||p.step==='done')return false;
+      if(['seal','guard','bottom','pardon'].includes(k)){if(p.fx[k])return false;p.fx[k]=1}
+      if(k==='rumor'){const q=+t;if(!merchants().includes(q)||q===m)return false;S.rum.push(q)}
+      if(k==='loan'){p.gold+=12;p.debt=(p.debt||0)+15}
+      if(k==='caravan'){for(let j=0;j<2;j++){const c=drawDeck();if(c)p.hand.push(c)}}
+      log(k==='loan'?`${p.name} узяв позику`:'Хтось на ринку щось затіває')}
+    p.hand.splice(i,1);S.disc[rnd(2)].unshift(k);sel.clear();if(k==='caravan'&&p.step==='draw'&&p.hand.length>=HAND)p.step='bag'},
+  sniff(v){if(S.scr!=='inspect'||actorIdx()!==S.sheriff||!ev('dogs')||S.dogUsed)return false;const q=P(+v);if(!q||q.res||+v===S.sheriff)return false;S.dogUsed=true;S.sniff[+v]=q.bag.filter(c=>c!==q.decl.g).length;log('Пси-шукачі обнюхали мішок '+q.name)},
+  peek(v){if(S.scr!=='inspect'||actorIdx()!==S.sheriff||!ch(P(S.sheriff),'eagle')||S.peek)return false;const p=P(+v);if(!p||p.res||!p.bag.length)return false;
+    S.peek={i:+v,k:p.bag[rnd(p.bag.length)]};log('Орлине Око підглянуло в мішок '+p.name)},
+  pass(v){if(S.scr!=='inspect'||actorIdx()!==S.sheriff)return false;const i=+v,p=P(i);if(!p||p.res||i===S.sheriff)return false;
+    passBag(p);log(`Шериф пропустив ${p.name}`)},
+  check(v){if(S.scr!=='inspect'||actorIdx()!==S.sheriff)return false;const i=+v,p=P(i),sh=P(S.sheriff);if(!p||p.res||i===S.sheriff)return false;
+    if(ev('fog')&&S.checks>=1)return false;
+    if(p.fx&&p.fx.guard){passBag(p,{guard:1});log(`Вартовий не дав відкрити мішок ${p.name}`);return}
+    S.checks++;st(sh).checks++;
+    let bag=p.bag.slice(),hid=[];if(p.fx&&p.fx.bottom){const w=bag.filter(k=>k!==p.decl.g).slice(0,2);w.forEach(k=>{bag.splice(bag.indexOf(k),1);hid.push(k);p.stand[k]++});st(p).smug+=hid.length}
+    const shown=bag,wrong=shown.filter(k=>k!==p.decl.g),right=shown.filter(k=>k===p.decl.g);const mult=ev('audit')?2:1;
+    if(!wrong.length){let fine=shown.reduce((a,k)=>a+G[k][2],0)*mult;if(ch(p,'honest'))fine*=2;const pd=pay(sh,p,fine);shown.forEach(k=>p.stand[k]++);st(sh).paidH+=fine;
+      p.res={t:'honest',shown,fine,pd,hid,fx:++S.fx};log(`${p.name} чесний! Шериф платить ${fine}`)}
+    else{let fine=wrong.reduce((a,k)=>a+(ch(p,'smug')?Math.max(1,G[k][2]-2):G[k][2]),0)*mult;if(ch(sh,'judge'))fine*=2;if(ev('amnesty')||(p.fx&&p.fx.seal))fine=0;
+      const pd=pay(p,sh,fine);right.forEach(k=>p.stand[k]++);const keep=p.fx&&p.fx.pardon;if(keep){wrong.forEach(k=>p.stand[k]++);st(p).smug+=wrong.length}else wrong.forEach(k=>S.disc[rnd(2)].push(k));
+      st(p).caught++;st(sh).fines+=fine;st(sh).caughtN=(st(sh).caughtN||0)+1;
+      p.res={t:'liar',shown,fine,pd,conf:keep?[]:wrong,kept:keep?wrong:[],hid,seal:!!(p.fx&&p.fx.seal),fx:++S.fx};log(`${p.name} спійманий: штраф ${fine}`)}
+    p.bag=[]},
+  deal(v){if(S.scr!=='inspect'||actorIdx()!==S.sheriff||ev('feast'))return false;const [si,gs,goods]=String(v).split('|');const i=+si,p=P(i),sh=P(S.sheriff);
+    if(!p||p.res||i===S.sheriff)return false;const gold=Math.max(0,Math.min(p.gold,+gs||0));
+    const gl=(goods||'').split(',').filter(Boolean).map(x=>x.split(':')).map(([k,n])=>[k,Math.max(0,+n||0)]).filter(([k,n])=>G[k]&&n>0&&p.stand[k]>=n);
+    p.gold-=gold;sh.gold+=gold;gl.forEach(([k,n])=>{p.stand[k]-=n;sh.stand[k]+=n});const val=gold+gl.reduce((a,[k,n])=>a+cval(k)*n,0);st(p).bribe+=val;st(sh).recv+=val;
+    if(ch(sh,'bribe'))sh.gold+=3;const nc=p.bag.filter(k=>!G[k][3]).length;let bonus=(ev('fair')?2:0)+(ev('black')?nc:0);p.gold+=bonus;st(p).smug+=nc;
+    p.bag.forEach(k=>p.stand[k]++);p.res={t:'deal',gold,goods:gl,bonus,fx:++S.fx};p.bag=[];
+    log(`${p.name} домовився з шерифом: ${gold} золота${gl.length?' + товари':''}`)},
+  endround(){if(S.scr!=='inspect'||merchants().some(i=>!P(i).res))return false;
+    if(S.round>=S.total){S.scr='over';S.score=score()}else nextRound()},
+};
+function passBag(p,extra){const nc=p.bag.filter(k=>!G[k][3]).length;p.bag.forEach(k=>p.stand[k]++);let bonus=0;if(ch(p,'widow')&&!(extra&&extra.guard))bonus+=2;if(ev('fair'))bonus+=2;if(ev('black'))bonus+=nc;p.gold+=bonus;st(p).smug+=nc;
+  p.res={t:'pass',bonus,fx:++S.fx,...(extra||{})};p.bag=[]}
+/* ===== Підрахунок ===== */
+function score(){const ps=S.players.map(p=>{const goods=Object.keys(G).reduce((a,k)=>a+p.stand[k]*G[k][1],0)+(ch(p,'sailor')?p.stand.fish+p.stand.rfish*2:0)+(ch(p,'pirate')?p.stand.rum*2:0)+(ch(p,'baker')?p.stand.bread:0);
+  return {name:p.name,ch:p.ch,gold:p.gold,goods,bonus:0,bon:[],legal:LEGAL.reduce((a,k)=>a+p.stand[k],0),contra:CONTRA.reduce((a,k)=>a+p.stand[k],0)}});
+  LEGAL.forEach(k=>{const nm=G[k][0],K=G[k][4],Q=G[k][5];const rk=ROYAL.find(r=>G[r][8]===k);
+    const cnt=S.players.map(p=>p.stand[k]+2*(p.stand[rk]||0));const max=Math.max(...cnt);if(max<=0)return;
+    const kings=cnt.map((c,i)=>c===max?i:-1).filter(i=>i>=0);
+    if(kings.length>1){const sh=Math.floor((K+Q)/kings.length);kings.forEach(i=>{ps[i].bonus+=sh;ps[i].bon.push(`король: ${nm} (поділено) +${sh}`)});return}
+    ps[kings[0]].bonus+=K;ps[kings[0]].bon.push(`король: ${nm} +${K}`);
+    const rest=cnt.map((c,i)=>i===kings[0]?-1:c);const m2=Math.max(...rest);if(m2<=0)return;
+    const qs=rest.map((c,i)=>c===m2?i:-1).filter(i=>i>=0);const sh=Math.floor(Q/qs.length);qs.forEach(i=>{ps[i].bonus+=sh;ps[i].bon.push(`королева: ${nm}${qs.length>1?' (поділено)':''} +${sh}`)})});
+  S.players.forEach((p,i)=>{if(ch(p,'noble')){const nb=ps[i].bon.length*5;if(nb){ps[i].bonus+=nb;ps[i].bon.push(`Шляхтичка +${nb}`)}}if(p.debt){ps[i].bonus-=p.debt;ps[i].bon.push(`борг лихварю −${p.debt}`)}});
+  ps.forEach(x=>x.total=x.gold+x.goods+x.bonus);
+  return ps.map((x,i)=>({...x,i})).sort((a,b)=>b.total-a.total||b.legal-a.legal||b.contra-a.contra)}
+/* ===== Звуки й ефекти ===== */
+let AC=null;
+function sfx(t){try{navigator.vibrate&&navigator.vibrate(t==='bad'?80:t==='win'?[60,40,60]:t==='tap'?0:20)}catch(e){}return;if(muted)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain(),n=AC.currentTime;o.connect(g);g.connect(AC.destination);
+  const Pp={coin:[[880,0],[1320,.06],[1760,.12]],bad:[[260,0],[180,.12]],tap:[[540,0]],win:[[523,0],[659,.12],[784,.24],[1046,.36]]}[t]||[[440,0]];o.type=t==='bad'?'sawtooth':'triangle';
+  Pp.forEach(([f,d])=>o.frequency.setValueAtTime(f,n+d));g.gain.setValueAtTime(.07,n);g.gain.exponentialRampToValueAtTime(.001,n+(t==='win'?.6:.3));o.start(n);o.stop(n+.7)}catch(e){}
+  try{navigator.vibrate&&navigator.vibrate(t==='bad'?80:t==='win'?[60,40,60]:20)}catch(e){}}
+function burstAt(el,good){if(!el||!el.getBoundingClientRect)return;const r=el.getBoundingClientRect();
+  for(let i=0;i<(good?10:6);i++){const b=document.createElement('i');b.className=good?'coinfly':'spark';b.style.left=(r.left+r.width/2)+'px';b.style.top=(r.top+r.height/2)+'px';if(!good)b.style.background='#ff7a6e';b.style.setProperty('--x',(rnd(140)-70)+'px');b.style.setProperty('--y',(rnd(100)-80)+'px');document.body.appendChild(b);setTimeout(()=>b.remove(),900)}}
+function confetti(){if(!document.body||!document.body.appendChild)return;const c=document.createElement('div');c.className='confetti';c.innerHTML=Array.from({length:60},(_,i)=>`<i style="left:${rnd(100)}%;background:${['#f2b544','#d9534f','#3ba56b','#2e86ab','#8e44ad'][i%5]};animation-duration:${2+rnd(200)/100}s;animation-delay:${rnd(100)/100}s"></i>`).join('');document.body.appendChild(c);setTimeout(()=>c.remove(),5000)}
+function bgfx(){const f=document.getElementById('bgfx');if(!f||!f.dataset||f.dataset.ok)return;f.dataset.ok=1;const cols=['#d9534f','#f2b544','#3ba56b','#2e86ab','#8e44ad'];
+  f.innerHTML=`<div class="flags">${Array.from({length:14},(_,i)=>`<i style="background:${cols[i%5]};animation-delay:${-i*.2}s"></i>`).join('')}</div>`+[8,30,52,74,92].map((x,i)=>`<div class="lant" style="left:${x}%;animation-delay:${-i*.7}s"></div>`).join('')+
+  Array.from({length:14},()=>`<i class="dust" style="left:${rnd(100)}%;animation-duration:${9+rnd(9)}s;animation-delay:${-rnd(15)}s"></i>`).join('')+
+  `<svg class="gull" style="top:18%" viewBox="0 0 40 14"><path d="M0 8q10-10 20 0q10-10 20 0" stroke="#fff" stroke-width="2.4" fill="none"/></svg><svg class="gull" style="top:26%;animation-delay:-14s;animation-duration:36s" viewBox="0 0 40 14"><path d="M0 8q10-10 20 0q10-10 20 0" stroke="#fff" stroke-width="2.4" fill="none"/></svg>`}
+const vid=(k,cls='')=>`<video class="${cls}" src="videos/${k}.mp4" poster="videos/${k}.jpg" autoplay muted playsinline loop preload="auto"></video>`;
+/* ===== Екрани ===== */
+const contraN=p=>PLAIN.reduce((a,k)=>a+p.stand[k],0);
+const bar=()=>`<div class="top"><span class="row" style="flex:0 0 auto;gap:6px"><span class="tag">Раунд ${S.round}/${S.total}</span><span class="tag"><img src="${img('s_sheriff')}" alt="">${esc(P(S.sheriff).name)}</span>${S.ev?`<span class="tag evchip">${EV[S.ev][0]}</span>`:''}</span>
+<span class="row" style="flex:0 0 auto;gap:6px"><button class="btn g" data-a="mute" style="min-height:36px;padding:4px 10px">${muted?'🔇':'🔊'}</button>${ONLINE?'':`<button class="btn g" data-a="undo" ${hist.length?'':'disabled'} style="min-height:36px;padding:4px 10px">↶</button>`}<button class="btn g" data-a="rules" style="min-height:36px;padding:4px 10px">Правила</button><button class="btn g" data-a="quit" style="min-height:36px;padding:4px 10px">Вийти</button></span></div>
+<div class="pl">${S.players.map((p,i)=>`<div class="pi ${i===S.sheriff?'sh':''}"><div class="av" style="background-image:url(${pav(p)})"></div><div><span class="nm">${esc(p.name)}</span>${i===S.sheriff?' <b class="g">· шериф</b>':''}${ONLINE&&i===ONLINE.me?' · ти':''}<div class="ch">${p.ch?CH[p.ch][0]:''}${p.decl&&!p.res?` · мішок: ${p.decl.n} × ${gname(p.decl.g)}`:''}${p.step&&p.step!=='done'&&S.scr==='market'?' · готується…':''}</div>
+<div class="stand">${LEGAL.concat(ROYAL).filter(k=>p.stand[k]).map(k=>`<span class="st"><i style="background-image:url(images/g_${k}.webp)"></i>${p.stand[k]}</span>`).join('')}${contraN(p)?`<span class="st"><i style="background:#2b1d3a"></i>?${contraN(p)}</span>`:''}</div></div><div data-g="${i}">${coins(p.gold)}</div></div>`).join('')}</div>`;
+const steps=n=>`<div class="step">${[1,2,3].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</div>`;
+function xpanel(p,m){const xs=p.hand.map((k,i)=>[k,i]).filter(([k])=>isX(k));const act=Object.keys(p.fx||{}).filter(k=>p.fx[k]);if(!xs.length&&!act.length)return '';
+  return `<div class="xp"><h3>Особливі карти</h3>${act.length?`<p class="res-ok" style="margin:4px 0">Діє цього раунду: ${act.map(k=>X[k][0]).join(', ')}</p>`:''}${xs.map(([k,i])=>`<div class="xrow"><span class="xi" style="background-image:url(images/x_${k}.webp)"></span><div><b>${X[k][0]}</b><small>${X[k][2]}</small>
+  ${X[k][3]==='s'?'<em>Зіграєш, коли будеш шерифом.</em>':k==='rumor'?`<div class="row" style="margin-top:6px">${merchants().filter(q=>q!==m).map(q=>`<button class="btn g" data-a="xplay" data-v="${i}|${q}" data-c="Пустити чутку про ${esc(P(q).name)}?">Про ${esc(P(q).name)}</button>`).join('')}</div>`:(p.fx&&p.fx[k])?'':`<button class="btn" data-a="xplay" data-v="${i}" data-c="Зіграти «${X[k][0]}»?" style="margin-top:6px">Зіграти</button>`}</div></div>`).join('')}</div>`}
+function marketHTML(m){const p=P(m);const max=ch(p,'market')?6:5;const selX=[...sel].some(i=>isX(p.hand[i]));
+  const hand=`<div class="hand">${p.hand.map((k,i)=>cardHTML(k,i,sel.has(i)?'sel':'')).join('')}</div>`;
+  const who=`<div class="row" style="align-items:center;flex-wrap:nowrap"><div class="av" style="flex:0 0 52px;height:52px;border-radius:14px;background-image:url(${pav(p)})"></div><div><h2>${esc(p.name)}</h2>${p.ch?`<p class="mut" style="margin:0">${CH[p.ch][0]}: ${CH[p.ch][1]}</p>`:''}</div></div>`;
+  if(p.step==='disc')return `<div class="panel">${who}${steps(1)}<h3>Ринок: скинь непотрібне</h3><p class="mut">Вибери до ${max} карт (можна жодної). Потім добереш з колоди або з верху купки.</p>${hand}
+    <h3 style="margin-top:10px">Куди скинути</h3><div class="seg"><button class="${pile===0?'on':''}" data-a="pile" data-v="0">Купка 1: ${S.disc[0].length?gname(S.disc[0].at(-1)):'—'}</button><button class="${pile===1?'on':''}" data-a="pile" data-v="1">Купка 2: ${S.disc[1].length?gname(S.disc[1].at(-1)):'—'}</button></div>
+    <button class="btn w" data-a="disc" data-v="${[...sel].join(',')}|${pile}" ${sel.size>max?'disabled':''}>${sel.size?`Скинути ${sel.size}`:'Нічого не скидати'}</button>${xpanel(p,m)}</div>`;
+  if(p.step==='draw')return `<div class="panel">${who}${steps(2)}<h3>Добери до ${HAND} карт</h3><p class="mut">У руці ${p.hand.length}. Бери по одній.</p>${hand}
+    <div class="row" style="margin-top:10px"><button class="btn" data-a="draw" data-v="deck">З колоди (${S.deck.length})</button>
+    ${[0,1].map(k=>`<button class="btn g" data-a="draw" data-v="${k}" ${p.blocked[k]||!S.disc[k].length?'disabled':''}>Купка ${k+1}: ${S.disc[k].length?gname(S.disc[k].at(-1)):'порожньо'}${p.blocked[k]?' (ти туди скидав)':''}</button>`).join('')}</div>${xpanel(p,m)}</div>`;
+  if(p.step==='bag')return `<div class="panel">${who}${steps(3)}<h3>Мішок і заява</h3><p class="mut">Вибери 1–${bagMax()} карт у мішок і заяви <b>один легальний товар</b> рівно на стільки штук. Брехати про товар можна, про кількість — ні.</p>${hand}
+    <div class="bagrow" style="margin-top:10px"><div class="bag"><b>${sel.size}</b></div><div><h3>Заявити: ${sel.size||'?'} ×</h3><div class="row" style="margin-top:6px">${LEGAL.map(g=>`<button class="btn g" data-a="bag" data-v="${[...sel].join(',')}|${g}" ${sel.size<1||sel.size>bagMax()||selX?'disabled':''} data-c="Покласти ${sel.size} карт у мішок і заявити: ${sel.size} × ${gname(g)}?">${gname(g)}</button>`).join('')}</div></div></div>
+    ${sel.size>bagMax()?`<p class="res-bad">Не більше ${bagMax()} карт!</p>`:''}${selX?'<p class="res-bad">Особливі карти не кладуть у мішок. Зіграй їх нижче.</p>':''}${xpanel(p,m)}</div>`;
+  return `<div class="panel big"><div class="bag" style="margin:0 auto;width:100px;height:100px"><b>${p.decl.n}</b></div><h2 style="margin-top:8px">Мішок зав'язано</h2><p>Заява: ${p.decl.n} × ${gname(p.decl.g)}. Чекаємо інших купців.</p></div>`}
+function resHTML(i){const p=P(i),r=p.res;if(!r)return '';const fresh=r.fx===S.fx;
+  const cards=r.shown?`<div class="hand" style="margin-top:8px">${r.shown.map((k,j)=>cardHTML(k,null,'reveal',fresh?2.6+j*.25:0)).join('')}</div>`:'';
+  const v=fresh?`<div class="vbox">${r.t==='deal'?vid('v_deal'):r.t==='pass'?vid('v_round'):`${vid('v_open')}${vid(r.t==='honest'?'v_honest':'v_caught','v2')}`}</div>`:'';
+  const ex=(r.hid&&r.hid.length?`<p class="res-ok">Подвійне дно сховало: ${r.hid.map(gname).join(', ')}.</p>`:'')+(r.seal?'<p class="res-ok">Фальшива печатка: штраф скасовано!</p>':'')+(r.kept&&r.kept.length?`<p class="res-ok">Помилування: ${r.kept.map(gname).join(', ')} лишається на ятці.</p>`:'');
+  if(r.t==='pass')return `${v}<p class="res-ok">${r.guard?'<b>Підкуплений вартовий</b> не дав відкрити мішок! Мішок пройшов.':'Пропущено без огляду.'}${r.bonus?` Бонус +${r.bonus} золотих.`:''}</p>`;
+  if(r.t==='deal')return `${v}<p class="res-ok">Угода: шериф отримав ${r.gold} золота${r.goods.length?' і '+r.goods.map(([k,n])=>`${n}× ${gname(k)}`).join(', '):''}. Мішок пройшов.${r.bonus?` Бонус ярмарку +${r.bonus}.`:''}</p>`;
+  if(r.t==='honest')return `${v}<p class="res-ok"><b>Чесно!</b> Шериф платить ${r.fine}${r.pd.goods.length?' (частину товарами)':''}.</p>${ex}${cards}`;
+  return `${v}<p class="res-bad"><b>Брехня!</b> ${r.conf.length?`Конфісковано: ${r.conf.map(gname).join(', ')}. `:''}Штраф ${r.fine}${r.pd.goods.length?' (частину товарами)':''}.</p>${ex}${cards}`}
+function inspectHTML(){const isSh=!ONLINE||ONLINE.me===S.sheriff;const ms=merchants();const all=ms.every(i=>P(i).res);const sh=P(S.sheriff);const fogUsed=ev('fog')&&S.checks>=1;
+  return `<div class="panel"><div class="row" style="align-items:center;flex-wrap:nowrap"><div class="av" style="flex:0 0 60px;height:60px;border-radius:16px;background-image:url(${img('s_sheriff')});border:3px solid var(--gold)"></div><div><h2>Огляд на митниці</h2><p class="mut" style="margin:0">${isSh?'Ти шериф.':`Шериф: <b>${esc(sh.name)}</b>.`} Купці пропонують хабарі вголос: золото, товари з ятки, обіцянки.${ev('feast')?' <b>Свято: угоди заборонені!</b>':''}${fogUsed?' <b>Туман: більше перевіряти не можна.</b>':''}</p></div></div>${isSh&&S.rum&&S.rum.length?`<div class="rumor">🗣️ ${S.rum.map(q=>`Хтось шепоче: <b>${esc(P(q).name)}</b> везе контрабанду!`).join('<br>')}</div>`:''}</div>
+  ${ms.map(i=>{const p=P(i);return `<div class="panel"><div class="bagrow"><div class="bag ${p.res?'':'shake'}"><b>${p.decl.n}</b></div><div><h3>${esc(p.name)}</h3><p style="margin:0">Заява: <b class="g">${p.decl.n} × ${gname(p.decl.g)}</b> · ${coins(p.gold)}</p>
+    ${S.spy&&S.spy[i]&&!p.res&&isSh?`<p class="mut" style="margin:0">Донощик шепоче: там є ${gname(S.spy[i])}.</p>`:''}${S.peek&&S.peek.i===i&&!p.res&&isSh?`<p class="mut" style="margin:0">Ти підгледів: ${gname(S.peek.k)}.</p>`:''}${S.sniff&&S.sniff[i]!=null&&!p.res&&isSh?`<p class="sniff">🐕 Собака ${S.sniff[i]?`гавкає: контрабанди <b>${S.sniff[i]}</b>`:'спокійна: контрабанди немає'}.</p>`:''}</div></div>
+    ${p.res?resHTML(i):isSh?`<div class="row" style="margin-top:8px"><button class="btn gr" data-a="pass" data-v="${i}" data-c="Пропустити мішок ${esc(p.name)} без огляду?">Пропустити</button><button class="btn r" data-a="check" data-v="${i}" ${fogUsed?'disabled':''} data-c="Відкрити мішок ${esc(p.name)}? Якщо купець чесний — ти платиш штраф.">Перевірити</button>${ev('feast')?'':`<button class="btn g" data-a="dealopen" data-v="${i}">Угода</button>`}${ch(sh,'eagle')&&!S.peek?`<button class="btn g" data-a="peek" data-v="${i}">Підглянути</button>`:''}${S.sniff&&S.sniff[i]!=null?'':ev('dogs')&&!S.dogUsed?`<button class="btn g" data-a="sniff" data-v="${i}">🐕 Пси-шукачі</button>`:sh.hand.includes('dog')?`<button class="btn g" data-a="xplay" data-v="${sh.hand.indexOf('dog')}|${i}" data-c="Зіграти «Собаку-нюхача» на мішок ${esc(p.name)}?">🐕 Нюхач</button>`:''}</div>`:'<p class="mut">Шериф вирішує…</p>'}</div>`}).join('')}
+  ${all?(isSh||!ONLINE?`<button class="btn w" data-a="endround">${S.round>=S.total?'Підрахувати результати':'Наступний раунд'}</button>`:'<p class="mut">Шериф завершує раунд.</p>'):''}`}
+function dealSheet(){const i=dealv.i,p=P(i);return `<div class="ov"><div class="sheet"><h3>Угода з ${esc(p.name)}</h3><p class="mut">Що купець віддає шерифу, щоб мішок пройшов без огляду.</p>
+  <p>Золото (є ${p.gold}):</p><div class="stepper"><button data-a="dg" data-v="-5">−5</button><button data-a="dg" data-v="-1">−</button>${coins(dealv.gold)}<button data-a="dg" data-v="1">+</button><button data-a="dg" data-v="5">+5</button></div>
+  <p style="margin-top:10px">Товари з ятки:</p><div class="goods">${Object.keys(G).filter(k=>p.stand[k]).map(k=>`<span class="gd">${gname(k)} ${dealv.goods[k]||0}/${p.stand[k]} <button class="btn g" style="min-height:30px;padding:0 8px" data-a="dk" data-v="${k}|1">+</button><button class="btn g" style="min-height:30px;padding:0 8px" data-a="dk" data-v="${k}|-1">−</button></span>`).join('')||'<span class="mut">ятка порожня</span>'}</div>
+  <div class="row" style="margin-top:14px"><button class="btn g" data-a="dealclose">Скасувати</button><button class="btn" data-a="deal" data-v="${i}|${dealv.gold}|${Object.entries(dealv.goods).filter(([,n])=>n>0).map(([k,n])=>k+':'+n).join(',')}" data-c="Записати угоду: ${esc(p.name)} віддає ${dealv.gold} золота${Object.values(dealv.goods).some(n=>n>0)?' і товари':''}, мішок проходить?">Укласти угоду</button></div></div></div>`}
+function overHTML(){const sc=S.score,stt=S.st||[];const g=(i,k)=>(stt[i]||NOST)[k]||0;
+  const AW=[['smug','👑','Король контрабанди','провіз контрабанди'],['lie','🤥','Головний брехун','мішків з брехнею'],['hon','😇','Чесна душа','чесних мішків'],['caughtN','🦅','Пильне око','спіймав брехунів'],['recv','💰','Хабарник','отримав хабарів'],['bribe','🤝','Щедрий купець','дав хабарів'],['sher','⭐','Найкращий шериф','заробив як шериф']];
+  const val=(i,k)=>k==='sher'?g(i,'fines')+g(i,'recv')-g(i,'paidH'):g(i,k);
+  const aw=AW.map(([k,ic,t,d],j)=>{const mx=Math.max(...S.players.map((_,i)=>val(i,k)));if(mx<=0)return '';const who=S.players.filter((_,i)=>val(i,k)===mx).map(p=>esc(p.name)).join(', ');return `<div class="aw" style="animation-delay:${.3+j*.12}s"><div class="ai">${ic}</div><b>${t}</b><span>${who}</span><small>${d}: ${mx}</small></div>`}).join('');
+  return `<div class="hero">${vid('v_win')}</div><div class="panel"><h1>Кінець гри</h1><div class="row" style="align-items:center;flex-wrap:nowrap;margin-top:8px"><div class="portrait" style="flex:0 0 90px;width:90px;height:90px;margin:0;background-image:url(${sc[0].ch?img('c_'+sc[0].ch):img('s_sheriff')})"></div><h2>Переміг ${esc(sc[0].name)}!</h2></div>
+  <table style="margin-top:10px"><tr><th>Гравець</th><th>Золото</th><th>Товари</th><th>Бонуси</th><th>Разом</th></tr>${sc.map(x=>`<tr><td>${esc(x.name)}</td><td>${x.gold}</td><td>${x.goods}</td><td>${x.bonus}</td><td><b class="g">${x.total}</b></td></tr>`).join('')}</table>
+  ${sc.map(x=>x.bon.length?`<p class="mut">${esc(x.name)}: ${x.bon.join('; ')}</p>`:'').join('')}</div>
+  <div class="panel"><h3>Хто що вдало провіз</h3><table class="st-t"><tr><th>Гравець</th><th>Брехав</th><th>Спіймали</th><th>Провіз контрабанди</th><th>Дав хабарів</th><th>Як шериф</th></tr>${S.players.map((p,i)=>`<tr><td>${esc(p.name)}</td><td>${g(i,'lie')}</td><td>${g(i,'caught')}</td><td>${g(i,'smug')}</td><td>${g(i,'bribe')}</td><td>${val(i,'sher')>=0?'+':''}${val(i,'sher')}</td></tr>`).join('')}</table>
+  ${aw?`<div class="awards">${aw}</div>`:''}<button class="btn w" data-a="again" style="margin-top:14px">Нова гра</button></div>`}
+const OPTS=[['chars','Персонажі','Кожен гравець отримує купця з особливою здібністю.'],['events','Події міста','Щораунду відкривається подія: ярмарок, шторм, ревізія…'],['royal','Рідкісні товари','У колоді 12 дорогих рідкісних товарів (рахуються як 2 легальні для бонусів).'],['special','Особливі карти','18 хитрих карт: фальшива печатка, подвійне дно, чутка, позика, собака-нюхач…'],['fast','Швидка гра','Кожен буде шерифом лише раз.']];
+const optsHTML=(o,act)=>OPTS.map(([k,t,d])=>`<div class="opt ${o[k]?'on':''}" data-a="${act}" data-v="${k}"><span class="sw"></span><span><b>${t}</b><small>${d}</small></span></div>`).join('');
+const RULES=()=>`<h3>Мета</h3><p>Ви купці портового міста. Найбагатший у кінці гри перемагає: рахується золото, вартість товарів на ятці й бонуси Короля та Королеви.</p>
+<h3>Раунд</h3><ol><li><b>Ринок.</b> Кожен купець таємно скидає до 5 карт в одну з двох купок і добирає до 6: з колоди або з верху купок. З купки, куди щойно скинув, брати не можна.</li>
+<li><b>Мішок.</b> Кладеш 1–5 карт у мішок і заявляєш <b>один легальний товар</b> і точну кількість карт.</li>
+<li><b>Огляд.</b> Купці торгуються з шерифом: золото, товари з ятки, обіцянки. Для кожного мішка шериф вирішує: пропустити, перевірити чи укласти угоду. Угода обов'язкова, обіцянки — ні.</li></ol>
+<h3>Перевірка</h3><ul><li>Купець чесний: шериф платить йому штраф за кожну карту, товар іде на ятку.</li><li>Купець збрехав: незаявлене конфіскують, і купець платить штраф за ці карти. Правдиві карти йдуть на ятку.</li><li>Пропустили або домовились: усе з мішка йде на ятку, контрабанда теж.</li><li>Бракує золота — доплачуєш товарами з ятки.</li></ul>
+<h3>Товари</h3><table><tr><th>Товар</th><th>Ціна</th><th>Штраф</th><th>Король/Королева</th></tr>${Object.keys(G).map(k=>`<tr><td>${gname(k)}</td><td>${G[k][1]}</td><td>${G[k][2]}</td><td>${G[k][3]?G[k][4]+' / '+G[k][5]:ROYAL.includes(k)?'як 2 '+gname(G[k][8]).toLowerCase():'—'}</td></tr>`).join('')}</table>
+<h3>Режими</h3>${OPTS.map(([,t,d])=>`<p><b>${t}.</b> ${d}</p>`).join('')}
+<h3>Персонажі</h3>${Object.entries(CH).map(([k,[t,d]])=>`<div class="row" style="align-items:center;flex-wrap:nowrap;margin:6px 0"><div class="av" style="flex:0 0 48px;height:48px;background-image:url(${img('c_'+k)})"></div><p style="margin:0"><b>${t}.</b> ${d}</p></div>`).join('')}
+<h3>Особливі карти</h3><p>Якщо увімкнено, у колоді є ще ${Object.values(XN).reduce((a,b)=>a+b,0)} хитрих карт. Їх не кладуть у мішок: грають на ринку (або шериф на огляді). Наприкінці гри вони нічого не варті.</p>${Object.entries(X).map(([k,x])=>`<p><b>${x[0]}</b> (${XN[k]} шт.). ${x[2]}</p>`).join('')}
+<h3>Події міста</h3>${Object.entries(EV).map(([k,[t,d]])=>`<p><b>${t}.</b> ${d}</p>`).join('')}
+<h3>Кінець гри</h3><p>Кожен буде шерифом двічі (утрьох — тричі, у швидкій грі — раз). Король товару — у кого його найбільше, Королева — друга кількість. Нічия за Короля: бонуси Короля й Королеви діляться порівну. Нічия за Королеву: її бонус ділиться. При рівних очках перемагає більше легальних товарів, потім більше контрабанди.</p>`;
+/* ===== Онлайн ===== */
+const PFX='mytnytsia-v2-';let PEER=null,CONN=null,CONNS=new Map();
+if(PEERMODE){try{UID=localStorage.getItem('myt-uid')}catch(e){}if(!UID){UID='p'+Math.random().toString(36).slice(2,12);try{localStorage.setItem('myt-uid',UID)}catch(e){}}}
+const LOCAL=new Set(['tog','pile','rules','undo','dealopen','dealclose','dg','dk','mode','add','del','cno','mute','opt']);
+function doAct(a,v,loc){
+  if(a==='join'){if(!LOB)return false;const nm=String(loc.name||'Гравець').slice(0,14);const x=LOB.players.find(q=>q.uid===ACTOR);if(x){x.name=nm;return}if(S||LOB.players.length>=6)return false;LOB.players.push({uid:ACTOR,name:nm});return}
+  if(a==='lopt'){if(!LOB||LOB.host!==ACTOR||S||!OPTS.some(o=>o[0]===v))return false;LOB.opts=LOB.opts||{...setup.opts};LOB.opts[v]=!LOB.opts[v];return}
+  if(a==='ostart'){if(LOB.host!==ACTOR||LOB.players.length<3||S)return false;newGame(LOB.players.map(q=>q.name),LOB.opts);S.players.forEach((q,i)=>q.uid=LOB.players[i].uid);S.online=true;S.scr='round';return}
+  if(a==='again'){if(!S||S.scr!=='over')return false;S=null;return}
+  if(!S)return false;ONLINE.me=S.players.findIndex(q=>q.uid===ACTOR);
+  if(['begin','endround'].includes(a)&&ONLINE.me!==S.sheriff)return false;
+  const f=ACT[a];if(!f)return false;return f(v)}
+const stateMsg=()=>({t:'state',lobby:LOB,state:S,seq:ONLINE.seq});
+function broadcast(){const m=stateMsg();CONNS.forEach(c=>{try{c.open&&c.send(m)}catch(e){}})}
+function persistHost(){try{localStorage.setItem('myt-host',JSON.stringify({code:ONLINE.code,lobby:LOB,state:S,seq:ONLINE.seq}))}catch(e){}}
+function hostApply(uid,a,v,loc){const before=JSON.stringify([LOB,S]);ACTOR=uid;quiet=true;let r;try{r=doAct(a,v,loc)}catch(e){console.error(e);r=false}finally{quiet=false}ACTOR=UID;if(S)ONLINE.me=S.players.findIndex(q=>q.uid===UID);
+  if(r!==false&&JSON.stringify([LOB,S])!==before){ONLINE.seq++;persistHost();broadcast()}render()}
+async function mutate(a,v,loc){if(busy)return;busy=true;const ref=DB.doc('games2/'+ONLINE.code);
+  try{let ok=false;for(let k=0;k<20&&!ok;k++){ok=(await ref.acquire({holder:UID,ttlMs:1500})).acquired;if(!ok)await new Promise(r=>setTimeout(r,300))}if(!ok)throw 0;
+    const sn=await ref.get();const d=sn.data();if((d.seq||0)!==ONLINE.seq){ONLINE.seq=d.seq||0;LOB=JSON.parse(JSON.stringify(d.lobby));S=d.state?JSON.parse(JSON.stringify(d.state)):null;say('Гра змінилась, натисни ще раз');return}
+    LOB=JSON.parse(JSON.stringify(d.lobby));S=d.state?JSON.parse(JSON.stringify(d.state)):null;ACTOR=UID;quiet=true;let r;try{r=doAct(a,v,loc)}finally{quiet=false}
+    if(r===false)return;await ref.set({lobby:LOB,state:S,seq:(d.seq||0)+1});ONLINE.seq=(d.seq||0)+1}
+  catch(e){say(e&&e.code==='invalid_argument'?'Немає дозволу: власник має поділитися з тобою як «Contributor».':'Не вдалося, спробуй ще раз')}finally{busy=false;render()}}
+function send(a,v){const loc={name:setup.myname||''};
+  if(DB)return mutate(a,v,loc);
+  if(ONLINE.host)return hostApply(UID,a,v,loc);
+  if(CONN&&CONN.open)CONN.send({t:'act',uid:UID,a,v,seq:ONLINE.seq,loc});else say('Немає зв’язку з ведучим')}
+function loadPeer(){return new Promise((res,rej)=>{if(window.Peer)return res();const x=document.createElement('script');x.src='https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js';x.onload=res;x.onerror=rej;document.head.appendChild(x)})}
+const code4=()=>Array.from({length:4},()=>'ABCDEFGHJKLMNPRSTUVWXYZ'[rnd(23)]).join('');
+async function peerHost(code,saved){try{await loadPeer()}catch(e){return say('Не вдалося завантажити модуль зв’язку')}
+  ONLINE={code,me:-1,seq:saved?saved.seq:1,host:true};LOB=saved?saved.lobby:{host:UID,players:[{uid:UID,name:setup.myname||'Ведучий'}],opts:{...setup.opts}};S=saved?saved.state:null;persistHost();render();
+  const pr=new Peer(PFX+code);PEER=pr;pr.on('open',()=>{ONLINE&&(ONLINE.ready=true);render()});
+  pr.on('connection',c=>{c.on('data',m=>{if(!m||typeof m.uid!=='string')return;CONNS.set(m.uid,c);
+    if(m.t==='join'){hostApply(m.uid,'join',null,{name:String(m.name||'')});try{c.send(stateMsg())}catch(e){}return}
+    if(m.t==='act'){if(m.seq!==ONLINE.seq){try{c.send({...stateMsg(),stale:true})}catch(e){}return}hostApply(m.uid,String(m.a),m.v,m.loc||{});try{c.send(stateMsg())}catch(e){}}});
+    c.on('close',()=>{for(const [k,x] of CONNS)if(x===c)CONNS.delete(k)})});
+  pr.on('disconnected',()=>{try{pr.reconnect()}catch(e){}});
+  pr.on('error',e=>{if(e.type==='unavailable-id'){pr.destroy();setTimeout(()=>ONLINE&&peerHost(saved||S?code:code4(),saved||(S?{lobby:LOB,state:S,seq:ONLINE.seq}:null)),saved||S?3000:0)}})}
+async function peerJoin(code){try{await loadPeer()}catch(e){return say('Не вдалося завантажити модуль зв’язку')}
+  ONLINE={code,me:-1,seq:0,host:false};LOB=null;S=null;try{localStorage.setItem('myt-online',JSON.stringify({code,name:setup.myname}))}catch(e){}
+  const pr=new Peer();PEER=pr;
+  const dial=()=>{if(!ONLINE||ONLINE.code!==code)return;const c=pr.connect(PFX+code,{reliable:true});CONN=c;
+    c.on('open',()=>c.send({t:'join',uid:UID,name:setup.myname||'Гравець'}));
+    c.on('data',m=>{if(m&&m.t==='state'&&ONLINE){ONLINE.lost=false;ONLINE.seq=m.seq;LOB=m.lobby;S=m.state;if(S)ONLINE.me=S.players.findIndex(q=>q.uid===UID);if(m.stale)say('Гра змінилась, натисни ще раз');render()}});
+    c.on('close',()=>{if(ONLINE&&ONLINE.code===code){ONLINE.lost=true;render();setTimeout(dial,2500)}})};
+  pr.on('open',dial);pr.on('error',e=>{if(e.type==='peer-unavailable'&&!LOB){say('Кімнату не знайдено');leave()}else if(ONLINE){ONLINE.lost=true;render();setTimeout(dial,3000)}});render()}
+function connectDB(code){ONLINE={code,me:-1,seq:0};LOB=null;S=null;try{localStorage.setItem('myt-online',JSON.stringify({code,name:setup.myname}))}catch(e){}
+  ONLINE.unsub=DB.doc('games2/'+code).onSnapshot(sn=>{if(!ONLINE||ONLINE.code!==code)return;if(!sn.exists){if(!sn.metadata.fromCache){say('Кімнату не знайдено');leave()}return}
+    const d=sn.data();ONLINE.seq=d.seq||0;LOB=JSON.parse(JSON.stringify(d.lobby));S=d.state?JSON.parse(JSON.stringify(d.state)):null;if(S)ONLINE.me=S.players.findIndex(q=>q.uid===UID);if(!busy)render()},()=>say('Зв’язок втрачено'));render()}
+function leave(){try{ONLINE&&ONLINE.unsub&&ONLINE.unsub()}catch(e){}try{PEER&&PEER.destroy()}catch(e){}PEER=null;CONN=null;CONNS.clear();ONLINE=null;LOB=null;S=null;try{localStorage.removeItem('myt-host');localStorage.removeItem('myt-online')}catch(e){}render()}
+const ONL={
+  async ocreate(){const nm=(document.getElementById('oname')||{}).value?.trim();if(!nm)return say('Впиши ім’я');setup.myname=nm;const code=code4();
+    if(!DB)return peerHost(code,null);
+    try{await DB.doc('games2/'+code).set({lobby:{host:UID,players:[{uid:UID,name:nm}],opts:{...setup.opts}},state:null,seq:1})}catch(e){return say('Не вдалося створити гру')}connectDB(code)},
+  async ojoin(){const nm=(document.getElementById('oname')||{}).value?.trim(),code=((document.getElementById('ocode')||{}).value||'').trim().toUpperCase();
+    if(!nm)return say('Впиши ім’я');if(!/^[A-Z]{4}$/.test(code))return say('Код — 4 літери');setup.myname=nm;
+    if(!DB)return peerJoin(code);connectDB(code);for(let k=0;k<40&&ONLINE&&!LOB;k++)await new Promise(r=>setTimeout(r,250));if(LOB)send('join')},
+  ostart(){send('ostart')},oleave(){leave()},lopt(v){send('lopt',v)}};
+/* ===== Рендер ===== */
+function lobbyHTML(){if(!LOB)return `<div class="panel big"><h2>Підключення…</h2><button class="btn g w" data-a="oleave">Вийти</button></div>`;
+  const host=LOB.host===UID,o=LOB.opts||setup.opts;return `<div class="hero"><img src="images/banner.webp" alt=""><div class="t"><h1>Кімната ${esc(ONLINE.code)}</h1><p>Скажи код друзям.</p></div></div><div class="panel">${PEERMODE&&ONLINE.host?'<p>Ти ведучий: не закривай сторінку й не блокуй екран.</p>':''}
+  <div class="pl">${LOB.players.map(x=>`<div class="pi" style="grid-template-columns:1fr auto"><b>${esc(x.name)}</b>${x.uid===LOB.host?'<span class="mut">створив</span>':''}</div>`).join('')}</div>
+  <h3 style="margin-top:12px">Режими</h3>${host?optsHTML(o,'lopt'):OPTS.filter(([k])=>o[k]).map(([,t])=>`<span class="gd">${t}</span> `).join('')||'<span class="mut">класика</span>'}
+  ${host?`<button class="btn w" data-a="ostart" style="margin-top:10px" ${LOB.players.length<3?'disabled':''}>${LOB.players.length<3?'Потрібно 3–6 гравців':'Почати гру'}</button>`:'<p class="mut">Гру почне той, хто створив кімнату.</p>'}
+  <button class="btn g w" data-a="oleave" style="margin-top:8px">Вийти</button></div>`}
+function setupHTML(){return `<div class="hero"><img src="images/banner.webp" alt="Портова митниця"><div class="t"><h1>Митниця</h1><p>Провези товар повз шерифа: обдури, підкупи або будь чесним.</p></div></div>
+  <div class="seg"><button class="${mode==='one'?'on':''}" data-a="mode" data-v="one">Один телефон</button><button class="${mode==='many'?'on':''}" data-a="mode" data-v="many">Кожен свій телефон</button></div>
+  ${mode==='one'?`<div class="panel"><h3>Купці (3–6)</h3>${setup.names.map((n,i)=>`<div class="nm2" style="margin-top:6px"><input data-i="${i}" value="${esc(n)}" maxlength="14">${setup.names.length>3?`<button data-a="del" data-v="${i}">×</button>`:''}</div>`).join('')}
+    ${setup.names.length<6?'<button class="btn g w" data-a="add" style="margin-top:8px">+ Купець</button>':''}<h3 style="margin-top:12px">Режими</h3>${optsHTML(setup.opts,'opt')}<button class="btn w" data-a="start" style="margin-top:12px">Почати гру</button></div>`
+  :(!PEERMODE&&!DB?`<div class="panel"><p>Онлайн-режим у Claude потребує входу в акаунт і доступу «Contributor».</p></div>`:`<div class="panel"><h3>Твоє ім’я</h3><input id="oname" maxlength="14" value="${esc(setup.myname||'')}"><button class="btn w" data-a="ocreate" style="margin-top:10px">Створити кімнату</button>
+    <h3 style="margin-top:12px">Або приєднатися</h3><div class="nm2"><input id="ocode" maxlength="4" placeholder="Код"><button class="btn" data-a="ojoin" style="width:auto">Увійти</button></div></div>`)}
+  <details class="panel"><summary>Правила</summary>${RULES()}</details>`}
+function render(){if(quiet)return;bgfx();
+  try{if(S&&!ONLINE)localStorage.setItem('mytnytsia2',JSON.stringify(S));if(!S&&!ONLINE)localStorage.removeItem('mytnytsia2')}catch(e){}
+  let h='';
+  if(ONLINE&&!S)h=lobbyHTML();
+  else if(!S)h=setupHTML();
+  else if(S.scr==='over')h=overHTML();
+  else{h=bar();const me=ONLINE?ONLINE.me:null;
+    if(S.scr==='round')h+=`<div class="hero">${vid('v_round')}</div><div class="panel big"><h2>Раунд ${S.round} з ${S.total}</h2><div class="portrait" style="background-image:url(${pav(P(S.sheriff))})"></div><p>Шериф цього раунду: <b class="g">${esc(P(S.sheriff).name)}</b>${P(S.sheriff).ch?` (${CH[P(S.sheriff).ch][0]})`:''}. Інші — купці.</p>
+      ${S.ev?`<div class="parch evc" style="text-align:left;margin-top:10px"><img src="${img('e_'+S.ev)}" alt=""><div><h3>Подія: ${EV[S.ev][0]}</h3><p style="margin:0">${EV[S.ev][1]}</p></div></div>`:''}
+      ${!ONLINE||me===S.sheriff?'<button class="btn w" data-a="begin" style="margin-top:12px">Відкрити ринок</button>':'<p class="mut">Шериф відкриває ринок.</p>'}</div>`;
+    else if(S.scr==='pass'){const p=P(S.q[S.qi]);h+=`<div class="hero">${vid('v_market')}</div><div class="panel big"><p class="mut">Передай телефон купцю</p><div class="portrait" style="background-image:url(${pav(p)})"></div><h2>${esc(p.name)}</h2><p class="mut">Інші не підглядають!</p><button class="btn w" data-a="me">Я — ${esc(p.name)}</button></div>`}
+    else if(S.scr==='market'){if(ONLINE){h+=me===S.sheriff?`<div class="hero">${vid('v_market')}</div><div class="panel big"><div class="portrait" style="background-image:url(${img('s_sheriff')})"></div><h2>Ти шериф</h2><p>Купці готують мішки. Дивись на їхні обличчя…</p></div>`:me>=0?marketHTML(me):''}else h+=marketHTML(S.q[S.qi])}
+    else if(S.scr==='inspect')h+=inspectHTML();
+    h+=`<details class="panel"><summary>Журнал</summary><ul>${S.log.slice(-10).reverse().map(l=>`<li>${esc(l)}</li>`).join('')}</ul></details>`}
+  if(ONLINE&&ONLINE.lost)h=`<div class="lost">Зв’язок втрачено, перепідключаюсь…</div>`+h;
+  if(dealv&&S&&S.scr==='inspect')h+=dealSheet();
+  if(conf)h+=`<div class="ov"><div class="sheet" style="text-align:center"><h3>${conf.m}</h3><div class="row" style="margin-top:12px"><button class="btn g" data-a="cno">Ні</button><button class="btn" data-a="cyes">Так</button></div></div></div>`;
+  if(showRules)h+=`<div class="ov"><div class="sheet"><div class="top"><h2>Правила</h2><button class="btn g" data-a="rules">Закрити</button></div>${RULES()}</div></div>`;
+  if(toast)h+=`<div class="toast">${esc(toast)}</div>`;
+  app.innerHTML=h;
+  if(S&&S.players){const g=S.players.map(p=>p.gold);if(prevGold&&prevGold.length===g.length&&app.querySelector)g.forEach((x,i)=>{if(x!==prevGold[i]){const el=app.querySelector(`[data-g="${i}"]`);if(el){el.classList.add('bump');burstAt(el,x>prevGold[i])}}});prevGold=g;
+    if(lastFx!==null&&S.fx>lastFx){const r=S.players.map(p=>p.res).find(r=>r&&r.fx===S.fx);sfx(r&&r.t==='liar'?'bad':'coin');
+      if(r){if(r.t==='deal')snd('deal');else if(r.t==='honest'||r.t==='liar'){snd('open');snd(r.t==='liar'?'caught':'honest',2600)}}}lastFx=S.fx;
+    if(S.scr==='round'&&render.rr!==S.round){if(render.rr!=null)snd('round');render.rr=S.round}
+    if((S.scr==='pass'||S.scr==='market')&&render.mr!==S.round){render.mr=S.round;snd('market')}
+    if(S.scr==='over'&&!render.won){render.won=1;confetti();sfx('win');snd('win')}if(S.scr!=='over')render.won=0}else{prevGold=null;lastFx=null}}
+/* ===== Кліки ===== */
+const SETUP={add(){if(setup.names.length<6)setup.names.push('Купець '+(setup.names.length+1))},del(v){setup.names.splice(+v,1)},opt(v){setup.opts[v]=!setup.opts[v]},start(){const n=setup.names.map(s=>s.trim()).filter(Boolean);if(n.length<3)return say('Потрібно 3–6 гравців');newGame(n,setup.opts);hist=[]}};
+app.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b||b.disabled)return;let a=b.dataset.a,v=b.dataset.v;
+  if(a!=='tog')sfx('tap');
+  if(a==='cno'){conf=null;return render()}
+  if(a==='cyes'){if(!conf)return;a=conf.a;v=conf.v;conf=null}else if(b.dataset.c){conf={a,v,m:b.dataset.c};return render()}
+  if(a==='mute'){muted=!muted;try{localStorage.setItem('myt-mute',muted?'1':'0')}catch(e){}return render()}
+  if(a==='mode'){mode=v;return render()}
+  if(a==='rules'){showRules=!showRules;return render()}
+  if(a==='dealopen'){dealv={i:+v,gold:0,goods:{}};return render()}
+  if(a==='dealclose'){dealv=null;return render()}
+  if(a==='dg'){dealv.gold=Math.max(0,Math.min(P(dealv.i).gold,dealv.gold+ +v));return render()}
+  if(a==='dk'){const [k,d]=v.split('|');dealv.goods[k]=Math.max(0,Math.min(P(dealv.i).stand[k],(dealv.goods[k]||0)+ +d));return render()}
+  if(a==='undo'){if(hist.length){S=JSON.parse(hist.pop());sel.clear()}return render()}
+  if(!S&&!ONLINE&&SETUP[a]){SETUP[a](v);return render()}
+  if(ONL[a]&&(ONLINE||mode==='many'))return ONL[a](v);
+  if(a==='deal')dealv=null;
+  if(['disc','bag','draw','me','begin'].includes(a))sel.clear();
+  if(a==='quit'||a==='again'){if(ONLINE)return a==='quit'?leave():send('again');S=null;hist=[];return render()}
+  if(ONLINE&&!LOCAL.has(a))return send(a,v);
+  const f=ACT[a];if(!f)return;const before=S?JSON.stringify(S):null;const r=f(v);
+  if(r!==false&&before&&S&&JSON.stringify(S)!==before){hist.push(before);if(hist.length>60)hist.shift()}render()});
+app.addEventListener('input',e=>{if(e.target.dataset.i!=null)setup.names[+e.target.dataset.i]=e.target.value});
+try{render()}catch(err){app.innerHTML='<p>Помилка: '+esc(err.message)+'</p><button class="btn" onclick="localStorage.removeItem(\'mytnytsia2\');location.reload()">Скинути</button>'}
+try{const l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Kurale&family=Rubik:wght@400;600;800&display=swap';document.head.appendChild(l)}catch(e){}
+if(PEERMODE){try{const hs=JSON.parse(localStorage.getItem('myt-host')||'null'),cl=JSON.parse(localStorage.getItem('myt-online')||'null');if(hs&&hs.code){mode='many';setTimeout(()=>peerHost(hs.code,hs),0)}else if(cl&&cl.code){mode='many';setup.myname=cl.name;setTimeout(()=>peerJoin(cl.code),0)}}catch(e){}}
+(async()=>{try{if(!window.claude||!window.claude.use)return;DB=await window.claude.use('db');const us=await window.claude.use('user');UID=us?await us.id():null;if(!DB||!UID)DB=null;
+  if(DB){const cl=JSON.parse(localStorage.getItem('myt-online')||'null');if(cl&&cl.code){mode='many';setup.myname=cl.name;connectDB(cl.code)}}render()}catch(e){}})();
+globalThis.__T={ACT,get S(){return S},set S(v){S=v},newGame,score,sel,setup};
+}
+</script></body></html>
