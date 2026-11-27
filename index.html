@@ -254,6 +254,7 @@ details li{margin:.3em 0}
 #lq video{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;background:#000;margin-top:12px}
 .lqspin{width:42px;height:42px;margin:18px auto;border:4px solid rgba(255,255,255,.2);border-top-color:var(--gold);border-radius:50%;animation:lqs 1s linear infinite}@keyframes lqs{to{transform:rotate(360deg)}}
 .offok{font-size:14px;margin:8px 2px 0}.lost .btn{width:auto;min-height:36px;padding:0 14px;margin-left:8px}
+.lrow{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:center;text-align:left;margin-top:8px}.lnm{display:flex;align-items:center;gap:6px;font-weight:600;white-space:nowrap}.lnm .av{width:28px;height:28px;margin:0}.lch{display:flex;flex-wrap:wrap;gap:5px}.lch .pill{min-height:34px;padding:4px 10px}.lch .pill.on{background:var(--gold);color:#2a1a05}
 </style></head><body>
 <div id="bgfx" aria-hidden="true"><div class="sunray"></div>
 <i class="cl c1"><svg viewBox="0 0 200 70"><g fill="#ffffff"><ellipse cx="60" cy="44" rx="50" ry="22"/><ellipse cx="110" cy="32" rx="46" ry="28"/><ellipse cx="150" cy="46" rx="40" ry="18"/></g></svg></i><i class="cl c2"><svg viewBox="0 0 200 70"><g fill="#ffffff"><ellipse cx="60" cy="44" rx="50" ry="22"/><ellipse cx="110" cy="32" rx="46" ry="28"/><ellipse cx="150" cy="46" rx="40" ry="18"/></g></svg></i><i class="cl c3"><svg viewBox="0 0 200 70"><g fill="#ffffff"><ellipse cx="60" cy="44" rx="50" ry="22"/><ellipse cx="110" cy="32" rx="46" ry="28"/><ellipse cx="150" cy="46" rx="40" ry="18"/></g></svg></i>
@@ -429,7 +430,7 @@ const RULES_MODES=`<h3 style="margin-top:14px">Режими гри</h3>
 <p><b>Жорстка гра.</b> Менше води й їжі на старті, частіше сухо, події лише погані й нейтральні.</p>
 <h3 style="margin-top:14px">Події острова</h3><p>Якщо увімкнено, на початку кожного раунду відкривається подія. Вона діє лише цей раунд.</p><ul>${Object.values(EVI).map(([t,d])=>`<li><b>${t}.</b> ${d}</li>`).join('')}</ul>
 <h3 style="margin-top:14px">Особливі карти</h3><p>Якщо увімкнено, в уламках трапляються ще 15 карт:</p><ul>${Object.keys(SPN).map(k=>`<li><b>${C[k][0]}</b> (${SPN[k]} шт.). ${C[k][3]}</li>`).join('')}</ul>
-<h3 style="margin-top:14px">Підсумки гри</h3><p>Наприкінці гра показує, хто скільки приніс їжі, води й дерева, скільки голосів отримав, і роздає звання: Годувальник, Водонос, Будівельник, Головна мішень, Стрілець, Щедра душа, Інтриган.</p>`;
+<h3 style="margin-top:14px">Спадок вигнаного</h3><p>Коли гравця виганяють голосуванням, його предмети не зникають. Табір по черзі голосує за кожен предмет, кому його віддати. Перемагає більшість. Якщо нічия або ніхто не голосував, предмет дістається випадковому гравцю.</p><h3 style="margin-top:14px">Підсумки гри</h3><p>Наприкінці гра показує, хто скільки приніс їжі, води й дерева, скільки голосів отримав, і роздає звання: Годувальник, Водонос, Будівельник, Головна мішень, Стрілець, Щедра душа, Інтриган.</p>`;
 
 const RB=new Uint32Array(64);let rbi=64;
 const r32=()=>{if(rbi>=64){try{crypto.getRandomValues(RB)}catch(e){for(let i=0;i<64;i++)RB[i]=Math.floor(Math.random()*4294967296)}rbi=0}return RB[rbi++]};
@@ -595,7 +596,17 @@ const ACT={
   vote(i){const v=S.vote,me=P(v.voters[v.vi]);let n=hero(me,'sly')?2:1;if(mega&&has(me,'megaphone')){take(me,'megaphone');n++;v.notes.push(`${me.name} кричав у мегафон`)}
     v.votes[i]=(v.votes[i]||0)+n;v.vi++;mega=false;
     if(v.vi>=v.voters.length){countVR(v);tally()}else S.scr='vpass';render()},
-  after(){resolve();render()},
+  after(){if(S.legacy&&S.scr==='verdict'){S.scr='legacy';return render()}resolve();render()},
+  lv(v){if(S.scr!=='legacy'||!S.legacy)return;const [a,b]=String(v).split('|').map(Number);const L=S.legacy;
+    if(!P(a)||!P(a).alive||!P(b)||!P(b).alive)return;if(S.online&&ONLINE&&ONLINE.me!==a)return;
+    L.votes[a]=L.votes[a]===b?undefined:b;if(L.votes[a]===undefined)delete L.votes[a];
+    if(S.online&&alive().every(q=>L.votes[S.players.indexOf(q)]!=null))return ACT.lcount();render()},
+  lcount(){if(S.scr!=='legacy'||!S.legacy)return;const L=S.legacy,al=alive().map(q=>S.players.indexOf(q)),cnt={};
+    Object.values(L.votes).forEach(b=>{if(al.includes(b))cnt[b]=(cnt[b]||0)+1});const mx=Math.max(0,...Object.values(cnt));
+    let pool=mx?Object.keys(cnt).map(Number).filter(i=>cnt[i]===mx):al;const lucky=pool.length>1||!mx;const w=pool[rnd(pool.length)];
+    const k=L.items[L.k];P(w).hand.push(k);L.last=`«${C[k][0]}» забирає <b>${esc(P(w).name)}</b>${lucky?' (не домовились — вирішив жереб)':` (${mx} гол.)`}.`;
+    log(`${P(w).name} забирає «${C[k][0]}» від ${P(L.from).name}`);L.k++;L.votes={};
+    if(L.k>=L.items.length){S.legacy=null;S.flash=null;resolve()}render()},
   nround(){nextRound();render()},
   sail(){const a=alive().length;S.water-=a;S.food-=a;over(true);render()},
   again(){S=null;try{localStorage.removeItem('shark-tooth')}catch(e){}render()}
@@ -636,7 +647,7 @@ function tally(ex=[]){
     return eliminate(pool[0]);
   }
 }
-function eliminate(out){const v=S.vote,p=P(out);p.alive=false;p.hand=[];p.fate={t:'ex',r:S.round};S.players.forEach(q=>q.rumor=0);S.oaths=[];S.secretNext=false;log(`${p.name} вигнали з табору`);
+function eliminate(out){const v=S.vote,p=P(out);p.alive=false;const inh=p.hand.filter(k=>C[k]&&C[k][1]!=='e');p.hand=[];S.legacy=inh.length?{from:out,items:inh,k:0,votes:{},last:null}:null;p.fate={t:'ex',r:S.round};S.players.forEach(q=>q.rumor=0);S.oaths=[];S.secretNext=false;log(`${p.name} вигнали з табору`);
   S.verdict={i:out,n:v.votes[out]||0,notes:v.notes,tab:v.cands.map(i=>[P(i).name,v.votes[i]||0])};S.scr='verdict'}
 function over(win){S.scr='over';S.win=win&&alive().length>0}
 
@@ -1042,9 +1053,18 @@ function render(){
     const v=S.vote,me=P(v.voters[v.vi]);
     h=bar()+`<div class="panel"><h2>${esc(me.name)}, кого виганяємо?</h2>${has(me,'megaphone')?`<button class="btn ${mega?'y':'g'} w" data-a="mg" style="margin:12px 0">${mega?'Мегафон увімкнено: +1 голос':'Увімкнути мегафон'}</button>`:''}
     <p class="mut">Твої карти (бачиш лише ти): ${me.hand.length?me.hand.map(k=>'«'+C[k][0]+'»').join(', '):'порожньо'}</p><div class="vote" style="margin-top:12px">${vcands(v,v.voters[v.vi]).map(i=>`<button class="btn" data-a="vote" data-v="${i}" data-c="Голосуєш проти ${esc(P(i).name)}?">${esc(P(i).name)}</button>`).join('')}</div></div>`;
+  } else if(S.scr==='legacy'){
+    const L=S.legacy,k=L.items[L.k],al=alive(),me=ONLINE?ONLINE.me:-1;
+    const cnt=i=>Object.values(L.votes).filter(b=>b===i).length;
+    h=bar()+`<div class="panel big"><p class="mut">Спадок ${esc(P(L.from).name)} · предмет ${L.k+1} з ${L.items.length}</p>${L.last?`<p class="res-ok" style="margin:4px 0 10px">${L.last}</p>`:''}<h2>Хто забере?</h2>
+    <div class="hand" style="max-width:220px;margin:10px auto">${cardHTML(k)}</div>
+    <p class="mut">${ONLINE?'Кожен голосує за того, кому віддати предмет. Коли проголосують усі — переможе більшість. Нічия → жереб.':'Кожен натискає, кому віддати. Хто не голосує — пропускає. Не домовились (нічия або ніхто) — жереб.'}</p>
+    ${al.map(q=>{const a=S.players.indexOf(q),mine=!ONLINE||me===a;return `<div class="lrow"><span class="lnm">${av(q)} ${esc(q.name)}:</span><span class="lch">${al.map(t=>{const b=S.players.indexOf(t);return `<button class="pill ${L.votes[a]===b?'on':''}" ${mine?`data-a="lv" data-v="${a}|${b}"`:'disabled'}>${esc(t.name)}</button>`}).join('')}</span></div>`}).join('')}
+    <p style="margin-top:10px">${al.filter(q=>cnt(S.players.indexOf(q))).map(q=>`${esc(q.name)}: <b>${cnt(S.players.indexOf(q))}</b>`).join(' · ')||'<span class="mut">Голосів ще немає</span>'}</p>
+    ${ONLINE?`<p class="mut">Проголосували ${Object.keys(L.votes).length} з ${al.length}</p>`:`<button class="btn y w" data-a="lcount" style="margin-top:10px">Віддати (або жереб)</button>`}</div>`;
   } else if(S.scr==='verdict'){
     const d=S.verdict,p=P(d.i);
-    h=bar()+`<div class="panel big"><p class="mut">Табір вирішив</p><div class="vbox">${vid('exile')}</div><div class="sinkbox"><div class="av gone sink" style="background-image:url(${pic('h_'+p.hero)})"></div><svg class="splash" viewBox="0 0 200 40"><path d="M0 22q25-12 50 0t50 0t50 0t50 0V40H0z" fill="#1590a8"/><circle cx="100" cy="20" r="6" fill="none" stroke="#bfefff" stroke-width="3"/><circle cx="100" cy="20" r="6" fill="none" stroke="#bfefff" stroke-width="2" style="animation-delay:.4s"/></svg></div><h2>${esc(p.name)} лишається сам на пляжі</h2>
+    h=bar()+`<div class="panel big"><p class="mut">Табір вирішив</p><div class="vbox">${vid('exile')}</div><div class="sinkbox"><div class="av gone sink" style="background-image:url(${pic('h_'+p.hero)})"></div><svg class="splash" viewBox="0 0 200 40"><path d="M0 22q25-12 50 0t50 0t50 0t50 0V40H0z" fill="#1590a8"/><circle cx="100" cy="20" r="6" fill="none" stroke="#bfefff" stroke-width="3"/><circle cx="100" cy="20" r="6" fill="none" stroke="#bfefff" stroke-width="2" style="animation-delay:.4s"/></svg></div><h2>${esc(p.name)} лишається сам на пляжі</h2>${S.legacy?`<p>Після нього лишилось предметів: <b>${S.legacy.items.length}</b>. Табір зараз вирішить, хто що забере.</p>`:''}
     <ul class="log" style="text-align:left;margin-top:12px">${d.tab.map(([n,c])=>`<li>${esc(n)}: ${c} гол.</li>`).join('')}${d.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul><button class="btn w" data-a="after" style="margin-top:16px">Далі</button></div>`;
   } else if(S.scr==='sum'){
     h=bar()+islandBoard()+`<div class="panel">${eatScene()}<h2>Кінець раунду ${S.round}</h2>${S.notes.map(n=>`<p>${n}</p>`).join('')}<p>Усі напилися й поїли. До плоту бракує: ${Math.max(0,alive().length-seats())} місць.</p><button class="btn w" data-a="nround" style="margin-top:12px">Наступний раунд</button></div>`;
