@@ -412,13 +412,15 @@ function overHTML(){const w=alive(),m=O().mode,n=S.players.length,W=winners(),nE
   if(m==='team'){const teams=[...new Set(S.players.map(p=>p.team))].map(t=>S.players.filter(p=>p.team===t)),won=teams.filter(t=>t.every(p=>S.win&&p.alive));
     head=won.length?`Перемогла команда!`:'Жодна команда не врятувалась повністю';
     rolesBox=`<div class="verdict-roles"><h3>Команди</h3>${teams.map(t=>`<p>${t.every(p=>S.win&&p.alive)?'🏆 ':''}<b>${t.map(p=>esc(p.name)).join(' + ')}</b> — ${t.filter(p=>S.win&&p.alive).length}/${t.length} відпливли</p>`).join('')}</div>`}
+  let why='';if(!S.win&&S.why){const y=S.why;why=y.none?'<p>Причина: на острові не лишилось жодного гравця.</p>':`<div class="verdict-roles"><h3>Чому програли</h3><p>${y.fin?'Прийшов ураган, а для всіх, хто лишився,':'Табору'} не вистачило:</p><ul>${y.lw?`<li>води: було ${y.w}, треба було ще <b>${y.lw}</b></li>`:''}${y.lf?`<li>їжі: було ${y.f}, треба було ще <b>${y.lf}</b></li>`:''}${y.ls?`<li>місць на плоту: було ${y.s}, треба було ще <b>${y.ls}</b> (по ${SEAT} дерева на місце)</li>`:''}</ul><p class="mut">Нестача була більша, ніж гравців лишилось (${y.n}), тож вигнанням уже нічого не врятувати.</p></div>`}
+  if(m==='team'){const teams=[...new Set(S.players.map(p=>p.team))].map(t=>S.players.filter(p=>p.team===t));why+=`<div class="verdict-roles"><h3>Чому команди не виграли</h3>${teams.map(t=>{const miss=t.filter(p=>!(S.win&&p.alive));return `<p><b>${t.map(p=>esc(p.name)).join(' + ')}</b>: ${miss.length?miss.map(p=>`${esc(p.name)} — ${p.fate?p.fate.t==='sh'?`застрелили в раунді ${p.fate.r}`:`вигнали в раунді ${p.fate.r}`:S.win?'не сів на пліт':'острів переміг'}`).join('; '):'усі відпливли 🏆'}</p>`}).join('')}</div>`}
   const fate=p=>S.win&&p.alive?'відплив на плоту':p.fate?p.fate.t==='sh'?`вибув від пострілу (${esc(p.fate.by)}), раунд ${p.fate.r}`:`вигнали в раунді ${p.fate.r}`:'лишився на острові';
   const badge=p=>p.role==='spy'?'<span class="badge spy">шпигун</span>':p.role==='res'?'<span class="badge res">рятівник</span>':m==='team'?`<span class="badge tm">команда ${p.team+1}</span>`:'';
   const s=S.st||[];const g=(i,k)=>(s[i]||NOST)[k]||0;
   const rows=S.players.map((p,i)=>`<tr class="${W[i]?'wn':''}"><td><span class="nmc"><i style="background-image:url(${pic('h_'+p.hero)});border-color:${p.col}"></i><span>${esc(p.name)}${badge(p)}${W[i]?'<span class="badge win">переміг</span>':''}<span class="fate">${fate(p)}</span></span></span></td><td>${g(i,'f')}</td><td>${g(i,'w')}</td><td>${g(i,'d')}</td><td>${g(i,'vr')}</td></tr>`).join('');
   const AW=[['f','🎣','Годувальник','найбільше риби'],['w','💧','Водонос','найбільше води'],['d','🪓','Будівельник','найбільше дерева'],['vr','🎯','Головна мішень','найбільше голосів проти'],['sh','🔫','Стрілець','найбільше пострілів'],['gv','🎁','Щедра душа','найбільше віддав іншим'],['tr','🕵️','Інтриган','найбільше підступних карт']];
   const aw=AW.map(([k,ic,t,d],j)=>{const mx=Math.max(0,...S.players.map((_,i)=>g(i,k)));if(!mx)return '';const who=S.players.filter((_,i)=>g(i,k)===mx).map(p=>esc(p.name)).join(', ');return `<div class="aw" style="animation-delay:${.3+j*.12}s"><div class="ai">${ic}</div><b>${t}</b><span>${who}</span><small>${d}: ${mx}</small></div>`}).join('');
-  return `<div class="hero">${vid(S.win?'win':'lose','bimg')}${S.win?raftScene().replace(/<svg[\s\S]*?<\/svg>/,''):''}</div><div class="panel big"><h2 class="win">${head}</h2><p>${sub}</p>${S.win?`<div class="chips" style="justify-content:center">${w.map(p=>`<span class="chip">${av(p)}${esc(p.name)}</span>`).join('')}</div>`:''}${rolesBox}</div>
+  return `<div class="hero">${vid(S.win?'win':'lose','bimg')}${S.win?raftScene().replace(/<svg[\s\S]*?<\/svg>/,''):''}</div><div class="panel big"><h2 class="win">${head}</h2><p>${sub}</p>${S.win?`<div class="chips" style="justify-content:center">${w.map(p=>`<span class="chip">${av(p)}${esc(p.name)}</span>`).join('')}</div>`:''}${rolesBox}${why}</div>
   <div class="panel"><h3>Хто що зробив</h3><table class="fin-t"><tr><th>Гравець</th><th title="їжа">${IC.f}</th><th title="вода">${IC.w}</th><th title="дерево">${IC.d}</th><th>Голосів проти</th></tr>${rows}</table>${aw?`<div class="awards">${aw}</div>`:''}
   <button class="btn y w" data-a="again" style="margin-top:14px">Нова гра</button></div>`}
 const RULES_MODES=`<h3 style="margin-top:14px">Режими гри</h3>
@@ -621,7 +623,7 @@ function endRound(){
 function resolve(){
   const {al,short}=lack();
   if(short>0){
-    if(short>=al.length)return over(false);
+    if(short>=al.length){const L=lack();S.why={lw:L.lw,lf:L.lf,ls:L.ls,n:al.length,w:S.water,f:S.food,s:seats(),fin:!!S.final};return over(false)}
     S.scr='talk';return;
   }
   S.ate={w:0,f:0};al.forEach(p=>{if(has(p,'flask'))take(p,'flask');else{S.water--;S.ate.w++}if(hero(p,'cook'));else if(has(p,'can'))take(p,'can');else{S.food--;S.ate.f++}});
@@ -649,7 +651,7 @@ function tally(ex=[]){
 }
 function eliminate(out){const v=S.vote,p=P(out);p.alive=false;const inh=p.hand.filter(k=>C[k]&&C[k][1]!=='e');p.hand=[];S.legacy=inh.length?{from:out,items:inh,k:0,votes:{},last:null}:null;p.fate={t:'ex',r:S.round};S.players.forEach(q=>q.rumor=0);S.oaths=[];S.secretNext=false;log(`${p.name} вигнали з табору`);
   S.verdict={i:out,n:v.votes[out]||0,notes:v.notes,tab:v.cands.map(i=>[P(i).name,v.votes[i]||0])};S.scr='verdict'}
-function over(win){S.scr='over';S.win=win&&alive().length>0}
+function over(win){S.scr='over';S.win=win&&alive().length>0;if(!S.win&&!S.why)S.why={none:alive().length===0}}
 
 const dv=k=>prevRes&&prevRes.g===S.players.length+'|'+S.players[0].name?S[k]-prevRes[k]:0;
 const dc=k=>{const d=dv(k);return d>0?'up':d<0?'down':''};
