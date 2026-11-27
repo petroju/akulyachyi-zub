@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Акулячий Зуб</title>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#062a33"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
 <style>
 /* VOICE: галасливий настільний вечір, трохи підступний
    IDEA: коробка настільної гри — ігрове поле, карти, жетони
@@ -247,6 +248,12 @@ details li{margin:.3em 0}
 
 .fi{position:relative;display:grid;place-items:center;overflow:hidden}.fi i{font-style:normal;font-size:44px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}.fi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .role.sm .fi i{font-size:28px}.ib .ibe .eic{position:relative;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:15px;overflow:hidden;background:rgba(255,255,255,.15)}.ib .ibe .eic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
+#lq .lqb{position:fixed;inset:0;z-index:200;background:rgba(3,20,25,.94);display:flex;align-items:center;justify-content:center;padding:14px;overflow:auto}
+#lq .lqs{background:var(--sea);border:2px solid rgba(255,255,255,.12);border-radius:18px;padding:18px;max-width:430px;width:100%;text-align:center;color:var(--ink)}
+#lq .lqs p{text-align:left}#lq .qr{background:#fff;border-radius:12px;padding:6px;margin:12px auto;width:min(100%,340px)}#lq .qr svg{display:block;width:100%;height:auto}
+#lq video{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;background:#000;margin-top:12px}
+.lqspin{width:42px;height:42px;margin:18px auto;border:4px solid rgba(255,255,255,.2);border-top-color:var(--gold);border-radius:50%;animation:lqs 1s linear infinite}@keyframes lqs{to{transform:rotate(360deg)}}
+.offok{font-size:14px;margin:8px 2px 0}.lost .btn{width:auto;min-height:36px;padding:0 14px;margin-left:8px}
 </style></head><body>
 <div id="bgfx" aria-hidden="true"><div class="sunray"></div>
 <i class="cl c1"><svg viewBox="0 0 200 70"><g fill="#ffffff"><ellipse cx="60" cy="44" rx="50" ry="22"/><ellipse cx="110" cy="32" rx="46" ry="28"/><ellipse cx="150" cy="46" rx="40" ry="18"/></g></svg></i><i class="cl c2"><svg viewBox="0 0 200 70"><g fill="#ffffff"><ellipse cx="60" cy="44" rx="50" ry="22"/><ellipse cx="110" cy="32" rx="46" ry="28"/><ellipse cx="150" cy="46" rx="40" ry="18"/></g></svg></i><i class="cl c3"><svg viewBox="0 0 200 70"><g fill="#ffffff"><ellipse cx="60" cy="44" rx="50" ry="22"/><ellipse cx="110" cy="32" rx="46" ry="28"/><ellipse cx="150" cy="46" rx="40" ry="18"/></g></svg></i>
@@ -697,7 +704,7 @@ const RULES_BODY=`
 <li>Говорити, домовлятися, підкуповувати картами, блефувати й не дотримувати обіцянок можна: у цьому вся гра.</li></ul>
 <h3>Револьвер і патрони</h3><p>У колоді є 2 револьвери й 6 патронів. Маючи і револьвер, і патрон, можна вистрілити у свій хід або під час розмов перед голосуванням: вибраний гравець одразу вибуває з гри, а його карти пропадають. Постріл витрачає один патрон. Стріляти можна навіть тоді, коли припасів вистачає, тож револьвер це і погроза, і спосіб торгуватися: «віддай мені флягу, або…». Патрони можна передавати іншим або тримати в себе, щоб ніхто не вистрілив.</p>
 <h3>Передати карту</h3><p>У свій хід під кожною картою є кнопка «Передати комусь». Карту можна віддати будь-кому живому, наприклад в обмін на голос чи обіцянку. Інші бачать у журналі, що ти щось передав, але не бачать, що саме.</p>
-<h3>Гра з кількох телефонів</h3><p>Вгорі на стартовому екрані виберіть «Кожен зі свого телефона». Один гравець створює гру й отримує код із 4 літер. Інші вписують цей код і своє ім’я. Коли зібралося щонайменше 3 гравці, той, хто створив кімнату, натискає «Почати гру».</p><p>Кожен бачить свої карти тільки на своєму телефоні й ходить, коли настає його черга. Голосування таємне: кожен голосує зі свого телефона, а всі бачать лише підсумок. ${PEERMODE?'Реєструватися не треба. Телефон того, хто створив гру, працює як ведучий: усі інші підключаються до нього, тому на ньому не можна закривати сторінку й блокувати екран, поки йде гра. Якщо зв’язок обірвався, телефони самі перепідключаються.':'Для цього режиму кожен гравець має бути в своєму акаунті Claude, а власник гри має поділитися нею з ним із правом «Contributor».'} Кнопки «Назад» тут немає.</p>
+<h3>Гра з кількох телефонів</h3><p>Вгорі на стартовому екрані виберіть «Кожен зі свого телефона». Один гравець створює гру й отримує код із 4 літер. Інші вписують цей код і своє ім’я. Коли зібралося щонайменше 3 гравці, той, хто створив кімнату, натискає «Почати гру».</p><h3>Гра без інтернету</h3><p>Спершу кожен один раз відкриває гру з інтернетом, і вона зберігається на телефоні. Ведучий вмикає точку доступу Wi-Fi (мобільні дані не потрібні), інші підключаються до неї. Ведучий тисне «Створити без інтернету» й показує QR-код. Друг тисне «Приєднатися без інтернету», сканує код і показує свій. Ведучий сканує код друга, і так з кожним гравцем.</p><p>Кожен бачить свої карти тільки на своєму телефоні й ходить, коли настає його черга. Голосування таємне: кожен голосує зі свого телефона, а всі бачать лише підсумок. ${PEERMODE?'Реєструватися не треба. Телефон того, хто створив гру, працює як ведучий: усі інші підключаються до нього, тому на ньому не можна закривати сторінку й блокувати екран, поки йде гра. Якщо зв’язок обірвався, телефони самі перепідключаються.':'Для цього режиму кожен гравець має бути в своєму акаунті Claude, а власник гри має поділитися нею з ним із правом «Contributor».'} Кнопки «Назад» тут немає.</p>
 <h3>Кнопка «↶ Назад»</h3><p>Скасовує останню дію, якщо хтось помилково натиснув не те. Домовтеся заздалегідь, коли нею можна користуватися, бо так можна й «перекинути» невдалий улов.</p>
 
 <h3>Ураган</h3>
@@ -721,18 +728,20 @@ const RULES=`<details class="panel"><summary>Як грати (усі прави�
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const clone=o=>o==null?o:JSON.parse(JSON.stringify(o));
 function say(t){toast=t;render();clearTimeout(say.t);say.t=setTimeout(()=>{toast='';render()},3500)}
-function modeHTML(){return `<div class="seg"><button class="${mode==='one'?'on':''}" data-a="mode" data-v="one">Один телефон по колу</button><button class="${mode==='many'?'on':''}" data-a="mode" data-v="many">Кожен зі свого телефона</button></div>`}
+function modeHTML(){return `<div class="seg"><button class="${mode==='one'?'on':''}" data-a="mode" data-v="one">Один телефон по колу</button><button class="${mode==='many'?'on':''}" data-a="mode" data-v="many">Кожен зі свого телефона</button></div>${offNote()}`}
 function menuHTML(){
   const hd=`<div class="hero">${heroArt}<div class="t"><h1>Акулячий Зуб</h1><p style="color:#fff;max-width:26ch">Пліт, ураган і чесні друзі. Поки вистачає їжі.</p></div></div>${modeHTML()}`;
   if(!PEERMODE&&(!DB||!UID))return hd+`<div class="panel"><h3>Онлайн-режим недоступний</h3><p>Щоб грати з різних телефонів, кожен гравець має увійти в свій акаунт Claude, а власник гри мусить поділитися нею з ним із правом «Contributor» (кнопка «Поділитися» на сторінці гри).</p><p class="mut">Якщо ти щойно відкрив сторінку, зачекай кілька секунд: підключення може тривати до 10 с.</p></div>${RULES}`;
   return hd+`<div class="panel"><h3>Твоє ім’я</h3><div class="nm" style="margin-top:8px"><input id="oname" maxlength="14" placeholder="Ім’я" value="${esc(setup.myname||'')}"></div>
   <h3 style="margin-top:16px">Створити нову гру</h3><p class="mut">Отримаєш код кімнати й скажеш його друзям.</p><button class="btn y w" data-a="ocreate">Створити гру</button>
   <h3 style="margin-top:16px">Або приєднатися</h3><div class="nm" style="margin-top:8px"><input id="ocode" maxlength="4" placeholder="Код, напр. KRAB" style="text-transform:uppercase"><button class="btn" data-a="ojoin" style="width:auto;padding:0 18px">Увійти</button></div></div>
+  ${PEERMODE?`<div class="panel"${PENDO?' style="border:2px solid var(--gold)"':''}><h3>📶 Без інтернету (усі поруч)</h3>${PENDO?'<p><b>Ти відкрив запрошення від ведучого.</b> Впиши ім’я вгорі й натисни «Приєднатися без інтернету».</p>':''}<p class="mut">Ведучий вмикає на телефоні точку доступу Wi-Fi, інші підключаються до неї (або всі до одного Wi-Fi). Інтернет не потрібен. Кожного гравця підключаєте через QR-коди.</p><div class="row" style="margin-top:8px"><button class="btn y" data-a="lcreate">Створити без інтернету</button><button class="btn" data-a="ljoin">Приєднатися без інтернету</button></div></div>`:''}
   <div class="panel"><p class="mut">${PEERMODE?'Кожен відкриває цю сторінку на своєму телефоні, реєстрація не потрібна. Телефон того, хто створив гру, стає ведучим: на ньому не можна закривати сторінку чи блокувати екран, поки йде гра.':'Кожен гравець відкриває цю гру на своєму телефоні у своєму акаунті Claude. Власник гри має поділитися нею з кожним із правом «Contributor».'}</p></div>${RULES}`}
 function lobbyHTML(){
+  if(!LOB&&ONLINE.local)return `<div class="panel big"><h2>Підключення без інтернету</h2><p class="mut">Відскануй QR-код на телефоні ведучого й покажи йому свій код.</p><button class="btn y w" data-a="lre" style="margin-top:12px">Сканувати код ведучого</button><button class="btn g w" data-a="oleave" style="margin-top:10px">Вийти</button></div>`;
   if(!LOB)return `<div class="panel big"><h2>Підключення…</h2><p class="mut">${ONLINE.slow?'Сервер довго не відповідає. Перевір інтернет або вийди й спробуй ще.':'Зачекай кілька секунд.'}</p><button class="btn g w" data-a="oleave" style="margin-top:12px">Вийти</button></div>`;
   const host=LOB.host===UID,pl=LOB.players||[],inn=pl.some(x=>x.uid===UID);
-  return `<div class="hero">${heroArt}<div class="t"><h1>Кімната ${esc(ONLINE.code)}</h1><p style="color:#fff">Скажи цей код друзям.</p></div></div>${PEERMODE?`<div class="panel"><p>${ONLINE.host?(ONLINE.ready?'Кімната відкрита.':'Відкриваю кімнату…')+' Ти ведучий: не закривай сторінку й не блокуй екран, поки йде гра.':'Ти підключений до ведучого.'}</p><button class="btn g w" data-a="copy">Скопіювати посилання на гру</button></div>`:''}
+  return `<div class="hero">${heroArt}<div class="t"><h1>${ONLINE.local?'Кімната без інтернету':'Кімната '+esc(ONLINE.code)}</h1><p style="color:#fff">${ONLINE.local?(ONLINE.host?'Підключай друзів через QR-коди.':'Ти в кімнаті.'):'Скажи цей код друзям.'}</p></div></div>${ONLINE.local?`<div class="panel">${ONLINE.host?'<p>Ти ведучий: не закривай сторінку й не блокуй екран, поки йде гра. Друзі мають бути підключені до твоєї точки доступу Wi-Fi.</p><button class="btn y w" data-a="ladd">📶 Додати гравця (QR-код)</button>':'<p>Ти підключений до ведучого без інтернету.</p>'}</div>`:PEERMODE?`<div class="panel"><p>${ONLINE.host?(ONLINE.ready?'Кімната відкрита.':'Відкриваю кімнату…')+' Ти ведучий: не закривай сторінку й не блокуй екран, поки йде гра.':'Ти підключений до ведучого.'}</p><button class="btn g w" data-a="copy">Скопіювати посилання на гру</button></div>`:''}
   <div class="panel"><h3>Гравці (${pl.length}/12)</h3><div class="chips">${pl.map((x,i)=>`<span class="chip ${x.uid===UID?'me':''}"><i style="background:${COLS[i%12]}">${esc((x.name||'?')[0]).toUpperCase()}</i>${esc(x.name)}${x.uid===LOB.host?' <small style="opacity:.7">створив</small>':''}</span>`).join('')}</div>
   ${inn?'':`<p>Тебе ще немає в списку.</p><button class="btn w" data-a="ojoin2">Приєднатися</button>`}
   <h3 style="margin-top:14px">Режим гри</h3>${host?optsHTML(LOB.opts,'lopt'):optsHTML(LOB.opts,'',true)+'<p class="mut">Режим вибирає той, хто створив кімнату.</p>'}
@@ -771,7 +780,7 @@ async function connect(code){
     e=>{clearTimeout(tm);say('Зв’язок втрачено. Вийди й зайди знову.')});
   render();
 }
-function leave(){if(ONLINE&&ONLINE.unsub)ONLINE.unsub();try{PEER&&PEER.destroy()}catch(e){}PEER=null;CONN=null;CONNS.clear();try{localStorage.removeItem('shark-host')}catch(e){}ONLINE=null;LOB=null;S=null;try{localStorage.removeItem('shark-online')}catch(e){}render()}
+function leave(){lqClose(true);CONNS.forEach(c=>{try{c.pc&&c.close()}catch(e){}});try{CONN&&CONN.pc&&CONN.close()}catch(e){}if(ONLINE&&ONLINE.unsub)ONLINE.unsub();try{PEER&&PEER.destroy()}catch(e){}PEER=null;CONN=null;CONNS.clear();try{localStorage.removeItem('shark-host')}catch(e){}ONLINE=null;LOB=null;S=null;try{localStorage.removeItem('shark-online')}catch(e){}render()}
 async function mutate(fn){
   if(busy||!ONLINE)return;busy=true;const ref=DB.doc('games/'+ONLINE.code);
   try{
@@ -956,6 +965,7 @@ function islandBoard(){
 
 function render(){
   if(quiet)return;
+  if(RELAY){app.innerHTML='<div class="panel big" style="margin-top:30px"><h2>Готово!</h2><p>Код друга передано в гру. Повернись у вкладку з грою.</p></div>';return}
   if(ONLINE&&S)ONLINE.me=S.players.findIndex(p=>p.uid===UID);
   try{if(S&&!ONLINE)localStorage.setItem('shark-tooth',JSON.stringify(S))}catch(e){}
   let h='';
@@ -1049,7 +1059,8 @@ function render(){
     h+=`<div class="ov"><div class="sheet"><h3>${title}</h3><div class="tg" style="margin-top:12px">${opts.length?opts.map(([q,i])=>`<button class="btn" data-a="${act}" data-v="${i}" data-c="${sheet.give?`Передати «${C[sheet.give][0]}» гравцю ${esc(q.name)}?`:sheet.k==='gun'?`Вистрілити в ${esc(q.name)}? Це не можна скасувати.`:`«${C[sheet.k][0]}» на гравця ${esc(q.name)}?`}">${esc(q.name)}</button>`).join(''):'<p>Немає підходящих гравців.</p>'}<button class="btn g" data-a="close">Скасувати</button></div></div></div>`}
   if(conf)h+=`<div class="ov"><div class="sheet conf"><h3>${conf.m}</h3><div class="row" style="margin-top:14px"><button class="btn g" data-a="cno">Ні</button><button class="btn y" data-a="cyes">Так</button></div></div></div>`;
   if(showRules)h+=`<div class="ov"><div class="sheet rul"><div class="top"><h2>Правила</h2><button class="btn g" data-a="rules">Закрити</button></div>${RULES_BODY}${RULES_MODES}<h3 style="margin-top:12px">Герої</h3><div class="heroes">${Object.entries(HER).map(([k,x])=>`<div><img src="${pic('h_'+k)}" alt=""><b>${x[0]}</b>${x[1]}</div>`).join('')}</div></div></div>`;
-  if(ONLINE&&ONLINE.lost)h=`<div class="lost">Зв’язок із ведучим втрачено, перепідключаюсь…</div>`+h;
+  if(ONLINE&&ONLINE.lost)h=(ONLINE.local?`<div class="lost">Зв’язок із ведучим втрачено.<button class="btn y" data-a="lre">Підключитися знову</button></div>`:`<div class="lost">Зв’язок із ведучим втрачено, перепідключаюсь…</div>`)+h;
+  if(ONLINE&&ONLINE.local&&ONLINE.host&&S)h+=`<button class="btn g w" data-a="ladd" style="margin-top:14px">📶 Підключити гравця (новий телефон або хтось вилетів)</button>`;
   if(S){const fx=S.fxn||0;if(seenFx===null)seenFx=fx;else if(fx>seenFx){bangUntil=Date.now()+2600;sfx('bang');setTimeout(()=>render(),2700)}seenFx=fx}else seenFx=null;
   if(Date.now()<bangUntil)h+=`<div class="bang"><div class="bangv">${vid('shot','scv')}</div><b>БАХ!</b></div>`;
   if(toast)h+=`<div class="toast">${esc(toast)}</div>`;
@@ -1057,6 +1068,180 @@ function render(){
   if(S&&prevRes){['water','food','wood'].forEach((k,i)=>{const d=dv(k);if(d){const el=app.querySelectorAll('.res .r')[i];if(el)burst(el,d>0?['#7dff9a','#ffd166','#fff']:['#ff8a7a','#c0392b']);sfx(d>0?'up':'down')}})}
   if(S)prevRes={water:S.water,food:S.food,wood:S.wood,g:S.players.length+'|'+S.players[0].name};else prevRes=null;
 }
+/* QR-код (байтовий режим, рівень корекції M), без бібліотек */
+const QR=(()=>{
+  const EXP=new Array(512),LOG=new Array(256);let x=1;for(let i=0;i<255;i++){EXP[i]=x;LOG[x]=i;x<<=1;if(x&256)x^=0x11d}for(let i=255;i<512;i++)EXP[i]=EXP[i-255];
+  const mul=(a,b)=>a&&b?EXP[LOG[a]+LOG[b]]:0;
+  const ECC=[-1,10,16,26,18,24,16,18,22,22,26,30,22,22,24,24,28,28,26,26,26,26,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28];
+  const NB=[-1,1,1,1,2,2,4,4,4,5,5,5,8,9,9,10,10,11,13,14,16,17,17,18,20,21,23,25,26,28,29,31,33,35,37,38,40,43,45,47,49];
+  const raw=v=>{let r=(16*v+128)*v+64;if(v>=2){const n=Math.floor(v/7)+2;r-=(25*n-10)*n-55;if(v>=7)r-=36}return r};
+  const dataCw=v=>Math.floor(raw(v)/8)-ECC[v]*NB[v];
+  function rsDiv(d){const r=new Array(d).fill(0);r[d-1]=1;let root=1;for(let i=0;i<d;i++){for(let j=0;j<d;j++){r[j]=mul(r[j],root);if(j+1<d)r[j]^=r[j+1]}root=mul(root,2)}return r}
+  function rsRem(data,dv){const r=new Array(dv.length).fill(0);for(const b of data){const f=b^r.shift();r.push(0);dv.forEach((c,i)=>r[i]^=mul(c,f))}return r}
+  function align(v){if(v===1)return[];const n=Math.floor(v/7)+2,size=v*4+17,step=v===32?26:Math.ceil((v*4+4)/(n*2-2))*2;const r=[6];for(let p=size-7;r.length<n;p-=step)r.splice(1,0,p);return r}
+  function encode(text){
+    const bytes=Array.from(new TextEncoder().encode(text));let v=1;
+    for(;v<=40;v++){const cap=dataCw(v)*8;if(4+(v<10?8:16)+bytes.length*8<=cap)break}
+    if(v>40)throw new Error('QR: забагато даних');
+    const bits=[];const put=(val,n)=>{for(let i=n-1;i>=0;i--)bits.push((val>>>i)&1)};
+    put(4,4);put(bytes.length,v<10?8:16);bytes.forEach(b=>put(b,8));
+    const cap=dataCw(v)*8;put(0,Math.min(4,cap-bits.length));put(0,(8-bits.length%8)%8);
+    for(let p=0xEC;bits.length<cap;p^=0xEC^0x11)put(p,8);
+    const data=[];for(let i=0;i<bits.length;i+=8){let b=0;for(let j=0;j<8;j++)b=b<<1|bits[i+j];data.push(b)}
+    const nb=NB[v],el=ECC[v],rc=Math.floor(raw(v)/8),ns=nb-rc%nb,sl=Math.floor(rc/nb),dv=rsDiv(el);const blocks=[];
+    for(let i=0,k=0;i<nb;i++){const d=data.slice(k,k+sl-el+(i<ns?0:1));k+=d.length;const e=rsRem(d,dv);if(i<ns)d.push(0);blocks.push(d.concat(e))}
+    const cw=[];for(let i=0;i<blocks[0].length;i++)blocks.forEach((b,j)=>{if(i!==sl-el||j>=ns)cw.push(b[i])});
+    const size=v*4+17,M=[],F=[];for(let i=0;i<size;i++){M.push(new Array(size).fill(false));F.push(new Array(size).fill(false))}
+    const set=(x,y,d)=>{M[y][x]=d;F[y][x]=true};
+    for(let i=0;i<size;i++){set(6,i,i%2===0);set(i,6,i%2===0)}
+    const finder=(cx,cy)=>{for(let dy=-4;dy<=4;dy++)for(let dx=-4;dx<=4;dx++){const d=Math.max(Math.abs(dx),Math.abs(dy)),xx=cx+dx,yy=cy+dy;if(xx>=0&&xx<size&&yy>=0&&yy<size)set(xx,yy,d!==2&&d!==4)}};
+    finder(3,3);finder(size-4,3);finder(3,size-4);
+    const al=align(v),na=al.length;for(let i=0;i<na;i++)for(let j=0;j<na;j++){if((i===0&&j===0)||(i===0&&j===na-1)||(i===na-1&&j===0))continue;for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++)set(al[i]+dx,al[j]+dy,Math.max(Math.abs(dx),Math.abs(dy))!==1)}
+    const fmt=mask=>{const d=(0<<3)|mask;let r=d;for(let i=0;i<10;i++)r=(r<<1)^((r>>>9)*0x537);const b=((d<<10)|r)^0x5412,g=i=>((b>>>i)&1)===1;
+      for(let i=0;i<=5;i++)set(8,i,g(i));set(8,7,g(6));set(8,8,g(7));set(7,8,g(8));for(let i=9;i<15;i++)set(14-i,8,g(i));
+      for(let i=0;i<8;i++)set(size-1-i,8,g(i));for(let i=8;i<15;i++)set(8,size-15+i,g(i));set(8,size-8,true)};
+    fmt(0);
+    if(v>=7){let r=v;for(let i=0;i<12;i++)r=(r<<1)^((r>>>11)*0x1F25);const b=v<<12|r;for(let i=0;i<18;i++){const d=((b>>>i)&1)===1,a=size-11+i%3,c=Math.floor(i/3);set(a,c,d);set(c,a,d)}}
+    let i=0;for(let right=size-1;right>=1;right-=2){if(right===6)right=5;for(let vert=0;vert<size;vert++)for(let j=0;j<2;j++){const xx=right-j,up=((right+1)&2)===0,yy=up?size-1-vert:vert;if(!F[yy][xx]&&i<cw.length*8){M[yy][xx]=((cw[i>>>3]>>>(7-(i&7)))&1)===1;i++}}}
+    const MS=[(x,y)=>(x+y)%2===0,(x,y)=>y%2===0,(x,y)=>x%3===0,(x,y)=>(x+y)%3===0,(x,y)=>(Math.floor(x/3)+Math.floor(y/2))%2===0,(x,y)=>x*y%2+x*y%3===0,(x,y)=>(x*y%2+x*y%3)%2===0,(x,y)=>((x+y)%2+x*y%3)%2===0];
+    const apply=m=>{for(let y=0;y<size;y++)for(let x=0;x<size;x++)if(!F[y][x]&&MS[m](x,y))M[y][x]=!M[y][x]};
+    const pen=()=>{let p=0;for(let k=0;k<2;k++)for(let a=0;a<size;a++){let run=1;for(let b=1;b<size;b++){const c=k?M[b][a]:M[a][b],pv=k?M[b-1][a]:M[a][b-1];if(c===pv){run++;if(run===5)p+=3;else if(run>5)p++}else run=1}}
+      for(let y=0;y<size-1;y++)for(let x=0;x<size-1;x++){const c=M[y][x];if(c===M[y][x+1]&&c===M[y+1][x]&&c===M[y+1][x+1])p+=3}
+      let dark=0;M.forEach(r=>r.forEach(c=>dark+=c));p+=Math.floor(Math.abs(dark*20-size*size*10)/(size*size))*10;return p};
+    let best=0,bp=Infinity;for(let m=0;m<8;m++){apply(m);fmt(m);const p=pen();if(p<bp){bp=p;best=m}apply(m)}
+    apply(best);fmt(best);return M}
+  function svg(text){const M=encode(text),n=M.length,q=4;let d='';M.forEach((r,y)=>r.forEach((c,x)=>{if(c)d+=`M${x+q},${y+q}h1v1h-1z`}));
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n+2*q} ${n+2*q}" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="#fff"/><path d="${d}" fill="#000"/></svg>`}
+  return {encode,svg}})();
+
+/* ===== Гра поруч без інтернету: пряме WebRTC-з'єднання, «знайомство» телефонів через QR-коди ===== */
+const LQ={el:null,st:null,pend:null,stream:null,timer:null,cto:null};
+let PENDO=null,RELAY=false,OFFOK=false;
+const B64={enc:u=>{let s='';u.forEach(b=>s+=String.fromCharCode(b));return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')},
+  dec:t=>{t=t.replace(/-/g,'+').replace(/_/g,'/');while(t.length%4)t+='=';return Uint8Array.from(atob(t),c=>c.charCodeAt(0))}};
+function packSDP(sdp,kind){
+  const g=re=>(sdp.match(re)||[])[1];
+  const uf=g(/a=ice-ufrag:(\S+)/),pw=g(/a=ice-pwd:(\S+)/),fp=g(/a=fingerprint:sha-256 (\S+)/i),su=g(/a=setup:(\w+)/)||'active';
+  if(!uf||!pw||!fp)throw new Error('немає даних з’єднання');
+  let cs=[...sdp.matchAll(/a=candidate:\S+ 1 udp \d+ (\S+) (\d+) typ (\w+)/gi)].map(m=>({ip:m[1],port:m[2],typ:m[3]}));
+  const h=cs.filter(c=>c.typ==='host');if(h.length)cs=h;
+  const seen=new Set();cs=cs.filter(c=>!seen.has(c.ip)&&seen.add(c.ip)).slice(0,4);
+  const fpb=B64.enc(Uint8Array.from(fp.split(':').map(x=>parseInt(x,16))));
+  return ['Z1',kind,kind==='o'?'x':su[0],uf,pw,fpb,cs.map(c=>c.ip+'_'+c.port).join(',')].join('~')}
+function unpackSDP(t){
+  t=String(t||'');try{if(t.includes('%'))t=decodeURIComponent(t)}catch(e){}
+  const i=t.indexOf('Z1~');if(i<0)return null;
+  const [,kind,su,uf,pw,fpb,cs]=t.slice(i).split('~');
+  if(!(kind==='o'||kind==='a')||!uf||!pw||!fpb)return null;
+  let fp;try{fp=[...B64.dec(fpb)].map(b=>b.toString(16).padStart(2,'0').toUpperCase()).join(':')}catch(e){return null}
+  const setup=kind==='o'?'actpass':(su==='p'?'passive':'active');
+  const L=['v=0','o=- '+(1+Math.floor(Math.random()*1e9))+' 2 IN IP4 127.0.0.1','s=-','t=0 0','a=group:BUNDLE 0','a=msid-semantic: WMS',
+    'm=application 9 UDP/DTLS/SCTP webrtc-datachannel','c=IN IP4 0.0.0.0','a=ice-ufrag:'+uf,'a=ice-pwd:'+pw,'a=ice-options:trickle',
+    'a=fingerprint:sha-256 '+fp,'a=setup:'+setup,'a=mid:0','a=sctp-port:5000','a=max-message-size:262144'];
+  (cs||'').split(',').filter(Boolean).forEach((c,k)=>{const j=c.lastIndexOf('_');L.push(`a=candidate:${k+1} 1 udp ${2122260223-k*256} ${c.slice(0,j)} ${c.slice(j+1)} typ host generation 0`)});
+  L.push('a=end-of-candidates');
+  return {kind,sdp:L.join('\r\n')+'\r\n'}}
+const lurl=t=>location.origin+location.pathname+'#'+t;
+function gathered(pc){return new Promise(r=>{if(pc.iceGatheringState==='complete')return r();const t=setTimeout(r,3000);
+  pc.addEventListener('icegatheringstatechange',()=>{if(pc.iceGatheringState==='complete'){clearTimeout(t);r()}})})}
+/* Дозвіл на камеру змушує браузер показати справжню адресу телефона в мережі — так з’єднання надійніше */
+async function unmask(){if(LQ.stream)return;try{LQ.stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}})}catch(e){}}
+function stopCam(){clearTimeout(LQ.timer);if(LQ.stream){LQ.stream.getTracks().forEach(t=>t.stop());LQ.stream=null}}
+/* Обгортка над каналом даних з тим самим інтерфейсом, що й у PeerJS: open, send, on('open'|'data'|'close') */
+function LConn(pc,dc){const ev={},fire=(n,x)=>(ev[n]||[]).forEach(f=>{try{f(x)}catch(e){console.error(e)}}),parts={},CH=15000;let closed=false;
+  const c={pc,dc,get open(){return dc.readyState==='open'},on(n,f){(ev[n]=ev[n]||[]).push(f);return c},
+    send(o){const s=JSON.stringify(o);if(s.length<=CH)return dc.send('J'+s);const id=Math.random().toString(36).slice(2,8),n=Math.ceil(s.length/CH);
+      for(let i=0;i<n;i++)dc.send('C'+id+','+i+','+n+','+s.slice(i*CH,(i+1)*CH))},
+    close(){closed=true;try{dc.close()}catch(e){}try{pc.close()}catch(e){}}};
+  dc.onopen=()=>fire('open');if(dc.readyState==='open')setTimeout(()=>fire('open'),0);
+  dc.onmessage=e=>{const d=String(e.data);let s=null;
+    if(d[0]==='J')s=d.slice(1);
+    else if(d[0]==='C'){const a=d.indexOf(','),b=d.indexOf(',',a+1),q=d.indexOf(',',b+1),id=d.slice(1,a),i=+d.slice(a+1,b),n=+d.slice(b+1,q);
+      const p=parts[id]=parts[id]||{n:0,a:[]};if(p.a[i]==null){p.a[i]=d.slice(q+1);p.n++}if(p.n===n){s=p.a.join('');delete parts[id]}}
+    if(s!=null){let m;try{m=JSON.parse(s)}catch(e){return}fire('data',m)}};
+  const cl=()=>{if(c.dead)return;c.dead=true;fire('close')};
+  dc.onclose=cl;pc.addEventListener('connectionstatechange',()=>{if(pc.connectionState==='failed'||pc.connectionState==='closed')cl()});
+  return c}
+function localHost(saved){
+  ONLINE={code:'LOCAL',local:true,me:-1,seq:saved?saved.seq:1,host:true,ready:true,slow:false};
+  LOB=saved?saved.lobby:{host:UID,players:[{uid:UID,name:setup.myname||'Ведучий'}]};S=saved?saved.state:null;
+  persistHost();render()}
+async function lOffer(){
+  await unmask();
+  const pc=new RTCPeerConnection({iceServers:[]}),dc=pc.createDataChannel('g',{ordered:true}),c=LConn(pc,dc);
+  c.on('open',()=>{if(LQ.pend===pc){LQ.pend=null;lqClose();say('Гравця підключено!')}});
+  c.on('data',m=>onHostMsg(c,m));
+  c.on('close',()=>{for(const [k,x] of CONNS)if(x===c)CONNS.delete(k)});
+  await pc.setLocalDescription(await pc.createOffer());await gathered(pc);stopCam();
+  if(LQ.pend)try{LQ.pend.close()}catch(e){}
+  LQ.pend=pc;return packSDP(pc.localDescription.sdp,'o')}
+async function lAccept(t){const x=unpackSDP(t);
+  if(!x||x.kind!=='a'){say('Це не той QR-код. Скануй код на телефоні друга.');return ONL.lscan()}
+  const pc=LQ.pend;if(!pc||pc.signalingState!=='have-local-offer')return say('Спершу натисни «Додати гравця»');
+  try{await pc.setRemoteDescription({type:'answer',sdp:x.sdp})}catch(e){console.error(e);return lqShow({step:'fail',msg:'Не вдалося прочитати код друга.',retry:'ladd'})}
+  lqShow({step:'busy',msg:'З’єднуюсь із гравцем…'});
+  clearTimeout(LQ.cto);LQ.cto=setTimeout(()=>{if(LQ.pend===pc)lqShow({step:'fail',msg:'Телефони не змогли з’єднатися. Перевір, що друг підключений до твоєї точки доступу (або до того самого Wi-Fi), і спробуй ще раз.',retry:'ladd'})},15000)}
+async function lAnswer(t){const x=unpackSDP(t);if(!x||x.kind!=='o')return false;
+  await unmask();
+  const pc=new RTCPeerConnection({iceServers:[]});
+  pc.ondatachannel=e=>{const c=LConn(pc,e.channel);CONN=c;
+    c.on('open',()=>{if(LQ.pend===pc)LQ.pend=null;lqClose();c.send({t:'join',uid:UID,name:setup.myname||'Гравець'})});
+    c.on('data',m=>{if(m&&m.t==='state'&&ONLINE){ONLINE.lost=false;ONLINE.seq=m.seq;LOB=m.lobby;S=m.state;if(m.stale)say('Гра щойно змінилась, глянь і натисни ще раз');render()}});
+    c.on('close',()=>{if(ONLINE&&CONN===c){ONLINE.lost=true;render()}})};
+  await pc.setRemoteDescription({type:'offer',sdp:x.sdp});await pc.setLocalDescription(await pc.createAnswer());await gathered(pc);stopCam();
+  if(LQ.pend)try{LQ.pend.close()}catch(e){}
+  LQ.pend=pc;return packSDP(pc.localDescription.sdp,'a')}
+async function lJoinWith(t){lqShow({step:'busy',msg:'Готую відповідь…'});
+  try{const a=await lAnswer(t);if(a===false)return lqShow({step:'fail',msg:'Це не запрошення. Скануй QR-код на телефоні ведучого.',retry:'lre'});lqShow({step:'answer',url:lurl(a)})}
+  catch(e){console.error(e);lqShow({step:'fail',msg:'Не вдалося: '+(e&&e.message||e),retry:'lre'})}}
+/* Вікно з QR-кодами живе поза #app, щоб перемальовування гри не збивало камеру */
+function lqShow(st){LQ.st=st;if(!LQ.el){LQ.el=document.createElement('div');LQ.el.id='lq';document.body.appendChild(LQ.el);
+    LQ.el.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;sfx('tap');const f=ONL[b.dataset.a];f&&f(b.dataset.v)})}
+  const host=ONLINE&&ONLINE.host,cancel=`<button class="btn g w" data-a="lclose" style="margin-top:10px">${st.step==='answer'||st.step==='offer'?'Закрити':'Скасувати'}</button>`;let b='';
+  if(st.step==='busy')b=`<h3>${st.msg}</h3><div class="lqspin"></div>`;
+  else if(st.step==='offer')b=`<h3>Запроси гравця</h3><div class="qr">${QR.svg(st.url)}</div><p><b>1.</b> Друг підключається до твоєї точки доступу, відкриває гру → «Кожен зі свого телефона» → «Приєднатися без інтернету» і сканує цей код.</p><p class="mut">На iPhone можна просто навести звичайну камеру.</p><p><b>2.</b> Потім натисни кнопку нижче й відскануй код, який з’явиться в друга.</p><button class="btn y w" data-a="lscan" style="margin-top:10px">Сканувати код друга</button>`;
+  else if(st.step==='answer')b=`<h3>Покажи цей код ведучому</h3><div class="qr">${QR.svg(st.url)}</div><p>Ведучий натискає «Сканувати код друга» і наводить камеру. Коли з’єднаєтесь, вікно закриється само.</p>`;
+  else if(st.step==='scan')b=`<h3>${host?'Наведи камеру на код друга':'Наведи камеру на код ведучого'}</h3><video playsinline muted></video>`;
+  else if(st.step==='noscan')b=`<h3>Тут сканер не працює</h3><p>${host?'Відкрий звичайну камеру телефона (або Google Lens) і наведи на код друга. Відкриється сторінка гри, вона сама передасть код сюди. Потім повернись у цю вкладку.':'Відкрий звичайну камеру телефона й наведи на QR-код ведучого. Відкриється гра із запрошенням: впиши ім’я й натисни «Приєднатися без інтернету».'}</p>`;
+  else if(st.step==='nocam')b=`<h3>Немає доступу до камери</h3><p>Дозволь грі користуватися камерою в налаштуваннях браузера й спробуй ще раз.</p><button class="btn y w" data-a="${host?'lscan':'lre'}">Спробувати ще</button>`;
+  else if(st.step==='fail')b=`<h3>Не вийшло</h3><p>${st.msg}</p>${st.retry?`<button class="btn y w" data-a="${st.retry}" style="margin-top:8px">Спробувати ще раз</button>`:''}`;
+  LQ.el.innerHTML=`<div class="lqb"><div class="lqs">${b}${cancel}</div></div>`}
+function lqClose(cancel){stopCam();clearTimeout(LQ.cto);if(cancel&&LQ.pend&&LQ.pend.connectionState!=='connected'){try{LQ.pend.close()}catch(e){}LQ.pend=null}
+  LQ.st=null;if(LQ.el){LQ.el.remove();LQ.el=null}}
+async function lqScan(onText){lqShow({step:'scan'});
+  let det=null;try{if('BarcodeDetector' in window){const f=await BarcodeDetector.getSupportedFormats();if(f.includes('qr_code'))det=new BarcodeDetector({formats:['qr_code']})}}catch(e){}
+  if(!det)return lqShow({step:'noscan'});
+  stopCam();try{LQ.stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}})}catch(e){return lqShow({step:'nocam'})}
+  const v=LQ.el&&LQ.el.querySelector('video');if(!v)return stopCam();v.srcObject=LQ.stream;try{await v.play()}catch(e){}
+  const tick=async()=>{if(!LQ.stream||!LQ.st||LQ.st.step!=='scan')return;
+    try{const r=await det.detect(v),t=r.map(x=>x.rawValue).find(s=>s&&s.includes('Z1~'));if(t){stopCam();return onText(t)}}catch(e){}
+    LQ.timer=setTimeout(tick,200)};tick()}
+Object.assign(ONL,{
+  lcreate(){const nm=(document.getElementById('oname')||{}).value?.trim();if(!nm)return say('Впиши своє ім’я');setup.myname=nm;wake();localHost(null);ONL.ladd()},
+  ljoin(){const nm=(document.getElementById('oname')||{}).value?.trim();if(!nm)return say('Впиши своє ім’я');setup.myname=nm;wake();
+    ONLINE={code:'LOCAL',local:true,me:-1,seq:0,host:false,slow:false};LOB=null;S=null;render();
+    if(PENDO){const t=PENDO;PENDO=null;return lJoinWith(t)}ONL.lre()},
+  lre(){if(!ONLINE||!ONLINE.local)return;lqScan(t=>lJoinWith(t))},
+  async ladd(){if(!ONLINE||!ONLINE.host)return;lqShow({step:'busy',msg:'Готую запрошення…'});
+    try{const t=await lOffer();lqShow({step:'offer',url:lurl(t)})}catch(e){console.error(e);lqShow({step:'fail',msg:'Не вдалося створити запрошення: '+(e&&e.message||e),retry:'ladd'})}},
+  lscan(){lqScan(t=>lAccept(t))},
+  lclose(){lqClose(true)}});
+/* Посилання з QR-коду: запрошення (o) відкриває гру з готовим входом; відповідь (a) передається у вкладку ведучого */
+(()=>{const h=decodeURIComponent(location.hash||'');if(!h.includes('Z1~'))return;const x=unpackSDP(h);
+  try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}
+  if(!x)return;
+  if(x.kind==='o'){PENDO=h.slice(h.indexOf('Z1~'));mode='many'}
+  else{RELAY=true;const t=h.slice(h.indexOf('Z1~'));try{new BroadcastChannel('akzub-local').postMessage(t)}catch(e){}try{localStorage.setItem('akzub-relay',t+'|'+Date.now())}catch(e){}setTimeout(()=>{try{window.close()}catch(e){}},1500)}})();
+const lRelay=t=>{if(!RELAY&&ONLINE&&ONLINE.local&&ONLINE.host&&LQ.pend&&LQ.last!==t){LQ.last=t;stopCam();lAccept(t)}};
+try{new BroadcastChannel('akzub-local').onmessage=e=>lRelay(String(e.data))}catch(e){}
+window.addEventListener('storage',e=>{if(e.key==='akzub-relay'&&e.newValue)lRelay(e.newValue.split('|')[0])});
+/* Офлайн-запуск: service worker зберігає гру на телефоні */
+function checkOff(){try{caches.open('akzub-v1').then(c=>c.match('videos/win.mp4')).then(r=>{if(!!r!==OFFOK){OFFOK=!!r;render()}}).catch(()=>{})}catch(e){}}
+if(PEERMODE&&'serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+  navigator.serviceWorker.addEventListener('message',e=>{if(e.data==='akzub-cached')checkOff()});checkOff()}
+const offNote=()=>!PEERMODE||!('serviceWorker' in navigator)?'':OFFOK?'<p class="offok">✅ Гра збережена на телефоні й відкриється без інтернету.</p>':'<p class="offok mut">Зберігаю гру на телефон, щоб вона відкривалась без інтернету…</p>';
+
 const NOH=new Set(['undo','rules','quit','again','start','tm']);
 app.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b||b.disabled)return;let a=b.dataset.a,v0=b.dataset.v;
   if(a==='mute'){muted=!muted;try{localStorage.setItem('shark-mute',muted?'1':'0')}catch(e){}return render()}
@@ -1076,7 +1261,7 @@ app.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b||b.d
 app.addEventListener('input',e=>{if(e.target.dataset.i!=null)setup.names[+e.target.dataset.i]=e.target.value});
 try{render()}catch(err){app.innerHTML='<p style="padding:20px;color:#fff">Помилка: '+esc(err&&err.message||err)+'. Натисни «Скинути»</p><button class="btn" id="rst">Скинути</button>';try{localStorage.removeItem('shark-tooth')}catch(e){}document.getElementById('rst').onclick=()=>location.reload()}
 if(PEERMODE){try{const hs=JSON.parse(localStorage.getItem('shark-host')||'null'),cl=JSON.parse(localStorage.getItem('shark-online')||'null');
-  if(hs&&hs.code){mode='many';setTimeout(()=>peerHost(hs.code,hs),0)}else if(cl&&cl.code){mode='many';setup.myname=cl.name;setTimeout(()=>peerJoin(cl.code),0)}}catch(e){}}
+  if(RELAY){}else if(hs&&hs.code==='LOCAL'){mode='many';setTimeout(()=>localHost(hs),0)}else if(hs&&hs.code){mode='many';setTimeout(()=>peerHost(hs.code,hs),0)}else if(PENDO){}else if(cl&&cl.code){mode='many';setup.myname=cl.name;setTimeout(()=>peerJoin(cl.code),0)}}catch(e){}}
 (async()=>{try{if(!window.claude||!window.claude.use)return;DB=await window.claude.use('db');const us=await window.claude.use('user');UID=us?await us.id():null;
   if(DB&&UID){let c=null;try{c=localStorage.getItem('shark-online')}catch(e){}if(c){mode='many';connect(c)}}render()}catch(e){}})();
 try{const l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&family=Russo+One&display=swap';document.head.appendChild(l)}catch(e){}
